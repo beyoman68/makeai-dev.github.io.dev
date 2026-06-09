@@ -1,24 +1,14 @@
 import { motion, useReducedMotion } from "motion/react";
-import { useState } from "react";
 
 import { useHtmlIsDark } from "@/lib/use-html-is-dark";
+import Dashboard from "@/components/make-money/Dashboard";
 
 /**
  * Solution — Make Money (AI 금융분석 플랫폼) section.
- * 히어로 영역과 '실시간 대시보드' 탭 미리보기로 구성된다.
+ * 히어로 영역과 '실시간 대시보드' 미리보기로 구성된다.
  */
 
 const ACCENT = "#00d4aa";
-
-const DASHBOARD_TABS = [
-  { label: "📊 종합현황", src: "/solutions/makemoney/dashboard-0.png" },
-  { label: "💼 주식 포트폴리오", src: "/solutions/makemoney/dashboard-1.png" },
-  { label: "⚡ 선물 트레이딩", src: "/solutions/makemoney/dashboard-2.png" },
-  { label: "🤖 AI 예측", src: "/solutions/makemoney/dashboard-3.png" },
-  { label: "🌐 글로벌 시장", src: "/solutions/makemoney/dashboard-4.png" },
-  { label: "💬 LLM 리포트", src: "/solutions/makemoney/dashboard-5.png" },
-  { label: "⚙ 제어판", src: "/solutions/makemoney/dashboard-6.png" },
-] as const;
 
 type Palette = {
   sectionBg: string;
@@ -27,7 +17,7 @@ type Palette = {
   overline: string;
   subtitle: string;
   body: string;
-  muted: string;
+muted: string;
   badgeBg: string;
   badgeBorder: string;
   secondaryBtnBorder: string;
@@ -94,8 +84,6 @@ export function MakeMoney() {
   const reduceMotion = useReducedMotion() ?? false;
   const isDark = useHtmlIsDark();
   const palette = paletteFor(isDark);
-
-  const [activeTab, setActiveTab] = useState(0);
 
   return (
     <section
@@ -180,9 +168,9 @@ export function MakeMoney() {
               lineHeight: 1.8,
             }}
           >
-            딥러닝 앙상블·BERT 뉴스 감성 분석·LLM 의사결정이 통합된 한국 주식 &amp;
-            코스피 200 선물 예측 분석 시스템. pykrx 실시간 데이터와 5개 AI 모델이
-            24시간 시장을 분석합니다.
+            딥러닝 앙상블·BERT 뉴스 감성 분석·LLM 의사결정이 통합된 한국 주식
+            &amp; 코스피 200 선물 예측 분석 시스템. pykrx 실시간 데이터와 5개 AI
+            모델이 24시간 시장을 분석합니다.
           </p>
 
           <div
@@ -304,66 +292,17 @@ export function MakeMoney() {
             접속만으로 모든 데이터를 실시간 모니터링합니다.
           </p>
 
-          {/* 탭 */}
-          <div
-            role="tablist"
-            aria-label="대시보드 미리보기 탭"
-            style={{
-              marginTop: 32,
-              display: "flex",
-              flexWrap: "wrap",
-              gap: 2,
-              borderBottom: `1px solid ${palette.tabBorder}`,
-            }}
-          >
-            {DASHBOARD_TABS.map((tab, i) => {
-              const isActive = i === activeTab;
-              return (
-                <button
-                  key={tab.label}
-                  type="button"
-                  role="tab"
-                  aria-selected={isActive}
-                  onClick={() => setActiveTab(i)}
-                  style={{
-                    padding: "11px 20px",
-                    background: palette.tabBg,
-                    border: "none",
-                    borderBottom: `2px solid ${
-                      isActive ? ACCENT : "transparent"
-                    }`,
-                    color: isActive ? palette.tabActiveText : palette.tabText,
-                    fontSize: 13,
-                    fontWeight: isActive ? 700 : 500,
-                    letterSpacing: "0.02em",
-                    cursor: "pointer",
-                    transition: "color 0.2s ease, border-color 0.2s ease",
-                    whiteSpace: "nowrap",
-                  }}
-                >
-                  {tab.label}
-                </button>
-              );
-            })}
-          </div>
-
           {/* 미리보기 프레임 */}
           <div
             style={{
+              marginTop: 32,
               border: `1px solid ${palette.frameBorder}`,
-              borderTop: "none",
               background: palette.frameBg,
-              borderRadius: "0 0 10px 10px",
+              borderRadius: 10,
               overflow: "hidden",
             }}
           >
-            <img
-              key={DASHBOARD_TABS[activeTab].src}
-              src={DASHBOARD_TABS[activeTab].src}
-              alt={`${DASHBOARD_TABS[activeTab].label} 화면`}
-              loading="lazy"
-              style={{ width: "100%", display: "block" }}
-            />
+            <Dashboard />
           </div>
         </motion.div>
       </div>
