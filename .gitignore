@@ -1,0 +1,24 @@
+# dependencies
+node_modules
+
+# build
+dist
+
+# logs
+*.log
+npm-debug.log*
+pnpm-debug.log*
+
+# env
+.env
+.env.*.local
+
+# editor / OS
+.DS_Store
+.idea
+
+# TypeScript
+*.tsbuildinfo
+
+# local notes (keep folder; optional: do not track)
+.dev/

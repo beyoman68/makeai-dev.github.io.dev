@@ -1,0 +1,145 @@
+@import url("https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap");
+@import "tailwindcss";
+
+/* Class-based dark mode: match `html.dark` and descendants (Tailwind v4) */
+@custom-variant dark (&:where(.dark, .dark *));
+
+/* Bebas Neue: header wordmark only (see SiteHeader logo link) */
+.font-logo {
+  font-family: "Bebas Neue", sans-serif;
+  letter-spacing: 0.04em;
+}
+
+:root {
+  --radius: 0.625rem;
+  --background: oklch(1 0 0);
+  --foreground: oklch(0.145 0 0);
+  --card: oklch(1 0 0);
+  --card-foreground: oklch(0.145 0 0);
+  --popover: oklch(1 0 0);
+  --popover-foreground: oklch(0.145 0 0);
+  --primary: oklch(0.205 0 0);
+  --primary-foreground: oklch(0.985 0 0);
+  --secondary: oklch(0.97 0 0);
+  --secondary-foreground: oklch(0.205 0 0);
+  --muted: oklch(0.97 0 0);
+  --muted-foreground: oklch(0.556 0 0);
+  --accent: oklch(0.97 0 0);
+  --accent-foreground: oklch(0.205 0 0);
+  --destructive: oklch(0.577 0.245 27.325);
+  --destructive-foreground: oklch(0.985 0 0);
+  --border: oklch(0.922 0 0);
+  --input: oklch(0.922 0 0);
+  --ring: oklch(0.708 0 0);
+}
+
+.dark {
+  --background: oklch(0.145 0 0);
+  --foreground: oklch(0.985 0 0);
+  --card: oklch(0.145 0 0);
+  --card-foreground: oklch(0.985 0 0);
+  --popover: oklch(0.145 0 0);
+  --popover-foreground: oklch(0.985 0 0);
+  --primary: oklch(0.985 0 0);
+  --primary-foreground: oklch(0.205 0 0);
+  --secondary: oklch(0.269 0 0);
+  --secondary-foreground: oklch(0.985 0 0);
+  --muted: oklch(0.269 0 0);
+  --muted-foreground: oklch(0.708 0 0);
+  --accent: oklch(0.269 0 0);
+  --accent-foreground: oklch(0.985 0 0);
+  --destructive: oklch(0.396 0.141 25.723);
+  --destructive-foreground: oklch(0.637 0.237 25.331);
+  --border: oklch(0.269 0 0);
+  --input: oklch(0.269 0 0);
+  --ring: oklch(0.439 0 0);
+}
+
+@theme inline {
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+}
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+
+  html {
+    color-scheme: light;
+  }
+
+  html.dark {
+    color-scheme: dark;
+  }
+
+  body {
+    @apply bg-background font-sans text-foreground antialiased;
+  }
+}
+
+/* Data Platform architecture SVG — theme via CSS variables (see data-platform-architecture-figure.tsx) */
+.data-platform-architecture-figure {
+  --dp-canvas: #ffffff;
+  --dp-headline: #111827;
+  --dp-subtitle: #9ca3af;
+  --dp-muted: #9ca3af;
+  --dp-body: #374151;
+  --dp-tertiary: #6b7280;
+  --dp-faint: #d1d5db;
+  --dp-border-light: #e5e7eb;
+  --dp-native-fill: #f9fafb;
+  --dp-native-border: #374151;
+  --dp-line-main: #374151;
+  --dp-line-sec: #374151;
+  --dp-card-fill: #ffffff;
+  --dp-merge-bg: #111827;
+  --dp-merge-text: #ffffff;
+  --dp-merge-label: rgba(255, 255, 255, 0.4);
+  --dp-merge-sub: rgba(255, 255, 255, 0.45);
+  --dp-merge-divider: rgba(255, 255, 255, 0.1);
+  --dp-merge-inner: rgba(255, 255, 255, 0.07);
+}
+
+.dark .data-platform-architecture-figure {
+  --dp-canvas: transparent;
+  --dp-headline: #fafafa;
+  --dp-subtitle: rgba(255, 255, 255, 0.65);
+  --dp-muted: rgba(255, 255, 255, 0.6);
+  --dp-body: #fafafa;
+  --dp-tertiary: rgba(255, 255, 255, 0.78);
+  --dp-faint: rgba(255, 255, 255, 0.55);
+  --dp-border-light: rgba(255, 255, 255, 0.35);
+  --dp-native-fill: transparent;
+  --dp-native-border: rgba(255, 255, 255, 0.42);
+  --dp-line-main: #ffffff;
+  --dp-line-sec: #ffffff;
+  --dp-card-fill: transparent;
+  --dp-merge-bg: #ffffff;
+  --dp-merge-text: #111827;
+  --dp-merge-label: rgba(17, 24, 39, 0.48);
+  --dp-merge-sub: rgba(17, 24, 39, 0.68);
+  --dp-merge-divider: rgba(17, 24, 39, 0.18);
+  --dp-merge-inner: rgba(17, 24, 39, 0.14);
+}

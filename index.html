@@ -1,0 +1,92 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <script>
+      (function () {
+        try {
+          var k = "theme";
+          var t = localStorage.getItem(k);
+          var dark;
+          if (t === "light") {
+            dark = false;
+          } else if (t === "dark") {
+            dark = true;
+          } else if (t === "system") {
+            dark = window.matchMedia("(prefers-color-scheme: dark)").matches;
+          } else {
+            dark = true;
+          }
+          document.documentElement.classList.toggle("dark", dark);
+          document.documentElement.classList.toggle("light", !dark);
+        } catch (_) {}
+      })();
+    </script>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Mazelone</title>
+    <meta
+      name="description"
+      content="마젤원(Mazelone)은 문서 처리, 문서 검색, 멀티모달 RAG, AI 번역, 온디바이스 AI 솔루션을 개발하는 AI 기업입니다."
+    />
+    <meta
+      name="keywords"
+      content="마젤원, Mazelone, 마젤원 주식회사, AI, 멀티모달 RAG, 문서 처리, 문서 검색, AI 번역, 온디바이스 AI"
+    />
+    <link rel="canonical" href="https://mazelone.com/" />
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="마젤원 Mazelone" />
+    <meta property="og:title" content="Mazelone" />
+    <meta
+      property="og:description"
+      content="마젤원(Mazelone)은 문서 처리, 문서 검색, 멀티모달 RAG, AI 번역, 온디바이스 AI 솔루션을 개발하는 AI 기업입니다."
+    />
+    <meta property="og:url" content="https://mazelone.com/" />
+    <meta property="og:image" content="https://mazelone.com/favicon.svg" />
+    <meta name="twitter:card" content="summary" />
+    <meta name="twitter:title" content="Mazelone" />
+    <meta
+      name="twitter:description"
+      content="마젤원(Mazelone)은 문서 처리, 문서 검색, 멀티모달 RAG, AI 번역, 온디바이스 AI 솔루션을 개발하는 AI 기업입니다."
+    />
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "Organization",
+        "name": "마젤원",
+        "alternateName": "Mazelone",
+        "url": "https://mazelone.com",
+        "logo": "https://mazelone.com/favicon.svg",
+        "description": "마젤원(Mazelone)은 문서 처리, 문서 검색, 멀티모달 RAG, AI 번역, 온디바이스 AI 솔루션을 개발하는 AI 기업입니다."
+      }
+    </script>
+    <script>
+      // Single Page Apps for GitHub Pages
+      // https://github.com/rafgraph/spa-github-pages
+      // MIT License
+      //
+      // Decode the redirected path from 404.html back into a real URL so that
+      // the client-side router can render the correct page on a direct hit.
+      (function (l) {
+        if (l.search[1] === "/") {
+          var decoded = l.search
+            .slice(1)
+            .split("&")
+            .map(function (s) {
+              return s.replace(/~and~/g, "&");
+            })
+            .join("?");
+          window.history.replaceState(
+            null,
+            "",
+            l.pathname.slice(0, -1) + decoded + l.hash
+          );
+        }
+      })(window.location);
+    </script>
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="module" src="/src/main.tsx"></script>
+  </body>
+</html>
