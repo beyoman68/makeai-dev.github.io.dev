@@ -12,11 +12,11 @@ import { productNav } from "@/lib/nav-config";
  */
 
 const TYPEWRITER_MIDDLE = [
-  "structured data extraction and parsing",
-  "retrieval and grounded knowledge answers",
-  "email agents and AI-assisted operations",
-  "translation across 50+ supported languages",
-  "structured document generation",
+  "모델 드리프트 실시간 감지",
+  "예측 정확도 자동 모니터링",
+  "자동 재학습 및 배포",
+  "시계열 데이터 특화 분석",
+  "현장 AI 모델 운영 자동화",
 ] as const;
 
 function HomeHeroTypewriter({
@@ -218,9 +218,11 @@ export function HomeHero() {
             marginBottom: 28,
           }}
         >
-          Building Real-World AI
+          <span style={{ whiteSpace: "nowrap" }}>
+            AI 모델이 현장에서 무너지는 이유,
+          </span>
           <br />
-          <span style={{ color: h1Muted }}>for the Future of Work</span>
+          <span style={{ color: h1Muted }}>Make AI가 해결합니다.</span>
         </motion.h1>
 
         <motion.p
@@ -240,8 +242,8 @@ export function HomeHero() {
             marginBottom: 14,
           }}
         >
-          Mazelone turns complex documents, language, images, and operational
-          knowledge into AI products people can actually use.
+          학습된 모델이 실전에서 예측 정확도를 잃어가는 순간을 포착하고,
+          자동으로 감지, 재학습, 배포하는 시계열 특화 AIOps 플랫폼
         </motion.p>
 
         {/* Korean blurb: same color as hero background so it does not show in the UI, but remains in the DOM for SEO. */}
@@ -265,8 +267,9 @@ export function HomeHero() {
             overflow: "hidden",
           }}
         >
-          마젤원(Mazelone)은 기업의 문서, 언어, 이미지, 운영 지식을 AI 제품으로
-          전환하는 엔터프라이즈 AI 기업입니다.
+          Make AI는 학습된 AI 모델의 현장 성능 저하를 자동으로 감지하고,
+          재학습과 배포까지 이어주는 시계열 특화 AIOps 플랫폼을 제공하는
+          기업입니다.
         </motion.p>
 
         <motion.div
@@ -287,7 +290,6 @@ export function HomeHero() {
             lineHeight: 1.6,
           }}
         >
-          <span>From </span>
           <HomeHeroTypewriter
             texts={TYPEWRITER_MIDDLE}
             reduceMotion={reduceMotion}
@@ -323,7 +325,7 @@ export function HomeHero() {
               e.currentTarget.style.background = primaryBtn.bg;
             }}
           >
-            Explore Products
+            Make AI Ops 알아보기
             <ArrowRight size={15} aria-hidden />
           </button>
           <button
@@ -347,7 +349,7 @@ export function HomeHero() {
               e.currentTarget.style.color = secondaryBtn.color;
             }}
           >
-            Talk to us
+            도입문의
           </button>
         </motion.div>
 
