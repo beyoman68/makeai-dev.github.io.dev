@@ -1,33 +1,37 @@
-import { Navigate, Route, Routes } from "react-router-dom"
+import { Navigate, Route, Routes } from "react-router-dom";
+import { SiteLayout } from "@/components/site-layout";
+import { DataPlatformPage } from "@/pages/DataPlatformPage";
+import { ChatPlatformPage } from "@/pages/ChatPlatformPage";
+import { AiTranslatorPage } from "@/pages/AiTranslatorPage";
+import { DocumentGeneratorPage } from "@/pages/DocumentGeneratorPage";
+import { EmailAgentPage } from "@/pages/EmailAgentPage";
+import { RagPlatformPage } from "@/pages/RagPlatformPage";
+import { HomePage } from "@/pages/HomePage";
+import { PlaceholderPage } from "@/pages/PlaceholderPage";
+import { ResearchPage } from "./pages/ResearchPage";
+import { MakeAIOps } from "@/components/solution/MakeAIOps";
+import { MakeMoney } from "@/components/solution/MakeMoney";
+import { DocuAnalyzer } from "@/components/solution/DocuAnalyzer";
+import { AXTool } from "@/components/solution/AXTool";
 
-import { SiteLayout } from "@/components/site-layout"
-import { CareerPage } from "@/pages/CareerPage"
-import { CompanyPage } from "@/pages/CompanyPage"
-import { DataPlatformPage } from "@/pages/DataPlatformPage"
-import { ChatPlatformPage } from "@/pages/ChatPlatformPage"
-import { AiTranslatorPage } from "@/pages/AiTranslatorPage"
-import { DocumentGeneratorPage } from "@/pages/DocumentGeneratorPage"
-import { EmailAgentPage } from "@/pages/EmailAgentPage"
-import { RagPlatformPage } from "@/pages/RagPlatformPage"
-import { HomePage } from "@/pages/HomePage"
-import { PlaceholderPage } from "@/pages/PlaceholderPage"
-import { ResearchPage } from "./pages/ResearchPage"
+function SolutionPage() {
+  return (
+    <main className="flex w-full flex-1 flex-col">
+      <MakeAIOps />
+      <MakeMoney />
+      <DocuAnalyzer />
+      <AXTool />
+    </main>
+  );
+}
 
 export default function App() {
   return (
     <Routes>
       <Route element={<SiteLayout />}>
         <Route index element={<HomePage />} />
-        <Route path="company/about" element={<CompanyPage />} />
-        <Route path="company/career" element={<CareerPage />} />
-        <Route
-          path="company"
-          element={<Navigate to="/company/about" replace />}
-        />
-        <Route
-          path="products/data-platform"
-          element={<DataPlatformPage />}
-        />
+        <Route path="solution" element={<SolutionPage />} />
+        <Route path="products/data-platform" element={<DataPlatformPage />} />
         <Route
           path="products/document-platform"
           element={<Navigate to="/products/data-platform" replace />}
@@ -50,5 +54,5 @@ export default function App() {
         <Route path="*" element={<Navigate to="/" replace />} />
       </Route>
     </Routes>
-  )
+  );
 }

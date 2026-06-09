@@ -5,6 +5,9 @@ export const CONTACT_MAIL = "ask@mazelone.com" as const
 /** Global Research hub — single page, no dropdown. */
 export const researchHref = "/research" as const
 
+/** Solution — homepage platform section, no dropdown. */
+export const solutionHref = "/solution" as const
+
 /** About → `/company/about` (top of page). Page still exposes `#about-us` | `#history` for deep links. No `#career` here. Career: `/company/career`. */
 export const companyNav = [
   { label: "About", href: "/company/about" },
