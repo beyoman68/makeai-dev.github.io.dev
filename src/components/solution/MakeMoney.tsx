@@ -17,7 +17,7 @@ type Palette = {
   overline: string;
   subtitle: string;
   body: string;
-muted: string;
+  muted: string;
   badgeBg: string;
   badgeBorder: string;
   secondaryBtnBorder: string;
