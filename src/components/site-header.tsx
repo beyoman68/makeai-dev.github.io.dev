@@ -6,7 +6,7 @@ import { cn } from "@/lib/utils"
 import {
   CONTACT_MAIL,
   productNav,
-  solutionHref,
+  solutionNav,
   // researchHref, // re-enable with Research desktop + mobile links below (`/research` route stays in App.tsx)
 } from "@/lib/nav-config"
 
@@ -220,26 +220,6 @@ export function SiteHeader() {
             className="hidden min-w-0 flex-1 items-center gap-1 lg:flex"
             aria-label="Primary"
           >
-            <Link
-              to={solutionHref}
-              className={cn(
-                "rounded-md px-3 py-2 text-sm font-medium text-zinc-950 outline-none transition-colors hover:bg-zinc-100 hover:text-zinc-950 focus-visible:ring-2 focus-visible:ring-indigo-500/80 dark:text-zinc-200 dark:hover:bg-zinc-800 dark:hover:text-white",
-                location.pathname === "/" &&
-                  location.hash === "#platform" &&
-                  "bg-zinc-100 text-zinc-950 dark:bg-zinc-800 dark:text-white",
-              )}
-            >
-              Solution
-            </Link>
-            <DesktopDropdown
-              id="nav-product"
-              label="Product"
-              items={productNav}
-              open={openDesktopMenu === "product"}
-              onPointerOpen={() => setOpenDesktopMenu("product")}
-              onPointerClose={() => setOpenDesktopMenu(null)}
-            />
-            {/* Solution menu — hidden for now; restore `solutionNav` import + block below
             <DesktopDropdown
               id="nav-solution"
               label="Solution"
@@ -248,7 +228,14 @@ export function SiteHeader() {
               onPointerOpen={() => setOpenDesktopMenu("solution")}
               onPointerClose={() => setOpenDesktopMenu(null)}
             />
-            */}
+            <DesktopDropdown
+              id="nav-product"
+              label="Product"
+              items={productNav}
+              open={openDesktopMenu === "product"}
+              onPointerOpen={() => setOpenDesktopMenu("product")}
+              onPointerClose={() => setOpenDesktopMenu(null)}
+            />
             {/* Research — temporarily hidden from primary nav; direct URL `/research` still works.
             <Link
               to={researchHref}
@@ -300,16 +287,8 @@ export function SiteHeader() {
           className="border-t border-zinc-200 bg-white lg:hidden dark:border-zinc-800 dark:bg-zinc-950"
         >
           <div className="mx-auto max-h-[min(70vh,calc(100dvh-3.5rem))] max-w-6xl overflow-y-auto px-4 pb-6 sm:px-6">
-            <div className="border-b border-zinc-200 py-3 last:border-b-0 dark:border-zinc-800">
-              <Link
-                to={solutionHref}
-                className="block rounded-md px-3 py-2 text-sm font-medium text-zinc-950 hover:bg-zinc-100 hover:text-zinc-950 dark:text-zinc-200 dark:hover:bg-zinc-800 dark:hover:text-white"
-              >
-                Solution
-              </Link>
-            </div>
+            <MobileNavSection title="Solution" items={solutionNav} />
             <MobileNavSection title="Product" items={productNav} />
-            {/* <MobileNavSection title="Solution" items={solutionNav} /> */}
             {/* Research — temporarily hidden from mobile nav; see desktop block comment.
             <div className="border-b border-zinc-200 py-3 last:border-b-0 dark:border-zinc-800">
               <Link

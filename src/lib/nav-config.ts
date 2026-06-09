@@ -15,7 +15,6 @@ export const companyNav = [
 ] as const
 
 export const productNav = [
-  { label: "MZO Data Platform", href: "/products/data-platform" },
   { label: "MZO RAG Platform", href: "/products/rag-platform" },
   { label: "MZO Chat Platform", href: "/products/chat-platform" },
   { label: "MZO Email Agent", href: "/products/email-agent" },
@@ -24,13 +23,10 @@ export const productNav = [
 ] as const
 
 export const solutionNav = [
-  { label: "Enterprise", href: "/solutions/enterprise" },
-  { label: "Public", href: "/solutions/public" },
-  { label: "Education", href: "/solutions/education" },
-  // Hidden from nav for now; `/solutions/healthcare` still works via App route.
-  // { label: "Healthcare", href: "/solutions/healthcare" },
-  { label: "Manufacturing", href: "/solutions/manufacturing" },
-  // { label: "Commerce", href: "/solutions/commerce" },
+  { label: "Make AIOps", href: "/solution/make-aiops" },
+  { label: "Make Money", href: "/solution/make-money" },
+  { label: "Docu. Analyzer", href: "/solution/docu-analyzer" },
+  { label: "AX 진단 툴", href: "/solution/ax-tool" },
 ] as const
 
 export const footerContact = {

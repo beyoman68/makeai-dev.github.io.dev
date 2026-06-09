@@ -14,23 +14,39 @@ import { MakeMoney } from "@/components/solution/MakeMoney";
 import { DocuAnalyzer } from "@/components/solution/DocuAnalyzer";
 import { AXTool } from "@/components/solution/AXTool";
 
-function SolutionPage() {
+function SolutionLayout({ children }: { children: React.ReactNode }) {
   return (
-    <main className="flex w-full flex-1 flex-col">
-      <MakeAIOps />
-      <MakeMoney />
-      <DocuAnalyzer />
-      <AXTool />
-    </main>
+    <main className="flex w-full flex-1 flex-col">{children}</main>
   );
 }
+
+import React from "react";
 
 export default function App() {
   return (
     <Routes>
       <Route element={<SiteLayout />}>
         <Route index element={<HomePage />} />
-        <Route path="solution" element={<SolutionPage />} />
+        <Route
+          path="solution"
+          element={<Navigate to="/solution/make-aiops" replace />}
+        />
+        <Route
+          path="solution/make-aiops"
+          element={<SolutionLayout><MakeAIOps /></SolutionLayout>}
+        />
+        <Route
+          path="solution/make-money"
+          element={<SolutionLayout><MakeMoney /></SolutionLayout>}
+        />
+        <Route
+          path="solution/docu-analyzer"
+          element={<SolutionLayout><DocuAnalyzer /></SolutionLayout>}
+        />
+        <Route
+          path="solution/ax-tool"
+          element={<SolutionLayout><AXTool /></SolutionLayout>}
+        />
         <Route path="products/data-platform" element={<DataPlatformPage />} />
         <Route
           path="products/document-platform"
