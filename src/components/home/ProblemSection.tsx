@@ -379,7 +379,7 @@ function ProblemCard({
   );
 }
 
-export function problemSection() {
+export function ProblemSection() {
   const reduceMotion = useReducedMotion() ?? false;
   const isDark = useHtmlIsDark();
   const palette = paletteFor(isDark);
