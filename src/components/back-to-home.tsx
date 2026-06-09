@@ -16,7 +16,7 @@ export function BackToHome({ className }: BackToHomeProps) {
         className,
       )}
     >
-      Back to home
+      홈으로 돌아가기
     </Link>
   )
 }

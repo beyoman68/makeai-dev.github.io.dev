@@ -17,27 +17,27 @@ const ease = [0.16, 1, 0.3, 1] as const
 const features = [
   {
     icon: Database,
-    badge: "Retrieval",
-    title: "Hybrid semantic search",
+    badge: "검색",
+    title: "하이브리드 시맨틱 검색",
     description:
-      "Lexical and dense retrieval across your corpus, fused and ranked for relevance. Built for low-latency paths from query to evidence.",
-    detail: "BM25 · dense embeddings · re-ranking",
+      "코퍼스 전반에 걸친 렉시컬·덴스 검색을 결합하고 관련성에 따라 순위를 매깁니다. 질의에서 근거까지 저지연 경로를 위해 설계되었습니다.",
+    detail: "BM25 · 덴스 임베딩 · 재순위화",
   },
   {
     icon: ShieldCheck,
-    badge: "Grounding",
-    title: "Evidence-linked answers",
+    badge: "근거",
+    title: "근거 연결형 답변",
     description:
-      "Responses anchor to passages you can inspect: citations, snippets, and provenance surfaced with the answer — not buried in logs.",
-    detail: "Citation linking · passage attribution · confidence signals",
+      "답변은 직접 확인할 수 있는 구절에 기반합니다. 인용, 발췌, 출처가 로그에 묻히지 않고 답변과 함께 표시됩니다.",
+    detail: "인용 연결 · 구절 출처 표기 · 신뢰도 신호",
   },
   {
     icon: Images,
-    badge: "Visual Retrieval",
-    title: "Fine-Grained Visual Retrieval",
+    badge: "비주얼 검색",
+    title: "세밀한 비주얼 검색",
     description:
-      "Late-interaction retrieval matches query and document representations at a finer level, improving retrieval for drawings, tables, figures, layouts, and other visually dense content.",
-    detail: "Late interaction · MaxSim matching · multi-vector retrieval",
+      "레이트 인터랙션 검색은 질의와 문서 표현을 더 세밀한 수준에서 매칭하여 도면, 표, 그림, 레이아웃 등 시각적으로 밀도 높은 콘텐츠의 검색 성능을 향상시킵니다.",
+    detail: "레이트 인터랙션 · MaxSim 매칭 · 멀티 벡터 검색",
   },
 ] as const
 
@@ -55,15 +55,15 @@ export function RagPlatformFeatureCards() {
         className="mb-12 text-center"
       >
         <p className="text-xs font-semibold tracking-[0.2em] text-muted-foreground uppercase">
-          Agent orchestration
+          에이전트 오케스트레이션
         </p>
         <h2 className="mt-3 text-balance text-3xl font-semibold tracking-tight text-foreground sm:text-4xl">
-          Built for retrieval, tools, and grounded generation.
+          검색, 도구, 근거 기반 생성을 위해 설계되었습니다.
         </h2>
         <p className="mx-auto mt-4 max-w-2xl text-pretty text-sm leading-relaxed text-muted-foreground sm:text-base">
-          From query understanding and hybrid retrieval to tool use, context
-          assembly, and streaming answers, each layer is designed to turn
-          enterprise data into grounded responses.
+          질의 이해와 하이브리드 검색부터 도구 사용, 컨텍스트 구성, 스트리밍
+          답변까지, 각 계층은 엔터프라이즈 데이터를 근거 있는 답변으로 전환하도록
+          설계되었습니다.
         </p>
       </motion.div>
 

@@ -12,7 +12,7 @@ export function RagPlatformHero() {
     <section className="w-full border-b border-border px-4 pb-14 pt-8 text-center sm:px-6 sm:pb-16 sm:pt-12 lg:px-8">
       <div className="mx-auto max-w-3xl">
         <p className="text-xs font-medium tracking-[0.2em] text-muted-foreground uppercase">
-          Products
+          제품
         </p>
 
         <motion.h1
@@ -34,9 +34,9 @@ export function RagPlatformHero() {
           transition={{ duration: reduceMotion ? 0 : 0.7, delay: reduceMotion ? 0 : 0.42 }}
           className="mt-4 text-pretty text-lg text-muted-foreground sm:text-xl"
         >
-          Mazelone connects language models to your knowledge — retrieving,
-          grounding, and reasoning across your sources, with controls fit for
-          production.
+          Mazelone은 언어 모델을 여러분의 지식에 연결합니다 — 다양한 소스를
+          검색하고, 근거를 마련하며, 추론하고, 프로덕션에 적합한 제어 기능을
+          제공합니다.
         </motion.p>
 
         <motion.div
