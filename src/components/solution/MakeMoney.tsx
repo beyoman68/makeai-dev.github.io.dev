@@ -144,7 +144,9 @@ export function MakeMoney() {
               margin: 0,
             }}
           >
-            Make Money
+            Make
+            <br />
+            <span style={{ color: ACCENT }}>Money</span>
           </h2>
           <p
             style={{

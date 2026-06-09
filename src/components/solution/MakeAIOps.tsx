@@ -335,16 +335,31 @@ export function MakeAIOps() {
             id="make-aiops-heading"
             className="text-balance"
             style={{
-              fontSize: "clamp(28px, 4vw, 2.4rem)",
-              fontWeight: 600,
+              fontSize: "clamp(40px, 7vw, 5rem)",
+              fontWeight: 700,
               letterSpacing: "-0.03em",
               color: palette.heading,
-              lineHeight: 1.15,
+              lineHeight: 1.02,
               margin: 0,
             }}
           >
-            똑똑한 인공지능을 만드는 플랫폼 Make Engine
+            Make
+            <br />
+            <span style={{ color: C.teal }}>AIOps</span>
           </h2>
+          <p
+            style={{
+              marginTop: 14,
+              fontSize: "clamp(18px, 2.6vw, 1.6rem)",
+              fontWeight: 600,
+              letterSpacing: "-0.01em",
+              color: palette.heading,
+              lineHeight: 1.3,
+              margin: "14px 0 0",
+            }}
+          >
+            똑똑한 인공지능을 만드는 플랫폼 Make Engine
+          </p>
           <p
             style={{
               marginTop: 16,
