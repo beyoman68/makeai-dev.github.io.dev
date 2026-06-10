@@ -6,11 +6,14 @@ import { BackToHome } from "@/components/back-to-home";
 import { DataPlatformArchitectureFigure } from "@/components/data-platform-architecture-figure";
 import { DataPlatformDemo } from "@/components/data-platform/data-platform-demo";
 import { CONTACT_MAIL } from "@/lib/nav-config";
+import { useHtmlIsDark } from "@/lib/use-html-is-dark";
 
 const ease = [0.16, 1, 0.3, 1] as const;
 
 export function DocuAnalyzer() {
   const reduce = useReducedMotion() ?? false;
+  const isDark = useHtmlIsDark();
+  const overlineColor = isDark ? "rgba(255,255,255,0.25)" : "rgba(24,24,27,0.45)";
 
   const inView = {
     initial: reduce ? false : ({ opacity: 0, y: 18 } as const),
@@ -38,7 +41,13 @@ export function DocuAnalyzer() {
               delay: reduce ? 0 : 0.06,
               ease,
             }}
-            className="text-xs font-medium tracking-[0.2em] text-muted-foreground uppercase"
+            className="uppercase"
+            style={{
+              fontSize: 11,
+              fontWeight: 600,
+              letterSpacing: "0.1em",
+              color: overlineColor,
+            }}
           >
             Document Analyzer
           </motion.p>
