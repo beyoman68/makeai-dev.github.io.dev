@@ -55,6 +55,11 @@ const cumulativeData = [
   2.8, 3.0, 3.2, 3.5, 3.8, 4.0, 4.2, 4.5, 5.0, 5.5, 6.0, 6.5, 7.2, 7.9,
 ];
 
+const ASSET_CHART_R = 70;
+const ASSET_CHART_C = 2 * Math.PI * ASSET_CHART_R;
+const DEPOSIT_ARC = 0.55 * ASSET_CHART_C;
+const STOCK_ARC = 0.45 * ASSET_CHART_C;
+
 export default function Dashboard() {
   const [activeTab, setActiveTab] = useState<Tab>("종합현황");
 
@@ -431,22 +436,22 @@ export default function Dashboard() {
                 <circle
                   cx="100"
                   cy="100"
-                  r="70"
+                  r={ASSET_CHART_R}
                   fill="none"
                   stroke="#00e5ff"
                   strokeWidth="28"
-                  strokeDasharray="219.9 219.9"
+                  strokeDasharray={`${DEPOSIT_ARC} ${STOCK_ARC}`}
                   strokeDashoffset="0"
                 />
                 <circle
                   cx="100"
                   cy="100"
-                  r="70"
+                  r={ASSET_CHART_R}
                   fill="none"
                   stroke="#00e676"
                   strokeWidth="28"
-                  strokeDasharray="99 340.8"
-                  strokeDashoffset="-219.9"
+                  strokeDasharray={`${STOCK_ARC} ${DEPOSIT_ARC}`}
+                  strokeDashoffset={-DEPOSIT_ARC}
                 />
                 <circle cx="100" cy="100" r="44" fill="#111820" />
               </svg>
