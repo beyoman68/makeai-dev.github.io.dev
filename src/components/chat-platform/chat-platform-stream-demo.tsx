@@ -25,9 +25,9 @@ const ease = [0.16, 1, 0.3, 1] as const
 type WorkspacePanelTab = "instructions" | "files" | "conversations"
 
 const WORKSPACE_PANEL_TABS: { id: WorkspacePanelTab; label: string }[] = [
-  { id: "instructions", label: "Instructions" },
-  { id: "files", label: "Files" },
-  { id: "conversations", label: "Conversations" },
+  { id: "instructions", label: "지침" },
+  { id: "files", label: "파일" },
+  { id: "conversations", label: "대화" },
 ]
 
 type Phase = "idle" | "typing" | "sent" | "streaming" | "done"
@@ -53,70 +53,70 @@ interface Scenario {
 
 const WORKSPACE_FILES: WorkspaceFile[] = [
   {
-    name: "Annual Leave Policy.pdf",
+    name: "연차 정책.pdf",
     refId: "HR-POL-2024-03",
     pages: 12,
-    updated: "Apr 18",
+    updated: "4월 18일",
   },
   {
-    name: "Employee Handbook.pdf",
+    name: "직원 핸드북.pdf",
     refId: "EH-2024-v2",
     pages: 63,
-    updated: "Apr 12",
+    updated: "4월 12일",
   },
 ]
 
 const WORKSPACE_TOOLS = [
-  "Web Search",
-  "Document AI",
-  "KPI Workflows",
-  "Proposal Builder",
+  "웹 검색",
+  "문서 AI",
+  "KPI 워크플로",
+  "제안서 빌더",
 ] as const
 
 const SCENARIOS: Scenario[] = [
   {
     id: "leave",
-    recentLabel: "Annual leave policy summarization",
-    recentTime: "2h ago",
+    recentLabel: "연차 정책 요약",
+    recentTime: "2시간 전",
     attachmentRefs: ["HR-POL-2024-03"],
-    user: "Summarize the annual leave policy and cite the relevant file.",
+    user: "연차 정책을 요약하고 관련 파일을 인용해 줘.",
     citeRef: "HR-POL-2024-03",
     assistant:
-      "Based on the Annual Leave Policy (HR-POL-2024-03), here is a concise summary:\n\nEntitlement — Full-time employees receive 20 working days of annual leave per year, accrued monthly. Part-time schedules are prorated against FTE.\n\nCarryover — Up to 5 unused days may roll into the next calendar year if approved by your manager before the December cutoff.\n\nApproval — Requests should be submitted at least 5 business days in advance through the HR portal unless marked urgent.\n\nThe figures and rules above are taken directly from the shared policy file in this workspace.",
+      "연차 정책(HR-POL-2024-03)을 바탕으로 한 간단한 요약입니다:\n\n부여 — 정규직 직원은 연간 20일의 연차를 부여받으며, 매월 적립됩니다. 시간제 근무는 FTE 기준으로 비례 산정됩니다.\n\n이월 — 12월 마감 전 관리자의 승인을 받으면 사용하지 않은 휴가를 최대 5일까지 다음 해로 이월할 수 있습니다.\n\n승인 — 긴급으로 표시된 경우를 제외하고, 요청은 HR 포털을 통해 최소 영업일 5일 전에 제출해야 합니다.\n\n위의 수치와 규정은 이 워크스페이스의 공유 정책 파일에서 직접 가져온 것입니다.",
   },
   {
     id: "handbook",
-    recentLabel: "Employee Handbook — benefits",
-    recentTime: "Yesterday",
+    recentLabel: "직원 핸드북 — 복리후생",
+    recentTime: "어제",
     attachmentRefs: ["EH-2024-v2"],
-    user: "Where does the handbook define remote-work eligibility?",
+    user: "핸드북에서 재택근무 자격 요건은 어디에 정의되어 있어?",
     citeRef: "EH-2024-v2",
     assistant:
-      "In the Employee Handbook (EH-2024-v2), remote-work eligibility is covered in the “Ways of Working” chapter.\n\nEligibility — Roles that are location-agnostic by job family may apply after the probation period. Hybrid schedules require director-level approval.\n\nEquipment — The handbook states that approved remote workers receive a standard hardware stipend and must use the company VPN for access to internal systems.\n\nFor exact wording, see the handbook sections referenced in your workspace Files tab.",
+      "직원 핸드북(EH-2024-v2)에서 재택근무 자격은 “일하는 방식” 장에서 다룹니다.\n\n자격 — 직무군 특성상 근무 장소에 구애받지 않는 역할은 수습 기간 이후 신청할 수 있습니다. 하이브리드 근무는 임원급 승인이 필요합니다.\n\n장비 — 핸드북에 따르면 승인된 재택근무자는 표준 하드웨어 지원금을 받으며, 내부 시스템 접속 시 회사 VPN을 사용해야 합니다.\n\n정확한 문구는 워크스페이스 파일 탭에서 참조된 핸드북 섹션을 확인하세요.",
   },
   {
     id: "kpi",
-    recentLabel: "Q4 KPI Review Sum…",
-    recentTime: "Yesterday",
+    recentLabel: "4분기 KPI 리뷰 요약…",
+    recentTime: "어제",
     attachmentRefs: ["HR-POL-2024-03", "EH-2024-v2"],
-    user: "Pull key numbers we discussed for Q4 KPI review.",
+    user: "4분기 KPI 리뷰에서 논의한 핵심 수치를 가져와 줘.",
     citeRef: "HR-POL-2024-03",
     assistant:
-      "I can ground answers in the documents attached to this workspace. For a KPI roll-up, combine metrics from your latest review pack with the policy tables in Annual Leave Policy (HR-POL-2024-03) only where leave impacts staffing plans.\n\nNext step — Upload or link the Q4 KPI spreadsheet to this workspace Files tab so I can cite specific cells and charts in the reply stream.",
+      "이 워크스페이스에 첨부된 문서를 근거로 답변을 드릴 수 있습니다. KPI 종합을 위해서는 최신 리뷰 자료의 지표와, 휴가가 인력 계획에 영향을 미치는 부분에 한해 연차 정책(HR-POL-2024-03)의 정책 표를 결합하세요.\n\n다음 단계 — 4분기 KPI 스프레드시트를 이 워크스페이스 파일 탭에 업로드하거나 연결해 주시면 응답 스트림에서 특정 셀과 차트를 인용할 수 있습니다.",
   },
 ]
 
 const RECENT_STATIC = [
-  { label: "Annual leave policy summarization", time: "2h ago", id: "leave" as const },
-  { label: "Q4 KPI Review Sum…", time: "Yesterday", id: "kpi" as const },
-  { label: "Employee handbook — remote", time: "3 days ago", id: "handbook" as const },
+  { label: "연차 정책 요약", time: "2시간 전", id: "leave" as const },
+  { label: "4분기 KPI 리뷰 요약…", time: "어제", id: "kpi" as const },
+  { label: "직원 핸드북 — 재택", time: "3일 전", id: "handbook" as const },
 ]
 
 function WorkspaceAttachmentChips({ refs }: { refs: string[] }) {
   const list = WORKSPACE_FILES.filter((f) => refs.includes(f.refId))
   if (list.length === 0) return null
   return (
-    <div className="flex justify-end" aria-label="Files in context for this message">
+    <div className="flex justify-end" aria-label="이 메시지의 컨텍스트에 포함된 파일">
       <div className="mb-1.5 flex max-w-full flex-wrap justify-end gap-1.5">
         {list.map((f) => (
           <span
@@ -304,15 +304,16 @@ export function ChatPlatformStreamDemo() {
       >
         <div className="mb-2 inline-flex items-center gap-2 text-[11px] font-semibold tracking-[0.08em] text-muted-foreground uppercase">
           <span className="h-px w-4 bg-border" aria-hidden />
-          Interactive workspace demo
+          인터랙티브 워크스페이스 데모
           <span className="h-px w-4 bg-border" aria-hidden />
         </div>
         <h2 className="text-balance text-2xl font-semibold tracking-tight text-foreground sm:text-3xl">
-          Teams, files, and streaming chat in one surface
+          팀, 파일, 스트리밍 채팅을 하나의 화면에서
         </h2>
         <p className="mx-auto mt-2 max-w-2xl text-sm text-muted-foreground">
-          Layout mirrors the MZO workspace experience: global navigation, workspace
-          files & tools, and a streaming assistant. Marketing demo only — no live backend.
+          레이아웃은 워크스페이스 경험을 그대로 반영합니다: 전역 내비게이션,
+          워크스페이스 파일 및 도구, 그리고 스트리밍 어시스턴트. 마케팅 데모일 뿐
+          — 실제 백엔드는 없습니다.
         </p>
       </motion.div>
 
@@ -327,60 +328,60 @@ export function ChatPlatformStreamDemo() {
             {/* 1 — Global navigation */}
             <nav
               className="flex w-full shrink-0 flex-col border-b border-border bg-muted/20 lg:w-[200px] lg:border-b-0 lg:border-r"
-              aria-label="Main sidebar: Personal, Team, Organization, and recent conversations"
+              aria-label="메인 사이드바: 개인, 팀, 조직 및 최근 대화"
             >
               <div className="max-h-[200px] space-y-3 overflow-y-auto p-3 lg:max-h-none">
                 <p className="text-[10px] font-semibold uppercase tracking-wide text-muted-foreground">
-                  Personal
+                  개인
                 </p>
                 <ul className="space-y-1 text-xs">
                   <li>
                     <span className="flex items-center gap-2 rounded-md px-2 py-1.5 text-muted-foreground">
-                      <FileText className="size-3.5 opacity-70" /> My Notes
+                      <FileText className="size-3.5 opacity-70" /> 내 노트
                     </span>
                   </li>
                   <li>
                     <span className="flex items-center gap-2 rounded-md px-2 py-1.5 text-muted-foreground">
-                      <Search className="size-3.5 opacity-70" /> Personal Research
+                      <Search className="size-3.5 opacity-70" /> 개인 리서치
                     </span>
                   </li>
                 </ul>
 
                 <p className="pt-1 text-[10px] font-semibold uppercase tracking-wide text-foreground">
-                  Team
+                  팀
                 </p>
                 <ul className="space-y-1 text-xs">
                   <li>
                     <span className="flex items-center justify-between gap-1 rounded-md bg-foreground px-2 py-1.5 font-medium text-background">
                       <span className="flex items-center gap-2 truncate">
-                        <Users className="size-3.5 shrink-0" /> HR Team
+                        <Users className="size-3.5 shrink-0" /> HR 팀
                       </span>
                       <span className="shrink-0 rounded bg-background/20 px-1 text-[9px]">
-                        Active
+                        활성
                       </span>
                     </span>
                   </li>
                   <li>
                     <span className="flex items-center gap-2 rounded-md px-2 py-1.5 text-muted-foreground">
-                      <Users className="size-3.5 opacity-70" /> Product Team
+                      <Users className="size-3.5 opacity-70" /> 프로덕트 팀
                     </span>
                   </li>
                 </ul>
 
                 <p className="pt-1 text-[10px] font-semibold uppercase tracking-wide text-foreground">
-                  Organization
+                  조직
                 </p>
                 <ul className="space-y-1 text-xs text-muted-foreground">
                   <li className="flex items-center gap-2 px-2 py-1">
-                    <Building2 className="size-3.5 opacity-70" /> Company Knowledge Base
+                    <Building2 className="size-3.5 opacity-70" /> 회사 지식 베이스
                   </li>
                   <li className="flex items-center gap-2 px-2 py-1">
-                    <Building2 className="size-3.5 opacity-70" /> Compliance Hub
+                    <Building2 className="size-3.5 opacity-70" /> 컴플라이언스 허브
                   </li>
                 </ul>
 
                 <p className="pt-1 text-[10px] font-semibold uppercase tracking-wide text-muted-foreground">
-                  Recent
+                  최근
                 </p>
                 <ul className="space-y-0.5 text-[11px]">
                   {RECENT_STATIC.map((r) => (
@@ -418,8 +419,8 @@ export function ChatPlatformStreamDemo() {
                     SK
                   </div>
                   <div className="min-w-0 text-[11px] leading-tight">
-                    <div className="truncate font-medium text-foreground">Sarah Kim</div>
-                    <div className="truncate text-muted-foreground">HR Team · MZO</div>
+                    <div className="truncate font-medium text-foreground">김사라</div>
+                    <div className="truncate text-muted-foreground">HR 팀</div>
                   </div>
                 </div>
               </div>
@@ -428,7 +429,7 @@ export function ChatPlatformStreamDemo() {
             {/* 2 — Workspace context */}
             <aside
               className="flex w-full shrink-0 flex-col border-b border-border bg-background lg:w-[260px] lg:border-b-0 lg:border-r"
-              aria-label="Workspace resources"
+              aria-label="워크스페이스 리소스"
             >
               <div className="border-b border-border p-3">
                 <div className="flex items-center gap-2">
@@ -436,8 +437,8 @@ export function ChatPlatformStreamDemo() {
                     <Users className="size-4" />
                   </div>
                   <div>
-                    <div className="text-sm font-semibold text-foreground">HR Team</div>
-                    <div className="text-[11px] text-muted-foreground">4 members · Workspace</div>
+                    <div className="text-sm font-semibold text-foreground">HR 팀</div>
+                    <div className="text-[11px] text-muted-foreground">멤버 4명 · 워크스페이스</div>
                   </div>
                 </div>
               </div>
@@ -445,7 +446,7 @@ export function ChatPlatformStreamDemo() {
               <div
                 className="flex border-b border-border px-2 pt-2"
                 role="tablist"
-                aria-label="Workspace panel"
+                aria-label="워크스페이스 패널"
               >
                 {WORKSPACE_PANEL_TABS.map(({ id, label }) => {
                   const selected = workspaceTab === id
@@ -487,21 +488,21 @@ export function ChatPlatformStreamDemo() {
                     className="space-y-3"
                   >
                     <p className="text-[11px] leading-relaxed text-muted-foreground">
-                      Follow these instructions for every conversation in this workspace.
+                      이 워크스페이스의 모든 대화에서 다음 지침을 따르세요.
                     </p>
                     <div className="rounded-lg border border-border bg-muted/20 p-3">
                       <label
                         htmlFor="workspace-instructions-preview"
                         className="sr-only"
                       >
-                        Workspace instructions
+                        워크스페이스 지침
                       </label>
                       <textarea
                         id="workspace-instructions-preview"
                         readOnly
                         rows={6}
                         className="w-full resize-none bg-transparent text-[11px] leading-relaxed text-foreground outline-none placeholder:text-muted-foreground"
-                        defaultValue="Use a formal, professional tone in English for all generated content and summaries."
+                        defaultValue="생성되는 모든 콘텐츠와 요약은 격식 있고 전문적인 어조로 작성하세요."
                       />
                     </div>
                   </div>
@@ -515,7 +516,7 @@ export function ChatPlatformStreamDemo() {
                     className="space-y-3"
                   >
                     <p className="text-[11px] leading-relaxed text-muted-foreground">
-                      Conversations use this workspace&apos;s instructions and shared files.
+                      대화는 이 워크스페이스의 지침과 공유 파일을 사용합니다.
                     </p>
                     <Button
                       type="button"
@@ -525,10 +526,10 @@ export function ChatPlatformStreamDemo() {
                       onClick={() => playScenario(SCENARIOS[0]!)}
                     >
                       <PenLine className="size-3.5 shrink-0" aria-hidden />
-                      Open new conversation
+                      새 대화 열기
                     </Button>
                     <p className="text-[10px] font-semibold uppercase tracking-wide text-muted-foreground">
-                      Recent in workspace
+                      워크스페이스 최근 항목
                     </p>
                     <ul className="space-y-1">
                       {RECENT_STATIC.map((r) => {
@@ -568,7 +569,7 @@ export function ChatPlatformStreamDemo() {
                     className="space-y-2"
                   >
                     <p className="text-[10px] font-semibold uppercase tracking-wide text-muted-foreground">
-                      Shared files
+                      공유 파일
                     </p>
                     {WORKSPACE_FILES.map((f) => (
                       <div
@@ -588,11 +589,11 @@ export function ChatPlatformStreamDemo() {
                               ID: {f.refId}
                             </div>
                             <div className="mt-1 flex flex-wrap items-center gap-2 text-[10px] text-muted-foreground">
-                              <span>{f.pages} pages</span>
+                              <span>{f.pages}페이지</span>
                               <span>·</span>
-                              <span>Updated {f.updated}</span>
+                              <span>{f.updated} 업데이트</span>
                               <span className="rounded bg-muted px-1.5 py-0 text-[9px] font-medium text-foreground">
-                                Shared
+                                공유됨
                               </span>
                             </div>
                           </div>
@@ -601,7 +602,7 @@ export function ChatPlatformStreamDemo() {
                     ))}
 
                     <p className="pt-2 text-[10px] font-semibold uppercase tracking-wide text-muted-foreground">
-                      Workspace tools
+                      워크스페이스 도구
                     </p>
                     <div className="grid grid-cols-2 gap-1.5">
                       {WORKSPACE_TOOLS.map((tool) => (
@@ -623,16 +624,16 @@ export function ChatPlatformStreamDemo() {
             <main className="relative flex min-h-[420px] min-w-0 flex-1 flex-col bg-muted/10">
               <div className="flex items-center justify-between border-b border-border bg-background/80 px-4 py-2.5 backdrop-blur-sm">
                 <div className="min-w-0 text-[11px] text-muted-foreground">
-                  <span className="text-foreground">HR Team</span>
+                  <span className="text-foreground">HR 팀</span>
                   <span className="mx-1.5 text-border">/</span>
-                  <span>New Conversation</span>
+                  <span>새 대화</span>
                 </div>
                 <div className="flex shrink-0 items-center gap-1.5 text-[10px] font-medium text-muted-foreground">
                   <span className="relative flex size-2">
                     <span className="absolute inline-flex size-full animate-ping rounded-full bg-emerald-500/50 opacity-75" />
                     <span className="relative inline-flex size-2 rounded-full bg-emerald-500" />
                   </span>
-                  Workspace context active
+                  워크스페이스 컨텍스트 활성
                 </div>
               </div>
 
@@ -641,7 +642,7 @@ export function ChatPlatformStreamDemo() {
                   <AnimatePresence mode="popLayout">
                     {showUserBubble && (
                       <div key="user-wrap" className="space-y-1">
-                        <p className="text-right text-[10px] text-muted-foreground">Sarah Kim</p>
+                        <p className="text-right text-[10px] text-muted-foreground">김사라</p>
                         <WorkspaceAttachmentChips refs={active.attachmentRefs} />
                         <UserBubble key="u" text={active.user} reduce={reduce} />
                       </div>
@@ -655,9 +656,8 @@ export function ChatPlatformStreamDemo() {
                         />
                         {phase === "done" && (
                           <p className="pl-11 text-[10px] leading-snug text-muted-foreground">
-                            Answer is grounded in the attached workspace file
-                            {active.attachmentRefs.length > 1 ? "s" : ""} above and the Files
-                            list in the middle column ({active.attachmentRefs.join(", ")}).
+                            답변은 위에 첨부된 워크스페이스 파일과 가운데 열의 파일
+                            목록({active.attachmentRefs.join(", ")})을 근거로 합니다.
                           </p>
                         )}
                       </div>
@@ -673,7 +673,7 @@ export function ChatPlatformStreamDemo() {
                       <span className="text-foreground">{inputPreview}</span>
                     ) : (
                       <span className="text-muted-foreground">
-                        Ask anything across your workspace…
+                        워크스페이스 전반에 무엇이든 물어보세요…
                       </span>
                     )}
                     {phase === "typing" && (
@@ -689,10 +689,10 @@ export function ChatPlatformStreamDemo() {
                   </div>
                   <div className="flex items-center justify-between gap-2 border-t border-border/60 pt-2">
                     <div className="flex items-center gap-0.5">
-                      <Button type="button" variant="ghost" size="icon" className="size-8" aria-label="Search">
+                      <Button type="button" variant="ghost" size="icon" className="size-8" aria-label="검색">
                         <Search className="size-4" />
                       </Button>
-                      <Button type="button" variant="ghost" size="icon" className="size-8" aria-label="Image">
+                      <Button type="button" variant="ghost" size="icon" className="size-8" aria-label="이미지">
                         <ImageIcon className="size-4" />
                       </Button>
                       <Button
@@ -700,13 +700,13 @@ export function ChatPlatformStreamDemo() {
                         variant="ghost"
                         size="icon"
                         className="size-8"
-                        aria-label="Add file"
+                        aria-label="파일 추가"
                       >
                         <FileText className="size-4" />
                       </Button>
                     </div>
                     <div className="flex items-center gap-1">
-                      <Button type="button" variant="ghost" size="icon" className="size-8" aria-label="Voice">
+                      <Button type="button" variant="ghost" size="icon" className="size-8" aria-label="음성">
                         <Mic className="size-4" />
                       </Button>
                       <Button
@@ -714,7 +714,7 @@ export function ChatPlatformStreamDemo() {
                         size="icon"
                         className="size-9 rounded-full"
                         disabled
-                        aria-label="Send (demo)"
+                        aria-label="보내기 (데모)"
                       >
                         <Send className="size-4" />
                       </Button>
@@ -722,14 +722,14 @@ export function ChatPlatformStreamDemo() {
                   </div>
                 </div>
                 <p className="mt-2 text-center text-[10px] text-muted-foreground">
-                  Workspace conversations can use shared files and instructions.
+                  워크스페이스 대화는 공유 파일과 지침을 사용할 수 있습니다.
                 </p>
               </div>
 
               <button
                 type="button"
                 className="absolute bottom-24 right-4 flex size-8 items-center justify-center rounded-full border border-border bg-background text-muted-foreground shadow-sm hover:text-foreground lg:bottom-28"
-                aria-label="Help"
+                aria-label="도움말"
               >
                 <HelpCircle className="size-4" />
               </button>
@@ -739,7 +739,7 @@ export function ChatPlatformStreamDemo() {
           {/* Scenario shortcuts (below fold on small screens — extra row) */}
           <div className="flex flex-wrap items-center gap-2 border-t border-border bg-muted/30 px-3 py-2">
             <span className="text-[10px] font-medium uppercase tracking-wide text-muted-foreground">
-              Try threads
+              스레드 사용해보기
             </span>
             {SCENARIOS.map((s) => (
               <button

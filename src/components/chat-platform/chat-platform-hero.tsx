@@ -17,7 +17,7 @@ export function ChatPlatformHero() {
           transition={{ duration: reduceMotion ? 0 : 0.55, delay: reduceMotion ? 0 : 0.06, ease }}
           className="text-xs font-medium tracking-[0.2em] text-muted-foreground uppercase"
         >
-          Workspace-based AI
+          워크스페이스 기반 AI
         </motion.p>
 
         <motion.h1
@@ -30,7 +30,7 @@ export function ChatPlatformHero() {
           }}
           className="mt-3 text-balance text-4xl font-bold tracking-tight text-foreground sm:text-5xl"
         >
-          MZO Chat Platform
+          Chat Platform
         </motion.h1>
 
         <motion.p
@@ -43,9 +43,9 @@ export function ChatPlatformHero() {
           }}
           className="mt-4 text-pretty text-lg text-muted-foreground sm:text-xl"
         >
-          Bring instructions, shared files, and conversations into one workspace. Across
-          personal, team, and organization scopes, answers stream with relevant context
-          and workspace knowledge—not isolated prompts.
+          지침, 공유 파일, 대화를 하나의 워크스페이스로 모으세요. 개인, 팀, 조직
+          범위 전반에서 답변은 고립된 프롬프트가 아니라 관련 컨텍스트와 워크스페이스
+          지식과 함께 스트리밍됩니다.
         </motion.p>
 
         <motion.div

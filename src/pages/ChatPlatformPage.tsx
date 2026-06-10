@@ -45,26 +45,27 @@ export function ChatPlatformPage() {
           {...inView}
         >
           <h2 className="text-xl font-semibold tracking-tight text-foreground">
-            From web client to stream endpoint
+            웹 클라이언트에서 스트림 엔드포인트까지
           </h2>
           <p className="mt-4 text-sm leading-7 text-muted-foreground">
-            MZO Chat Platform is designed around the same building blocks you would draw on a
-            whiteboard: a routed web client, authenticated API calls, and a long-lived response
-            for assistant output. The interactive demo above illustrates the experience layer;
-            your architecture review can pair it with your own network and identity constraints.
+            Chat Platform은 화이트보드에 그릴 법한 동일한 구성 요소를 중심으로
+            설계되었습니다. 라우팅된 웹 클라이언트, 인증된 API 호출, 그리고 어시스턴트
+            출력을 위한 장시간 유지되는 응답입니다. 위의 인터랙티브 데모는 경험
+            계층을 보여주며, 아키텍처 검토 시 여러분의 네트워크 및 ID 제약과 함께
+            구성할 수 있습니다.
           </p>
         </motion.section>
 
         <motion.section className="mt-16 border-t border-border pt-16 text-center" {...inView}>
           <h2 className="text-2xl font-semibold tracking-tight text-foreground">
-            Ready to talk about your chat rollout?
+            채팅 도입에 대해 이야기할 준비가 되셨나요?
           </h2>
           <p className="mx-auto mt-4 max-w-2xl text-sm leading-7 text-muted-foreground">
-            We can walk through streaming behavior, deployment models, and how assistants plug
-            into your existing systems.
+            스트리밍 동작, 배포 모델, 그리고 어시스턴트가 기존 시스템에 어떻게
+            연동되는지 함께 살펴볼 수 있습니다.
           </p>
           <Button asChild size="lg" className="mt-8 rounded-full px-8">
-            <a href={`mailto:${CONTACT_MAIL}`}>Contact us</a>
+            <a href={`mailto:${CONTACT_MAIL}`}>문의하기</a>
           </Button>
         </motion.section>
 

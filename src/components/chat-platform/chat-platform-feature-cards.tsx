@@ -6,16 +6,16 @@ const ease = [0.16, 1, 0.3, 1] as const
 
 const CARDS = [
   {
-    title: "Workspace-scoped context",
-    body: "Keep instructions, shared files, and conversations together so every reply starts from the right working context—not a blank thread.",
+    title: "워크스페이스 범위의 컨텍스트",
+    body: "지침, 공유 파일, 대화를 함께 유지하여 모든 답변이 빈 스레드가 아닌 올바른 작업 컨텍스트에서 시작되도록 합니다.",
   },
   {
-    title: "Grounded answers from shared knowledge",
-    body: "Stream answers tied to workspace files and retrieved context, so responses stay traceable and useful for real team workflows.",
+    title: "공유 지식에서 나오는 근거 있는 답변",
+    body: "워크스페이스 파일과 검색된 컨텍스트에 연결된 답변을 스트리밍하여, 응답이 추적 가능하고 실제 팀 워크플로에 유용하게 유지됩니다.",
   },
   {
-    title: "A unified surface for team AI work",
-    body: "Move from workspace navigation to active conversation, shared resources, and follow-up in one continuous experience.",
+    title: "팀 AI 작업을 위한 통합 화면",
+    body: "워크스페이스 탐색에서 활성 대화, 공유 리소스, 후속 작업까지 하나의 연속된 경험으로 이동하세요.",
   },
 ] as const
 
@@ -35,12 +35,12 @@ export function ChatPlatformFeatureCards() {
         id="chat-platform-value-heading"
         className="text-2xl font-semibold tracking-tight text-foreground"
       >
-        Built for knowledge work that stays organized
+        체계적으로 정리되는 지식 업무를 위해 설계되었습니다
       </h2>
       <p className="mt-4 max-w-3xl text-sm leading-7 text-muted-foreground">
-        MZO Chat Platform brings workspace instructions, shared files, and streaming,
-        source-aware answers into one operating surface—so teams keep context where the
-        work lives.
+        Chat Platform은 워크스페이스 지침, 공유 파일, 그리고 출처를 인식하는 스트리밍
+        답변을 하나의 운영 화면으로 모아, 팀이 업무가 이루어지는 곳에 컨텍스트를
+        유지할 수 있게 합니다.
       </p>
       <div className="mt-10 grid gap-4 md:grid-cols-3">
         {CARDS.map((c, i) => (
