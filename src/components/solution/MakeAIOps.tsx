@@ -1,6 +1,25 @@
+import {
+  CategoryScale,
+  Chart as ChartJS,
+  Filler,
+  LineController,
+  LineElement,
+  LinearScale,
+  PointElement,
+} from "chart.js";
 import { motion, useReducedMotion } from "motion/react";
+import { useEffect, useRef } from "react";
 
 import { useHtmlIsDark } from "@/lib/use-html-is-dark";
+
+ChartJS.register(
+  CategoryScale,
+  LinearScale,
+  PointElement,
+  LineElement,
+  LineController,
+  Filler,
+);
 
 /**
  * Solution — Make AIOps ("Make Engine") section.
@@ -11,6 +30,8 @@ import { useHtmlIsDark } from "@/lib/use-html-is-dark";
 const C = {
   teal: "#00d4aa",
   red: "#f87171",
+  blue: "#4f9cf9",
+  amber: "#fbbf24",
 } as const;
 
 const COMPARISON_ROWS = [
@@ -80,6 +101,8 @@ type Palette = {
   iconBg: string;
   iconBorder: string;
   featureTitle: string;
+  statsBoxBg: string;
+  statsBoxBorder: string;
 };
 
 function paletteFor(isDark: boolean): Palette {
@@ -96,6 +119,8 @@ function paletteFor(isDark: boolean): Palette {
       iconBg: "rgba(0,212,170,0.1)",
       iconBorder: "rgba(0,212,170,0.2)",
       featureTitle: "#e8e8e8",
+      statsBoxBg: "rgba(0,212,170,0.05)",
+      statsBoxBorder: "rgba(0,212,170,0.1)",
     };
   }
 
@@ -111,7 +136,160 @@ function paletteFor(isDark: boolean): Palette {
     iconBg: "rgba(0,212,170,0.08)",
     iconBorder: "rgba(0,212,170,0.18)",
     featureTitle: "#18181b",
+    statsBoxBg: "rgba(0,212,170,0.05)",
+    statsBoxBorder: "rgba(0,212,170,0.12)",
   };
+}
+
+function createSeededRandom(seed: number) {
+  let state = seed;
+  return () => {
+    state = (state * 1664525 + 1013904223) >>> 0;
+    return state / 0xffffffff;
+  };
+}
+
+function randArr(n: number, base: number, amp: number, rand: () => number): number[] {
+  return Array.from(
+    { length: n },
+    (_, i) => +(base + amp * (Math.sin(i * 0.35 + rand() * 0.4) + rand() * 0.25)).toFixed(3),
+  );
+}
+
+function buildWalkForwardData() {
+  const rand = createSeededRandom(42);
+  const n = 80;
+  const labels = Array.from({ length: n }, () => "");
+  const price = randArr(n, 100, 18, rand);
+  const pred = price.map((v, i) =>
+    i < 8 ? null : +(v + 2.5 * (rand() - 0.5)).toFixed(2),
+  );
+  return { labels, price, pred };
+}
+
+function WalkForwardChart({ palette }: { palette: Palette }) {
+  const canvasRef = useRef<HTMLCanvasElement>(null);
+  const chartRef = useRef<ChartJS<"line"> | null>(null);
+
+  useEffect(() => {
+    const canvas = canvasRef.current;
+    if (!canvas) return;
+
+    const { labels, price, pred } = buildWalkForwardData();
+
+    chartRef.current?.destroy();
+
+    chartRef.current = new ChartJS(canvas, {
+      type: "line",
+      data: {
+        labels,
+        datasets: [
+          {
+            data: price,
+            borderColor: "#64748b",
+            borderWidth: 1.5,
+            pointRadius: 0,
+            fill: false,
+            tension: 0.4,
+          },
+          {
+            data: pred,
+            borderColor: C.blue,
+            borderWidth: 2,
+            pointRadius: 0,
+            fill: false,
+            tension: 0.4,
+            borderDash: [4, 2],
+          },
+        ],
+      },
+      options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        animation: false,
+        plugins: { legend: { display: false } },
+        scales: { x: { display: false }, y: { display: false } },
+      },
+    });
+
+    return () => {
+      chartRef.current?.destroy();
+      chartRef.current = null;
+    };
+  }, []);
+
+  return (
+    <div
+      style={{
+        background: palette.cardBg,
+        border: `1px solid ${palette.cardBorder}`,
+        borderRadius: 16,
+        padding: "1.5rem",
+      }}
+    >
+      <div
+        style={{
+          fontSize: "0.8rem",
+          color: palette.muted,
+          marginBottom: "1rem",
+          textTransform: "uppercase",
+          letterSpacing: "0.5px",
+        }}
+      >
+        Walk-Forward 검증 시각화
+      </div>
+      <div style={{ height: 200, position: "relative" }}>
+        <canvas ref={canvasRef} style={{ position: "absolute", inset: 0 }} />
+      </div>
+      <div style={{ display: "flex", gap: "1rem", marginTop: "1rem", flexWrap: "wrap" }}>
+        {[
+          { label: "Bull 국면", bg: "rgba(0,212,170,0.15)", color: C.teal },
+          { label: "Bear 국면", bg: "rgba(248,113,113,0.15)", color: C.red },
+          { label: "Sideways 국면", bg: "rgba(251,191,36,0.15)", color: C.amber },
+          { label: "모델 예측", bg: "rgba(79,156,249,0.15)", color: C.blue },
+        ].map((pill) => (
+          <span
+            key={pill.label}
+            style={{
+              padding: "0.25rem 0.7rem",
+              borderRadius: 20,
+              fontSize: "0.75rem",
+              fontWeight: 600,
+              background: pill.bg,
+              color: pill.color,
+            }}
+          >
+            {pill.label}
+          </span>
+        ))}
+      </div>
+      <div
+        style={{
+          marginTop: "1.2rem",
+          padding: "0.8rem",
+          background: palette.statsBoxBg,
+          borderRadius: 8,
+          border: `1px solid ${palette.statsBoxBorder}`,
+        }}
+      >
+        <div style={{ fontSize: "0.75rem", color: palette.muted, marginBottom: "0.5rem" }}>
+          Walk-Forward Split 5회 검증 결과
+        </div>
+        <div style={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: "0.5rem" }}>
+          {[
+            { value: "2.41", label: "평균 Sharpe", color: C.teal },
+            { value: "87.3%", label: "방향 정확도", color: C.blue },
+            { value: "-12.4%", label: "최대 낙폭", color: C.amber },
+          ].map((stat) => (
+            <div key={stat.label} style={{ textAlign: "center" }}>
+              <div style={{ fontSize: "1.1rem", fontWeight: 800, color: stat.color }}>{stat.value}</div>
+              <div style={{ fontSize: "0.65rem", color: palette.muted }}>{stat.label}</div>
+            </div>
+          ))}
+        </div>
+      </div>
+    </div>
+  );
 }
 
 function ComparisonTable({ palette }: { palette: Palette }) {
@@ -373,7 +551,7 @@ export function MakeAIOps() {
           </p>
         </motion.div>
 
-        <div className="grid grid-cols-1 items-start gap-16 lg:grid-cols-2">
+        <div className="grid grid-cols-1 items-center gap-16 lg:grid-cols-2">
           <div
             style={{ display: "flex", flexDirection: "column", gap: "1.5rem" }}
           >
@@ -391,8 +569,14 @@ export function MakeAIOps() {
             ))}
           </div>
 
-          {/* 우측 영역 — 의도적으로 비워둠 */}
-          <div aria-hidden className="hidden lg:block" />
+          <motion.div
+            initial={reduceMotion ? false : { opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: reduceMotion ? 0 : 0.6, delay: 0.1 }}
+            viewport={{ once: true, margin: "-60px" }}
+          >
+            <WalkForwardChart palette={palette} />
+          </motion.div>
         </div>
       </div>
     </section>
