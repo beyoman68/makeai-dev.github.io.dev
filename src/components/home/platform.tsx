@@ -519,6 +519,158 @@ function FeatureItem({
   );
 }
 
+// ─── Weather Chart (Case Study) ──────────────────────────────────────────────
+
+function generateWeatherDates(
+  year: number,
+  month: number,
+  day: number,
+  count: number,
+): string[] {
+  const dates: string[] = [];
+  const d = new Date(year, month - 1, day);
+  for (let i = 0; i < count; i++) {
+    const m = String(d.getMonth() + 1).padStart(2, "0");
+    const dd = String(d.getDate()).padStart(2, "0");
+    dates.push(`${d.getFullYear()}-${m}-${dd}`);
+    d.setDate(d.getDate() + 1);
+  }
+  return dates;
+}
+
+// Transformer: 50일 (2026-04-07 ~ 2026-05-26)
+const TRANSFORMER_LABELS = generateWeatherDates(2026, 4, 7, 50);
+// 실측(종가): Apr 7~12 급등(15→30), Apr 21~23 저점(~10), 이후 완만 상승
+const TRANSFORMER_ACTUAL: number[] = [
+  15, 15, 22, 27, 30, 30, 27, // Apr 7–13   (0–6)
+  25, 23, 21, 20, 18, 17, 16, // Apr 14–20  (7–13)
+  11, 10, 11, 13, 15, 18, 20, // Apr 21–27  (14–20)
+  20, 18, 17, 19, 21, 22, 22, // Apr 28–May 4 (21–27)
+  20, 20, 22, 24, 23, 24, 24, // May 5–11   (28–34)
+  25, 25, 26, 28, 27, 27, 28, // May 12–18  (35–41)
+  27, 27, 26, 28, 30, 30, 28, 30, // May 19–26 (42–49)
+];
+// 예측: index 19(Apr 26)부터 21.3→26.0 선형 상승 (앞 19행 null)
+const TRANSFORMER_PRED: (number | null)[] = [
+  ...(Array.from({ length: 19 }, () => null) as null[]),
+  21.3, 21.5, 21.6, 21.8, 22.0, 22.1, 22.3, 22.5,
+  22.7, 22.9, 23.1, 23.3, 23.5, 23.7, 23.9, 24.1,
+  24.3, 24.5, 24.7, 24.9, 25.0, 25.2, 25.4, 25.6,
+  25.7, 25.8, 25.9, 26.0, 26.0, 26.0, 26.0,
+];
+
+// FFN: 30일 (2026-04-27 ~ 2026-05-26), 전 구간 예측
+const FFN_LABELS = generateWeatherDates(2026, 4, 27, 30);
+// 실측(종가): Apr 27 ~15 급등 후 May 1~9 평탄(21~23), May 13~20 피크(~31), May 21 급락(~16), 회복
+const FFN_ACTUAL: number[] = [
+  15, 20, 23, 22, 23, 22, 22, 21, // Apr 27–May 4  (0–7)
+  22, 23, 23, 22, 23, 25, 26, 24, // May 5–12      (8–15)
+  26, 29, 30, 31, 30, 30, 30, 30, // May 13–20     (16–23)
+  16, 21, 25, 29, 28, 25,         // May 21–26     (24–29)
+];
+// 예측: 실측과 거의 동일 패턴, min 14.8(May 21), max 30.9(May 16)
+const FFN_PRED: (number | null)[] = [
+  15.0, 19.5, 22.0, 21.5, 22.5, 21.5, 21.0, 20.5, // Apr 27–May 4  (0–7)
+  21.0, 22.0, 22.5, 21.5, 22.5, 25.0, 25.5, 23.5, // May 5–12      (8–15)
+  25.5, 28.5, 30.0, 30.9, 29.5, 29.0, 29.5, 29.5, // May 13–20     (16–23)
+  14.8, 20.0, 24.0, 28.5, 27.5, 24.0,             // May 21–26     (24–29)
+];
+
+function WeatherChartCanvas({
+  isDark,
+  actualData,
+  predData,
+  labels,
+}: {
+  isDark: boolean;
+  actualData: number[];
+  predData: (number | null)[];
+  labels: string[];
+}) {
+  const canvasRef = useRef<HTMLCanvasElement>(null);
+  const chartRef = useRef<InstanceType<typeof ChartJS> | null>(null);
+
+  useEffect(() => {
+    const canvas = canvasRef.current;
+    if (!canvas) return;
+    chartRef.current?.destroy();
+
+    const gridColor = isDark ? "rgba(255,255,255,0.1)" : "rgba(0,0,0,0.08)";
+    const tickColor = isDark ? "rgba(255,255,255,0.45)" : "rgba(0,0,0,0.45)";
+    const legendColor = isDark ? "rgba(255,255,255,0.7)" : "rgba(0,0,0,0.65)";
+
+    chartRef.current = new ChartJS(canvas, {
+      type: "line",
+      data: {
+        labels,
+        datasets: [
+          {
+            label: "종가",
+            data: actualData,
+            borderColor: "#4f9cf9",
+            borderWidth: 1.5,
+            pointRadius: 0,
+            fill: false,
+            tension: 0.3,
+            spanGaps: false,
+          },
+          {
+            label: "예측",
+            data: predData,
+            borderColor: C.teal,
+            borderWidth: 2,
+            pointRadius: 3.5,
+            pointBackgroundColor: C.teal,
+            pointBorderColor: C.teal,
+            fill: false,
+            tension: 0.35,
+            spanGaps: false,
+          },
+        ],
+      },
+      options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        animation: false,
+        plugins: {
+          legend: {
+            display: true,
+            position: "top",
+            labels: {
+              color: legendColor,
+              boxWidth: 14,
+              boxHeight: 3,
+              font: { size: 11 },
+              padding: 16,
+            },
+          },
+        },
+        scales: {
+          x: {
+            grid: { color: gridColor },
+            border: { color: gridColor },
+            ticks: { color: tickColor, maxTicksLimit: 8, font: { size: 10 } },
+          },
+          y: {
+            grid: { color: gridColor },
+            border: { color: gridColor },
+            ticks: { color: tickColor, font: { size: 10 }, stepSize: 5 },
+            min: 5,
+            max: 36,
+          },
+        },
+      },
+    });
+
+    return () => {
+      chartRef.current?.destroy();
+      chartRef.current = null;
+    };
+  }, [isDark, actualData, predData, labels]);
+
+  return <canvas ref={canvasRef} style={{ position: "absolute", inset: 0 }} />;
+}
+
 // ─── Case Study Section ───────────────────────────────────────────────────────
 
 function CaseStudySection({
@@ -730,15 +882,103 @@ function CaseStudySection({
                 evo_1779885810016
               </span>
             </div>
-            <img
-              src="/platform/transformer-weather.png"
-              alt="Transformer 기상 1일후 기온 예측 결과"
+            <div
               style={{
-                width: "100%",
-                display: "block",
+                background: "rgba(0,212,170,0.12)",
+                borderBottom: `1px solid rgba(0,212,170,0.22)`,
+                padding: "0.45rem 1.1rem",
+                fontSize: "0.72rem",
+                color: C.teal,
+                fontWeight: 600,
+                lineHeight: 1.5,
+              }}
+            >
+              ✅ 예측 완료 &nbsp;|&nbsp; 모델: evo_1779885810016 &nbsp;|&nbsp;
+              31개 예측 포인트 (앞 19행은 시퀀스 구성용 — 예측 없음)
+            </div>
+            <div
+              style={{
+                padding: "0.5rem 1.1rem",
+                borderBottom: `1px solid ${border2}`,
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "space-between",
+                gap: "0.5rem",
+              }}
+            >
+              <span
+                style={{
+                  fontSize: "0.82rem",
+                  fontWeight: 700,
+                  color: palette.heading,
+                }}
+              >
+                예측 결과
+              </span>
+              <span style={{ fontSize: "0.66rem", color: palette.muted }}>
+                시퀀스 길이로 인해 앞 19개 행은 예측 제외
+              </span>
+            </div>
+            <div
+              style={{
+                position: "relative",
+                height: 220,
+                background: isDark ? "#0d1117" : "#f1f5fb",
+              }}
+            >
+              <WeatherChartCanvas
+                isDark={isDark}
+                actualData={TRANSFORMER_ACTUAL}
+                predData={TRANSFORMER_PRED}
+                labels={TRANSFORMER_LABELS}
+              />
+            </div>
+            <div
+              style={{
+                display: "flex",
                 borderBottom: `1px solid ${border2}`,
               }}
-            />
+            >
+              {(
+                [
+                  { label: "평균", value: "23.541" },
+                  { label: "표준편차", value: "1.4774" },
+                  { label: "최소", value: "21.3181" },
+                  { label: "최대", value: "26.0044" },
+                  { label: "추세", value: "▲상승", color: C.teal },
+                ] as Array<{ label: string; value: string; color?: string }>
+              ).map((s, i) => (
+                <div
+                  key={s.label}
+                  style={{
+                    flex: 1,
+                    padding: "0.45rem 0.3rem",
+                    textAlign: "center",
+                    borderRight:
+                      i < 4 ? `1px solid ${border2}` : "none",
+                  }}
+                >
+                  <div
+                    style={{
+                      fontSize: "0.58rem",
+                      color: palette.muted,
+                      marginBottom: "0.12rem",
+                    }}
+                  >
+                    {s.label}
+                  </div>
+                  <div
+                    style={{
+                      fontSize: "0.78rem",
+                      fontWeight: 800,
+                      color: s.color ?? palette.heading,
+                    }}
+                  >
+                    {s.value}
+                  </div>
+                </div>
+              ))}
+            </div>
             <div style={{ padding: "1rem 1.2rem" }}>
               <div
                 style={{
@@ -870,15 +1110,103 @@ function CaseStudySection({
                 evo_1779885703650
               </span>
             </div>
-            <img
-              src="/platform/evolutionary-weather.png"
-              alt="진화학습 FFN 기상 1일후 기온 예측 결과"
+            <div
               style={{
-                width: "100%",
-                display: "block",
+                background: "rgba(0,212,170,0.12)",
+                borderBottom: `1px solid rgba(0,212,170,0.22)`,
+                padding: "0.45rem 1.1rem",
+                fontSize: "0.72rem",
+                color: C.teal,
+                fontWeight: 600,
+                lineHeight: 1.5,
+              }}
+            >
+              ✅ 예측 완료 &nbsp;|&nbsp; 모델: evo_1779885703650 &nbsp;|&nbsp;
+              30개 예측 포인트
+            </div>
+            <div
+              style={{
+                padding: "0.5rem 1.1rem",
+                borderBottom: `1px solid ${border2}`,
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "space-between",
+                gap: "0.5rem",
+              }}
+            >
+              <span
+                style={{
+                  fontSize: "0.82rem",
+                  fontWeight: 700,
+                  color: palette.heading,
+                }}
+              >
+                예측 결과
+              </span>
+              <span style={{ fontSize: "0.66rem", color: palette.muted }}>
+                100% 구간 예측 달성
+              </span>
+            </div>
+            <div
+              style={{
+                position: "relative",
+                height: 220,
+                background: isDark ? "#0d1117" : "#f1f5fb",
+              }}
+            >
+              <WeatherChartCanvas
+                isDark={isDark}
+                actualData={FFN_ACTUAL}
+                predData={FFN_PRED}
+                labels={FFN_LABELS}
+              />
+            </div>
+            <div
+              style={{
+                display: "flex",
                 borderBottom: `1px solid ${border2}`,
               }}
-            />
+            >
+              {(
+                [
+                  { label: "평균", value: "22.911" },
+                  { label: "표준편차", value: "4.6135" },
+                  { label: "최소", value: "14.787" },
+                  { label: "최대", value: "30.9103" },
+                  { label: "추세", value: "▲상승", color: C.teal },
+                ] as Array<{ label: string; value: string; color?: string }>
+              ).map((s, i) => (
+                <div
+                  key={s.label}
+                  style={{
+                    flex: 1,
+                    padding: "0.45rem 0.3rem",
+                    textAlign: "center",
+                    borderRight:
+                      i < 4 ? `1px solid ${border2}` : "none",
+                  }}
+                >
+                  <div
+                    style={{
+                      fontSize: "0.58rem",
+                      color: palette.muted,
+                      marginBottom: "0.12rem",
+                    }}
+                  >
+                    {s.label}
+                  </div>
+                  <div
+                    style={{
+                      fontSize: "0.78rem",
+                      fontWeight: 800,
+                      color: s.color ?? palette.heading,
+                    }}
+                  >
+                    {s.value}
+                  </div>
+                </div>
+              ))}
+            </div>
             <div style={{ padding: "1rem 1.2rem" }}>
               <div
                 style={{
