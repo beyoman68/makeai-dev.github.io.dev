@@ -9,9 +9,9 @@ import { cn } from "@/lib/utils"
  * (layout, timing). Client-side simulation; `prefers-reduced-motion` shows a static snapshot.
  */
 
-const CATEGORY_OPTIONS = ["Software", "Development / Services"] as const
-const PROCUREMENT_OPTIONS = ["Negotiated Contract", "Open Competitive Bid", "Direct Purchase"] as const
-const DOC_TYPE_OPTIONS = ["RFP", "Proposal", "Business Plan"] as const
+const CATEGORY_OPTIONS = ["소프트웨어", "개발 / 서비스"] as const
+const PROCUREMENT_OPTIONS = ["수의계약", "공개 경쟁 입찰", "직접 구매"] as const
+const DOC_TYPE_OPTIONS = ["RFP", "제안서", "사업 계획서"] as const
 
 type SectionRow = { id: number; title: string }
 type SubsectionRow = { id: number; number: string; title: string }
@@ -34,56 +34,56 @@ type DemoScenario = {
 
 const SCENARIOS: readonly DemoScenario[] = [
   {
-    title: "2027 AI Transformation Project",
-    category: "Software",
-    procurement: "Negotiated Contract",
+    title: "2027 AI 전환 프로젝트",
+    category: "소프트웨어",
+    procurement: "수의계약",
     docType: "RFP",
     budget: "100,000,000",
-    duration: "12 months",
+    duration: "12개월",
     categoryIdx: 0,
     procurementIdx: 0,
     docTypeIdx: 0,
     sections: [
-      { id: 1, title: "Project Overview" },
-      { id: 2, title: "Current System Status" },
-      { id: 3, title: "Proposal Requirements" },
-      { id: 4, title: "Submission and Evaluation Guidelines" },
+      { id: 1, title: "프로젝트 개요" },
+      { id: 2, title: "현행 시스템 현황" },
+      { id: 3, title: "제안 요구사항" },
+      { id: 4, title: "제출 및 평가 지침" },
     ],
     subsections: [
-      { id: 11, number: "1.1", title: "Overview" },
-      { id: 12, number: "1.2", title: "Background" },
-      { id: 13, number: "1.3", title: "Current State and Improvements" },
+      { id: 11, number: "1.1", title: "개요" },
+      { id: 12, number: "1.2", title: "배경" },
+      { id: 13, number: "1.3", title: "현황 및 개선 방향" },
     ],
     stream11:
-      "This RFP outlines requirements for the 2027 AI Transformation Project — a strategic initiative to modernize enterprise systems through AI-assisted automation and intelligent document processing for organizational workflows.",
+      "본 RFP는 2027 AI 전환 프로젝트의 요구사항을 정의합니다. AI 기반 자동화와 지능형 문서 처리를 통해 엔터프라이즈 시스템을 현대화하고 조직 워크플로를 개선하는 전략적 이니셔티브입니다.",
     stream12:
-      "The organization currently operates on legacy platforms requiring manual document processing. This initiative establishes AI-first workflows to reduce operational overhead while improving accuracy and compliance across all departments.",
+      "현재 조직은 수동 문서 처리가 필요한 레거시 플랫폼에서 운영되고 있습니다. 본 이니셔티브는 AI 우선 워크플로를 구축하여 운영 부담을 줄이고, 모든 부서에서 정확성과 컴플라이언스를 향상시킵니다.",
   },
   {
-    title: "Platform modernization initiative",
-    category: "Development / Services",
-    procurement: "Open Competitive Bid",
-    docType: "Proposal",
+    title: "플랫폼 현대화 이니셔티브",
+    category: "개발 / 서비스",
+    procurement: "공개 경쟁 입찰",
+    docType: "제안서",
     budget: "85,000,000",
-    duration: "18 months",
+    duration: "18개월",
     categoryIdx: 1,
     procurementIdx: 1,
     docTypeIdx: 1,
     sections: [
-      { id: 1, title: "Scope and delivery model" },
-      { id: 2, title: "Supplier qualification criteria" },
-      { id: 3, title: "Technical and commercial evaluation" },
-      { id: 4, title: "Submission and Q&A calendar" },
+      { id: 1, title: "범위 및 전달 모델" },
+      { id: 2, title: "공급업체 자격 기준" },
+      { id: 3, title: "기술 및 상업 평가" },
+      { id: 4, title: "제출 및 Q&A 일정" },
     ],
     subsections: [
-      { id: 11, number: "1.1", title: "Program objectives" },
-      { id: 12, number: "1.2", title: "Delivery phasing" },
-      { id: 13, number: "1.3", title: "Governance and exit criteria" },
+      { id: 11, number: "1.1", title: "프로그램 목표" },
+      { id: 12, number: "1.2", title: "전달 단계" },
+      { id: 13, number: "1.3", title: "거버넌스 및 종료 기준" },
     ],
     stream11:
-      "This proposal defines the modernization initiative — delivery phasing, exit criteria for each phase, and governance checkpoints aligned with procurement rules.",
+      "본 제안서는 현대화 이니셔티브를 정의합니다. 전달 단계, 각 단계별 종료 기준, 그리고 조달 규정에 맞춘 거버넌스 체크포인트를 포함합니다.",
     stream12:
-      "The services program spans integration, data migration, and controlled rollout. Each subsection ties back to the evaluation matrix published in the solicitation pack.",
+      "서비스 프로그램은 통합, 데이터 마이그레이션, 통제된 롤아웃을 포괄합니다. 각 하위 섹션은 입찰 자료에 게시된 평가 매트릭스와 연결됩니다.",
   },
 ] as const
 
@@ -407,41 +407,41 @@ export function DocuGeneratorWorkflowDemo() {
               <div className="px-6 py-5">
                 <div className="mb-5 flex items-center gap-2.5">
                   <div className="flex size-7 shrink-0 items-center justify-center rounded-lg bg-zinc-900 dark:bg-white">
-                    <span className="text-[11px] font-bold tracking-tight text-white dark:text-zinc-950">M</span>
+                    <span className="text-[11px] font-bold tracking-tight text-white dark:text-zinc-950">D</span>
                   </div>
                   <div>
                     <div className="text-[12.5px] font-semibold tracking-tight text-zinc-900 dark:text-white">
                       Document Generator
                     </div>
-                    <div className="text-[10px] text-zinc-500 dark:text-zinc-400">MZO Platform</div>
+                    <div className="text-[10px] text-zinc-500 dark:text-zinc-400">문서 생성 플랫폼</div>
                   </div>
                 </div>
 
                 <div className="mb-[18px] h-px bg-zinc-200 dark:bg-zinc-800/90" />
 
                 <div className="flex flex-col gap-3">
-                  {renderField("Document Title", fTitle, "title", "Enter project name")}
+                  {renderField("문서 제목", fTitle, "title", "프로젝트명 입력")}
                   <div className="grid grid-cols-2 gap-3">
                     {renderSelectField(
-                      "Document Category",
+                      "문서 카테고리",
                       "category",
                       fCategory,
                       CATEGORY_OPTIONS,
-                      "Select category",
+                      "카테고리 선택",
                     )}
                     {renderSelectField(
-                      "Procurement Type",
+                      "조달 유형",
                       "procurement",
                       fProcurement,
                       PROCUREMENT_OPTIONS,
-                      "Select type",
+                      "유형 선택",
                     )}
                   </div>
                   <div className="grid grid-cols-2 gap-3">
-                    {renderSelectField("Document Type", "docType", fDocType, DOC_TYPE_OPTIONS, "Select document")}
-                    {renderField("Budget (USD)", fBudget, "budget")}
+                    {renderSelectField("문서 유형", "docType", fDocType, DOC_TYPE_OPTIONS, "문서 선택")}
+                    {renderField("예산 (USD)", fBudget, "budget")}
                   </div>
-                  {renderField("Duration", fDuration, "duration")}
+                  {renderField("기간", fDuration, "duration")}
 
                   <div className="mt-0.5 h-px bg-zinc-200 dark:bg-zinc-800/90" />
 
@@ -460,18 +460,18 @@ export function DocuGeneratorWorkflowDemo() {
                     {btnState === "clicked" ? (
                       <>
                         <RefreshCw size={12} className="animate-spin" />
-                        <span>Generating Document...</span>
+                        <span>문서 생성 중…</span>
                       </>
                     ) : (
                       <>
                         <Sparkles size={12} className={btnState === "idle" ? "opacity-40" : "opacity-100"} />
-                        <span>Generate Document</span>
+                        <span>문서 생성</span>
                       </>
                     )}
                   </button>
 
                   <div className="text-center text-[9.5px] text-zinc-500 dark:text-zinc-500">
-                    AI-generated draft · Review before submission
+                    AI 생성 초안 · 제출 전 검토 필요
                   </div>
                 </div>
               </div>
@@ -489,13 +489,13 @@ export function DocuGeneratorWorkflowDemo() {
                 <div className="mb-3 flex min-w-0 flex-wrap items-center gap-x-2 gap-y-1">
                   <button
                     type="button"
-                    aria-label="New document"
+                    aria-label="새 문서"
                     className="flex size-7 shrink-0 items-center justify-center rounded-md border border-zinc-200 bg-zinc-100 text-zinc-600 transition-colors dark:border-white/[0.07] dark:bg-black dark:text-zinc-300"
                   >
                     <ArrowLeft size={12} />
                   </button>
                   <span className="min-w-0 flex-1 truncate text-[10.5px] font-medium tracking-tight text-zinc-600 dark:text-zinc-200">
-                    Input → Structured Draft
+                    입력 → 구조화된 초안
                   </span>
                 </div>
 
@@ -559,7 +559,7 @@ export function DocuGeneratorWorkflowDemo() {
                                 className="flex h-[22px] shrink-0 items-center gap-1 rounded border border-zinc-200 bg-zinc-50 px-2 text-[9.5px] text-zinc-700 dark:border-white/[0.06] dark:bg-white/[0.04] dark:text-zinc-200"
                               >
                                 <Sparkles size={8} />
-                                <span>Draft Section</span>
+                                <span>섹션 초안 작성</span>
                               </button>
                             </div>
 
@@ -597,7 +597,7 @@ export function DocuGeneratorWorkflowDemo() {
                                                   <div className="ml-auto flex items-center gap-1">
                                                     <div className="size-[5px] animate-pulse rounded-full bg-emerald-600 dark:bg-emerald-400" />
                                                     <span className="text-[9px] text-emerald-700 dark:text-emerald-400">
-                                                      generating
+                                                      생성 중
                                                     </span>
                                                   </div>
                                                 )}
@@ -625,7 +625,7 @@ export function DocuGeneratorWorkflowDemo() {
                                                   <div className="flex items-center gap-2 py-1">
                                                     <div className="size-1 animate-pulse rounded-full bg-emerald-600 dark:bg-emerald-400" />
                                                     <span className="text-[10.5px] text-emerald-800 dark:text-emerald-400">
-                                                      Generating content...
+                                                      콘텐츠 생성 중…
                                                     </span>
                                                   </div>
                                                 ) : (
@@ -661,13 +661,13 @@ export function DocuGeneratorWorkflowDemo() {
                     <div className="flex min-w-0 flex-1 items-center gap-2">
                       <FileText className="size-3 shrink-0 text-zinc-500 dark:text-zinc-400" aria-hidden />
                       <span className="text-[10px] text-zinc-600 dark:text-zinc-300">
-                        {overviewSections.length} sections loaded · {fDocType || "RFP"} structure ready for drafting
+                        {overviewSections.length}개 섹션 로드됨 · {fDocType || "RFP"} 구조 초안 작성 준비 완료
                       </span>
                     </div>
                     <div className="ml-auto flex flex-wrap items-center gap-2 sm:ml-0">
                       <div className="flex items-center gap-1.5 rounded border border-zinc-200 bg-white px-2 py-0.5 dark:border-white/[0.05] dark:bg-zinc-950/80">
                         <div className="size-[5px] rounded-full bg-zinc-500 dark:bg-zinc-400" />
-                        <span className="text-[9.5px] text-zinc-600 dark:text-zinc-200">Structured Draft</span>
+                        <span className="text-[9.5px] text-zinc-600 dark:text-zinc-200">구조화된 초안</span>
                       </div>
                     </div>
                   </motion.div>
@@ -695,7 +695,7 @@ export function DocuGeneratorWorkflowDemo() {
 
       <div className="flex h-8 items-center border-t border-zinc-200 bg-zinc-50 px-4 dark:border-zinc-800 dark:bg-black">
         <span className="text-[9.5px] text-zinc-500 dark:text-zinc-400">
-          MZO Document Generator · Enterprise
+          Document Generator · 엔터프라이즈
         </span>
       </div>
     </div>

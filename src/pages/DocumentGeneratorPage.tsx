@@ -44,21 +44,21 @@ export function DocumentGeneratorPage() {
           {...inView}
         >
           <h2 className="text-xl font-semibold tracking-tight text-foreground">
-            Preview the workflow. Keep production inside your controls.
+            워크플로를 미리보고, 운영은 여러분의 통제 안에서 유지하세요.
           </h2>
           <p className="mt-4 text-sm leading-7 text-muted-foreground">
-            This preview demonstrates the drafting experience only. In production, MZO Document
-            Generator can operate within your identity, retention, and approval model so structured
-            drafts follow the controls your organization already uses.
+            이 미리보기는 초안 작성 경험만 보여줍니다. 운영 환경에서 Document Generator는
+            ID, 보존, 승인 모델 안에서 동작하여 구조화된 초안이 조직이 이미 사용하는
+            통제 체계를 따르도록 할 수 있습니다.
           </p>
         </motion.section>
 
         <motion.section className="mt-16 border-t border-border pt-16 text-center" {...inView}>
           <h2 className="text-2xl font-semibold tracking-tight text-foreground">
-            Maximize document workflow efficiency with MZO Document Generator
+            Document Generator로 문서 워크플로 효율을 극대화하세요
           </h2>
           <Button asChild size="lg" className="mt-8 rounded-full px-8">
-            <a href={`mailto:${CONTACT_MAIL}`}>Contact us</a>
+            <a href={`mailto:${CONTACT_MAIL}`}>문의하기</a>
           </Button>
         </motion.section>
 

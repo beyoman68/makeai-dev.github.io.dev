@@ -7,39 +7,39 @@ const ease = [0.16, 1, 0.3, 1] as const
 const FEATURES = [
   {
     icon: Layers,
-    title: "Section-by-section generation",
+    title: "섹션별 생성",
     description:
-      "Draft large documents section by section so teams can review, regenerate, and improve specific parts without redoing the whole file.",
+      "대형 문서를 섹션별로 초안 작성하여, 팀이 전체 파일을 다시 작성하지 않고 특정 부분을 검토·재생성·개선할 수 있습니다.",
   },
   {
     icon: ClipboardList,
-    title: "Inputs that shape the document",
+    title: "문서를 형성하는 입력값",
     description:
-      "Use structured project inputs to guide the outline, language, and scope of the generated document from the start.",
+      "구조화된 프로젝트 입력을 사용하여 처음부터 생성 문서의 개요, 언어, 범위를 안내합니다.",
   },
   {
     icon: Zap,
-    title: "Live drafting at the subsection level",
+    title: "하위 섹션 단위 실시간 초안 작성",
     description:
-      "See content appear where it belongs, with subsection-level streaming that makes progress visible and reviewable.",
+      "콘텐츠가 해당 위치에 나타나는 것을 확인할 수 있으며, 하위 섹션 단위 스트리밍으로 진행 상황을 가시화하고 검토할 수 있습니다.",
   },
   {
     icon: Building2,
-    title: "Purpose-built document structures",
+    title: "목적에 맞게 설계된 문서 구조",
     description:
-      "Supports structured formats for RFPs, proposals, planning documents, and other formal enterprise deliverables.",
+      "RFP, 제안서, 기획 문서, 그리고 기타 공식 엔터프라이즈 산출물을 위한 구조화된 형식을 지원합니다.",
   },
   {
     icon: ListTree,
-    title: "Navigable document hierarchy",
+    title: "탐색 가능한 문서 계층",
     description:
-      "Work through long documents with collapsible sections and subsections that keep the draft organized and easy to scan.",
+      "접을 수 있는 섹션과 하위 섹션으로 긴 문서를 작업하여, 초안을 체계적으로 유지하고 쉽게 훑어볼 수 있습니다.",
   },
   {
     icon: PenLine,
-    title: "Review and regenerate without restarting",
+    title: "재시작 없이 검토 및 재생성",
     description:
-      "Refine individual sections, regenerate targeted content, and keep the rest of the draft intact.",
+      "개별 섹션을 다듬고, 대상 콘텐츠만 재생성하며, 나머지 초안은 그대로 유지합니다.",
   },
 ] as const
 
@@ -95,15 +95,15 @@ export function DocuGeneratorFeatureCards() {
         >
           <div className="mb-4 inline-flex max-w-full items-center rounded-full border border-border bg-card px-3 py-1.5 dark:border-white/10 dark:bg-white/[0.06]">
             <span className="text-left text-[11px] font-medium uppercase leading-snug tracking-[0.04em] text-muted-foreground dark:text-zinc-300">
-              Why teams use MZO Document Generator
+              팀이 Document Generator를 사용하는 이유
             </span>
           </div>
           <h2 className="max-w-xl text-balance text-[clamp(1.625rem,3vw,2.25rem)] font-semibold tracking-tight text-foreground dark:text-white">
-            Built for formal documents that need structure and control
+            구조와 통제가 필요한 공식 문서를 위해 설계
           </h2>
           <p className="mt-3 max-w-lg text-[15px] leading-relaxed text-muted-foreground dark:text-zinc-300">
-            Designed for RFPs, proposals, plans, and governed business documents where hierarchy,
-            review, and controlled drafting matter.
+            계층 구조, 검토, 통제된 초안 작성이 중요한 RFP, 제안서, 계획서,
+            그리고 거버넌스가 적용된 비즈니스 문서를 위해 설계되었습니다.
           </p>
         </motion.div>
 
