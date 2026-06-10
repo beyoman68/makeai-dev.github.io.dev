@@ -1,7 +1,7 @@
-import { CheckCircle2 } from "lucide-react"
-import { motion, useReducedMotion } from "motion/react"
+import { CheckCircle2 } from "lucide-react";
+import { motion, useReducedMotion } from "motion/react";
 
-const ease = [0.16, 1, 0.3, 1] as const
+const ease = [0.16, 1, 0.3, 1] as const;
 
 const BULLETS = [
   "채팅과 문서 번역을 하나의 제품에서",
@@ -9,22 +9,18 @@ const BULLETS = [
   "온디바이스 또는 클라우드 배포",
   "용어집 인식 및 요약 지원",
   "엔터프라이즈 프라이버시와 제어를 위한 설계",
-] as const
+] as const;
 
 /**
  * Product hero — centered rhythm aligned with Chat / RAG / Email product pages.
  * Interactive demo lives in a full-width band below (`AiTranslatorPage`).
  */
 export function AiTranslatorHero() {
-  const reduce = useReducedMotion() ?? false
+  const reduce = useReducedMotion() ?? false;
 
   return (
     <section className="w-full border-b border-border px-4 pb-14 pt-8 text-center sm:px-6 sm:pb-16 sm:pt-12 lg:px-8">
       <div className="mx-auto max-w-3xl">
-        <p className="text-xs font-medium tracking-[0.2em] text-muted-foreground uppercase">
-          제품
-        </p>
-
         <motion.h1
           initial={reduce ? false : { opacity: 0, y: 22 }}
           animate={{ opacity: 1, y: 0 }}
@@ -48,14 +44,18 @@ export function AiTranslatorHero() {
           }}
           className="mx-auto mt-4 max-w-2xl text-pretty text-lg text-muted-foreground sm:text-xl"
         >
-          채팅, 문서, 음성, 이미지를 하나의 워크스페이스에서 번역하세요 — 스트리밍
-          출력, 용어집 제어, 요약 기능이 내장되어 있습니다.
+          채팅, 문서, 음성, 이미지를 하나의 워크스페이스에서 번역하세요 —
+          스트리밍 출력, 용어집 제어, 요약 기능이 내장되어 있습니다.
         </motion.p>
 
         <motion.ul
           initial={reduce ? false : { opacity: 0, y: 10 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: reduce ? 0 : 0.55, delay: reduce ? 0 : 0.4, ease }}
+          transition={{
+            duration: reduce ? 0 : 0.55,
+            delay: reduce ? 0 : 0.4,
+            ease,
+          }}
           className="mx-auto mt-8 max-w-lg space-y-3 text-left text-sm leading-relaxed text-foreground"
         >
           {BULLETS.map((line) => (
@@ -73,7 +73,11 @@ export function AiTranslatorHero() {
         <motion.div
           initial={reduce ? false : { opacity: 0 }}
           animate={{ opacity: 1 }}
-          transition={{ duration: reduce ? 0 : 0.5, delay: reduce ? 0 : 0.48, ease }}
+          transition={{
+            duration: reduce ? 0 : 0.5,
+            delay: reduce ? 0 : 0.48,
+            ease,
+          }}
           className="mt-10 flex justify-center"
         >
           <span className="inline-flex items-center gap-2 rounded-full border border-border bg-background/80 px-3.5 py-1.5 text-[11px] font-medium tracking-tight text-foreground shadow-sm dark:border-zinc-800 dark:bg-zinc-900/80">
@@ -101,5 +105,5 @@ export function AiTranslatorHero() {
         />
       </div>
     </section>
-  )
+  );
 }

@@ -1,17 +1,17 @@
-import { ArrowRight } from "lucide-react"
-import { motion, useReducedMotion } from "motion/react"
+import { ArrowRight } from "lucide-react";
+import { motion, useReducedMotion } from "motion/react";
 
-import { Button } from "@/components/ui/button"
-import { DocuGeneratorWorkflowDemo } from "@/components/docu-generator/docu-generator-workflow-demo"
-import { CONTACT_MAIL } from "@/lib/nav-config"
+import { Button } from "@/components/ui/button";
+import { DocuGeneratorWorkflowDemo } from "@/components/docu-generator/docu-generator-workflow-demo";
+import { CONTACT_MAIL } from "@/lib/nav-config";
 
-const ease = [0.16, 1, 0.3, 1] as const
+const ease = [0.16, 1, 0.3, 1] as const;
 
 /**
  * Hero — product column and live workflow preview (no separate demo headline; see Data Platform).
  */
 export function DocuGeneratorHero() {
-  const reduceMotion = useReducedMotion() ?? false
+  const reduceMotion = useReducedMotion() ?? false;
 
   return (
     <section className="relative w-full overflow-hidden border-b border-zinc-300 bg-zinc-100 text-zinc-950 dark:border-zinc-600 dark:bg-zinc-950 dark:text-zinc-50">
@@ -32,14 +32,14 @@ export function DocuGeneratorHero() {
       <div className="relative mx-auto max-w-7xl px-4 pb-16 pt-20 sm:px-6 sm:pb-20 sm:pt-24 lg:px-8 lg:pb-24 lg:pt-28">
         <div className="flex flex-col items-center gap-12 lg:flex-row lg:items-center lg:gap-16 xl:gap-24">
           <div className="w-full max-w-[520px] flex-1 text-center lg:text-left">
-            <p className="mb-4 text-xs font-medium uppercase tracking-[0.2em] text-zinc-600 dark:text-zinc-400">
-              제품
-            </p>
-
             <motion.div
               initial={reduceMotion ? false : { opacity: 0, y: 16 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: reduceMotion ? 0 : 0.6, delay: reduceMotion ? 0 : 0.12, ease }}
+              transition={{
+                duration: reduceMotion ? 0 : 0.6,
+                delay: reduceMotion ? 0 : 0.12,
+                ease,
+              }}
             >
               <h1 className="mb-6 text-[clamp(2.25rem,4.5vw,3.5rem)] font-semibold leading-[1.08] tracking-[-0.03em] text-zinc-950 dark:text-zinc-50">
                 Document Generator
@@ -49,18 +49,27 @@ export function DocuGeneratorHero() {
             <motion.p
               initial={reduceMotion ? false : { opacity: 0, y: 12 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: reduceMotion ? 0 : 0.6, delay: reduceMotion ? 0 : 0.24, ease }}
+              transition={{
+                duration: reduceMotion ? 0 : 0.6,
+                delay: reduceMotion ? 0 : 0.24,
+                ease,
+              }}
               className="mx-auto mb-8 max-w-md text-pretty text-[clamp(0.9375rem,1.5vw,1.0625rem)] leading-relaxed text-zinc-800 dark:text-zinc-300"
             >
-              공식 비즈니스 문서를 위한 구조화된 초안 작성 워크스페이스입니다. 개요 우선
-              조립, 섹션별 소유권, 그리고 프로그램 오피스가 거버넌스할 수 있는 검토 준비
-              결과물을 제공합니다. 무제한 콘텐츠 생성이 아닙니다.
+              공식 비즈니스 문서를 위한 구조화된 초안 작성 워크스페이스입니다.
+              개요 우선 조립, 섹션별 소유권, 그리고 프로그램 오피스가 거버넌스할
+              수 있는 검토 준비 결과물을 제공합니다. 무제한 콘텐츠 생성이
+              아닙니다.
             </motion.p>
 
             <motion.div
               initial={reduceMotion ? false : { opacity: 0, y: 10 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: reduceMotion ? 0 : 0.6, delay: reduceMotion ? 0 : 0.36, ease }}
+              transition={{
+                duration: reduceMotion ? 0 : 0.6,
+                delay: reduceMotion ? 0 : 0.36,
+                ease,
+              }}
               className="flex justify-center lg:justify-start"
             >
               <Button
@@ -68,7 +77,10 @@ export function DocuGeneratorHero() {
                 size="lg"
                 className="rounded-xl border border-zinc-800 bg-zinc-900 px-6 text-sm font-medium text-white hover:bg-zinc-800 dark:border-0 dark:bg-white dark:text-zinc-950 dark:hover:bg-zinc-100"
               >
-                <a href={`mailto:${CONTACT_MAIL}`} className="inline-flex items-center gap-2">
+                <a
+                  href={`mailto:${CONTACT_MAIL}`}
+                  className="inline-flex items-center gap-2"
+                >
                   문의하기
                   <ArrowRight className="size-4" aria-hidden />
                 </a>
@@ -78,10 +90,15 @@ export function DocuGeneratorHero() {
             <motion.p
               initial={reduceMotion ? false : { opacity: 0 }}
               animate={{ opacity: 1 }}
-              transition={{ duration: reduceMotion ? 0 : 0.6, delay: reduceMotion ? 0 : 0.5, ease }}
+              transition={{
+                duration: reduceMotion ? 0 : 0.6,
+                delay: reduceMotion ? 0 : 0.5,
+                ease,
+              }}
               className="mt-6 text-center text-[11.5px] text-zinc-600 dark:text-zinc-400 lg:text-left"
             >
-              조달, 제안서, 거버넌스가 적용된 문서화 프로그램을 위해 설계되었습니다.
+              조달, 제안서, 거버넌스가 적용된 문서화 프로그램을 위해
+              설계되었습니다.
             </motion.p>
           </div>
 
@@ -106,5 +123,5 @@ export function DocuGeneratorHero() {
         </div>
       </div>
     </section>
-  )
+  );
 }

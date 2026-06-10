@@ -1,20 +1,16 @@
-import { motion, useReducedMotion } from "motion/react"
+import { motion, useReducedMotion } from "motion/react";
 
-const ease = [0.16, 1, 0.3, 1] as const
+const ease = [0.16, 1, 0.3, 1] as const;
 
 /**
  * MZO Email Agent — hero (eyebrow **Products** like `RagPlatformHero`; motion rhythm like Chat / RAG).
  */
 export function EmailAgentHero() {
-  const reduceMotion = useReducedMotion() ?? false
+  const reduceMotion = useReducedMotion() ?? false;
 
   return (
     <section className="w-full border-b border-border px-4 pb-14 pt-8 text-center sm:px-6 sm:pb-16 sm:pt-12 lg:px-8">
       <div className="mx-auto max-w-3xl">
-        <p className="text-xs font-medium tracking-[0.2em] text-muted-foreground uppercase">
-          제품
-        </p>
-
         <motion.h1
           initial={reduceMotion ? false : { opacity: 0, y: 22 }}
           animate={{ opacity: 1, y: 0 }}
@@ -38,9 +34,9 @@ export function EmailAgentHero() {
           }}
           className="mt-4 text-pretty text-lg text-muted-foreground sm:text-xl"
         >
-          첨부파일을 인식하는 요약, 근거 있는 Q&A, 답장 초안, 번역을 Outlook 안으로
-          가져오세요. 팀이 오늘 사용하는 동일한 스레드, ID 경계, 정책 환경 안에서
-          그대로 작업할 수 있습니다.
+          첨부파일을 인식하는 요약, 근거 있는 Q&A, 답장 초안, 번역을 Outlook
+          안으로 가져오세요. 팀이 오늘 사용하는 동일한 스레드, ID 경계, 정책
+          환경 안에서 그대로 작업할 수 있습니다.
         </motion.p>
 
         <motion.div
@@ -55,5 +51,5 @@ export function EmailAgentHero() {
         />
       </div>
     </section>
-  )
+  );
 }

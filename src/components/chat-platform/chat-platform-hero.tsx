@@ -1,12 +1,12 @@
-import { motion, useReducedMotion } from "motion/react"
+import { motion, useReducedMotion } from "motion/react";
 
-const ease = [0.16, 1, 0.3, 1] as const
+const ease = [0.16, 1, 0.3, 1] as const;
 
 /**
  * Hero — workspace-first positioning, MZO Chat Platform H1 (same motion rhythm as RAG / Data product pages).
  */
 export function ChatPlatformHero() {
-  const reduceMotion = useReducedMotion() ?? false
+  const reduceMotion = useReducedMotion() ?? false;
 
   return (
     <section className="w-full border-b border-border px-4 pb-14 pt-8 text-center sm:px-6 sm:pb-16 sm:pt-12 lg:px-8">
@@ -14,11 +14,13 @@ export function ChatPlatformHero() {
         <motion.p
           initial={reduceMotion ? false : { opacity: 0, y: 10 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: reduceMotion ? 0 : 0.55, delay: reduceMotion ? 0 : 0.06, ease }}
+          transition={{
+            duration: reduceMotion ? 0 : 0.55,
+            delay: reduceMotion ? 0 : 0.06,
+            ease,
+          }}
           className="text-xs font-medium tracking-[0.2em] text-muted-foreground uppercase"
-        >
-          워크스페이스 기반 AI
-        </motion.p>
+        ></motion.p>
 
         <motion.h1
           initial={reduceMotion ? false : { opacity: 0, y: 22 }}
@@ -44,8 +46,8 @@ export function ChatPlatformHero() {
           className="mt-4 text-pretty text-lg text-muted-foreground sm:text-xl"
         >
           지침, 공유 파일, 대화를 하나의 워크스페이스로 모으세요. 개인, 팀, 조직
-          범위 전반에서 답변은 고립된 프롬프트가 아니라 관련 컨텍스트와 워크스페이스
-          지식과 함께 스트리밍됩니다.
+          범위 전반에서 답변은 고립된 프롬프트가 아니라 관련 컨텍스트와
+          워크스페이스 지식과 함께 스트리밍됩니다.
         </motion.p>
 
         <motion.div
@@ -60,5 +62,5 @@ export function ChatPlatformHero() {
         />
       </div>
     </section>
-  )
+  );
 }

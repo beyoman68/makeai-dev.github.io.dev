@@ -1,20 +1,16 @@
-import { motion, useReducedMotion } from "motion/react"
+import { motion, useReducedMotion } from "motion/react";
 
-const ease = [0.16, 1, 0.3, 1] as const
+const ease = [0.16, 1, 0.3, 1] as const;
 
 /**
  * Hero — same pattern as `DataPlatformPage`: eyebrow **Products**, H1 **MZO RAG Platform**, lead paragraph.
  */
 export function RagPlatformHero() {
-  const reduceMotion = useReducedMotion() ?? false
+  const reduceMotion = useReducedMotion() ?? false;
 
   return (
     <section className="w-full border-b border-border px-4 pb-14 pt-8 text-center sm:px-6 sm:pb-16 sm:pt-12 lg:px-8">
       <div className="mx-auto max-w-3xl">
-        <p className="text-xs font-medium tracking-[0.2em] text-muted-foreground uppercase">
-          제품
-        </p>
-
         <motion.h1
           initial={reduceMotion ? false : { opacity: 0, y: 24 }}
           animate={{ opacity: 1, y: 0 }}
@@ -31,7 +27,10 @@ export function RagPlatformHero() {
         <motion.p
           initial={reduceMotion ? false : { opacity: 0, y: 12 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: reduceMotion ? 0 : 0.7, delay: reduceMotion ? 0 : 0.42 }}
+          transition={{
+            duration: reduceMotion ? 0 : 0.7,
+            delay: reduceMotion ? 0 : 0.42,
+          }}
           className="mt-4 text-pretty text-lg text-muted-foreground sm:text-xl"
         >
           Mazelone은 언어 모델을 여러분의 지식에 연결합니다 — 다양한 소스를
@@ -51,5 +50,5 @@ export function RagPlatformHero() {
         />
       </div>
     </section>
-  )
+  );
 }
