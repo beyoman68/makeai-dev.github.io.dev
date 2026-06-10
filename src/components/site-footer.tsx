@@ -1,6 +1,6 @@
-import { Link } from "react-router-dom"
+import { Link } from "react-router-dom";
 
-import { ThemeToggle } from "@/components/theme-toggle"
+import { ThemeToggle } from "@/components/theme-toggle";
 import {
   companyNav,
   CONTACT_MAIL,
@@ -8,15 +8,15 @@ import {
   productNav,
   // researchHref, // re-enable with Research footer link below
   // solutionNav, // re-enable with Solution column below
-} from "@/lib/nav-config"
-import { phoneToTelHref } from "@/lib/utils"
+} from "@/lib/nav-config";
+import { phoneToTelHref } from "@/lib/utils";
 
 function FooterColumn({
   title,
   items,
 }: {
-  title: string
-  items: readonly { label: string; href: string }[]
+  title: string;
+  items: readonly { label: string; href: string }[];
 }) {
   return (
     <div>
@@ -36,11 +36,11 @@ function FooterColumn({
         ))}
       </ul>
     </div>
-  )
+  );
 }
 
 export function SiteFooter() {
-  const year = new Date().getFullYear()
+  const year = new Date().getFullYear();
 
   return (
     <footer id="site-footer" className="border-t border-border bg-muted/30">
@@ -78,7 +78,7 @@ export function SiteFooter() {
                       >
                         {p.n}
                       </a>{" "}
-                      <span className="text-muted-foreground">({p.role})</span>
+                      {/* <span className="text-muted-foreground">({p.role})</span> */}
                     </span>
                   ))}
                 </dd>
@@ -103,15 +103,9 @@ export function SiteFooter() {
             </h2>
             <dl className="space-y-4 text-sm text-muted-foreground">
               <div>
-                <dt className="font-medium text-foreground/90">Headquarters</dt>
+                {/* <dt className="font-medium text-foreground/90">Headquarters</dt> */}
                 <dd className="mt-1 leading-relaxed">
                   {footerContact.headquarters}
-                </dd>
-              </div>
-              <div>
-                <dt className="font-medium text-foreground/90">AI Lab</dt>
-                <dd className="mt-1 leading-relaxed">
-                  {footerContact.seoulOffice}
                 </dd>
               </div>
             </dl>
@@ -120,12 +114,11 @@ export function SiteFooter() {
 
         <div className="mt-12 flex flex-col gap-4 border-t border-border pt-8 sm:flex-row sm:items-center sm:justify-between">
           <p className="font-logo text-lg tracking-wide text-foreground">
-            MAZELONE
+            Make AI
           </p>
           <p className="text-xs text-muted-foreground">
-            © {year}{" "}
-            <span className="sr-only">마젤원 주식회사 · </span>
-            Mazelone Inc. All rights reserved.
+            © {year} <span className="sr-only">Make AI Inc. · </span>
+            Make AI Inc. All rights reserved.
           </p>
           <div className="flex flex-wrap items-center gap-2 sm:justify-end">
             <a
@@ -139,5 +132,5 @@ export function SiteFooter() {
         </div>
       </div>
     </footer>
-  )
+  );
 }

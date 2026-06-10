@@ -208,12 +208,12 @@ export function SiteHeader() {
     <header className="sticky top-0 z-50 border-b border-zinc-200 bg-white text-zinc-950 dark:border-zinc-800 dark:bg-zinc-950 dark:text-zinc-50">
       <div className="mx-auto flex h-14 max-w-6xl items-center justify-between gap-4 px-4 sm:px-6 lg:px-8">
         <div className="flex min-w-0 flex-1 items-center gap-4 lg:gap-10">
-          <Link
-            to="/"
-            className="font-logo shrink-0 text-xl tracking-wide text-zinc-950 sm:text-2xl dark:text-white"
-            aria-label="Mazelone home"
-          >
-            MAZELONE
+          <Link to="/" className="shrink-0" aria-label="Make AI home">
+            <img
+              src="/makeai_logo_transparent.png"
+              alt="Make AI"
+              className="h-8 w-auto sm:h-9"
+            />
           </Link>
 
           <nav

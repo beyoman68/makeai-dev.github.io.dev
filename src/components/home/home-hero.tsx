@@ -4,7 +4,7 @@ import { ArrowRight, ChevronRight } from "lucide-react";
 import { motion, useReducedMotion } from "motion/react";
 
 import { useHtmlIsDark } from "@/lib/use-html-is-dark";
-import { productNav } from "@/lib/nav-config";
+import { solutionNav } from "@/lib/nav-config";
 
 /**
  * Home hero — MazHero-inspired layout; light mode uses white + dark ink; dark mode keeps near-black band.
@@ -307,10 +307,9 @@ export function HomeHero() {
           className="flex flex-wrap gap-2.5"
           style={{ marginBottom: 88 }}
         >
-          <button
-            type="button"
-            onClick={() => scrollTo("#home-products")}
-            className="inline-flex cursor-pointer items-center gap-2 border-0 text-sm font-medium tracking-tight transition-colors"
+          <Link
+            to="/solution/make-aiops"
+            className="inline-flex cursor-pointer items-center gap-2 border-0 text-sm font-medium tracking-tight no-underline transition-colors"
             style={{
               color: primaryBtn.color,
               background: primaryBtn.bg,
@@ -327,7 +326,7 @@ export function HomeHero() {
           >
             Make AI Ops 알아보기
             <ArrowRight size={15} aria-hidden />
-          </button>
+          </Link>
           <button
             type="button"
             onClick={() => scrollTo("#site-footer")}
@@ -370,9 +369,9 @@ export function HomeHero() {
               letterSpacing: "0.03em",
             }}
           >
-            Products ·
+            Solutions ·
           </span>
-          {productNav.map(({ label, href }, i) => (
+          {solutionNav.map(({ label, href }, i) => (
             <motion.div
               key={href}
               initial={reduceMotion ? false : { opacity: 0, x: -8 }}

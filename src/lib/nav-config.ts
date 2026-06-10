@@ -1,6 +1,6 @@
 /** IA-driven nav targets; paths for future routing (same-origin). */
 
-export const CONTACT_MAIL = "ask@mazelone.com" as const;
+export const CONTACT_MAIL = "jhcho@makeai.cloud" as const;
 
 /** Global Research hub — single page, no dropdown. */
 export const researchHref = "/research" as const;
@@ -30,10 +30,7 @@ export const solutionNav = [
 ] as const;
 
 export const footerContact = {
-  phones: [{ n: "(+82) 10-5260-4172", role: "Business" }] as const,
+  phones: [{ n: "(+82) 10-9174-3516" }] as const,
   email: CONTACT_MAIL,
-  headquarters:
-    "165 Yangsu-ro, Yangseo-myeon, Yangpyeong-gun, Gyeonggi-do, Republic of Korea",
-  seoulOffice:
-    "4th Floor, 161 Hakdong-ro, Gangnam District, Seoul, Republic of Korea",
+  headquarters: "서울시 강남구 학동로 161 (건일빌딩 4층)",
 } as const;
