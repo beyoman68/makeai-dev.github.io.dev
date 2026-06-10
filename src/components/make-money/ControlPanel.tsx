@@ -122,27 +122,13 @@ export default function ControlPanel() {
             ● 거래 제어
           </div>
           <div style={{ display: "flex", flexDirection: "column", gap: 8 }}>
-            <button style={ctrlBtn("#3a0a0a", "#ff5252", "#ff5252")}>
-              ● 전체 거래 즉시중단
-            </button>
-            <button style={ctrlBtn("#0a3a0a", "#00e676", "#00e676")}>
-              ▶ 거래 재개
-            </button>
-            <button style={ctrlBtn("#3a1a0a", "#ff6e40", "#ff6e40")}>
-              ⚡ 선물 강제 청산
-            </button>
-            <button style={ctrlBtn("#2a1a2a", "#e040fb", "#e040fb")}>
-              ✉ 주식 전량 청산
-            </button>
-            <button style={ctrlBtn("#1a1a2a", "#778", "#aaa")}>
-              ● 스크리닝 수동 실행
-            </button>
-            <button style={ctrlBtn("#1a2a2a", "#778", "#aaa")}>
-              ✦ LLM 추천 재생성
-            </button>
-            <button style={ctrlBtn("#1a1a2a", "#778", "#aaa")}>
-              ✂ 손절 체크 실행
-            </button>
+            <button style={mutedBtn}>● 전체 거래 즉시중단</button>
+            <button style={mutedBtn}>▶ 거래 재개</button>
+            <button style={mutedBtn}>⚡ 선물 강제 청산</button>
+            <button style={mutedBtn}>✉ 주식 전량 청산</button>
+            <button style={mutedBtn}>● 스크리닝 수동 실행</button>
+            <button style={mutedBtn}>✦ LLM 추천 재생성</button>
+            <button style={mutedBtn}>✂ 손절 체크 실행</button>
           </div>
         </div>
 
@@ -170,7 +156,7 @@ export default function ControlPanel() {
                 >
                   <span style={{ color: "#aaa", fontSize: 12 }}>{p.label}</span>
                   <span
-                    style={{ color: "#00e676", fontSize: 12, fontWeight: 600 }}
+                    style={{ color: "#aaa", fontSize: 12, fontWeight: 600 }}
                   >
                     {p.value}
                     {p.unit}
@@ -195,7 +181,7 @@ export default function ControlPanel() {
                     }
                     style={{
                       width: "100%",
-                      accentColor: "#00e676",
+                      accentColor: "#778",
                       cursor: "pointer",
                     }}
                   />
@@ -205,14 +191,9 @@ export default function ControlPanel() {
             <button
               onClick={handleSave}
               style={{
-                background: saved ? "#0a3a1a" : "#0d2a1a",
-                border: "1px solid #00e676",
-                borderRadius: 4,
-                color: "#00e676",
-                padding: "8px",
-                fontSize: 12,
-                cursor: "pointer",
+                ...mutedBtn,
                 marginTop: 4,
+                textAlign: "center",
               }}
             >
               {saved ? "✓ 저장됨" : "💾 파라미터 저장"}
@@ -289,12 +270,8 @@ export default function ControlPanel() {
                 marginTop: 4,
               }}
             >
-              <button style={ctrlBtn("#0a2a1a", "#00e676", "#00e676")}>
-                ✏ 페이퍼 매수
-              </button>
-              <button style={ctrlBtn("#3a0a0a", "#ff5252", "#ff5252")}>
-                ✏ 페이퍼 매도
-              </button>
+              <button style={mutedBtn}>✏ 페이퍼 매수</button>
+              <button style={mutedBtn}>✏ 페이퍼 매도</button>
             </div>
             <div style={{ marginTop: 4 }}>
               <div style={{ color: "#556", fontSize: 11, marginBottom: 6 }}>
@@ -307,12 +284,8 @@ export default function ControlPanel() {
                   gap: 6,
                 }}
               >
-                <button style={ctrlBtn("#0a1a3a", "#00b0ff", "#00b0ff")}>
-                  ↑ LONG
-                </button>
-                <button style={ctrlBtn("#2a1a3a", "#e040fb", "#e040fb")}>
-                  ↓ SHORT
-                </button>
+                <button style={mutedBtn}>↑ LONG</button>
+                <button style={mutedBtn}>↓ SHORT</button>
               </div>
             </div>
           </div>
@@ -383,20 +356,16 @@ export default function ControlPanel() {
   );
 }
 
-const ctrlBtn = (
-  bg: string,
-  border: string,
-  color: string,
-): React.CSSProperties => ({
-  background: bg,
-  border: `1px solid ${border}`,
+const mutedBtn: React.CSSProperties = {
+  background: "#1a1a2a",
+  border: "1px solid #778",
   borderRadius: 4,
-  color,
+  color: "#aaa",
   padding: "8px 12px",
   fontSize: 12,
   cursor: "pointer",
   textAlign: "left",
-});
+};
 
 const inputStyle: React.CSSProperties = {
   width: "100%",
