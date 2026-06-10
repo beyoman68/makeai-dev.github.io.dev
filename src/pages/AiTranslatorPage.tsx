@@ -49,25 +49,26 @@ export function AiTranslatorPage() {
           {...inView}
         >
           <h2 className="text-xl font-semibold tracking-tight text-foreground">
-            Translate across text, voice, image, and document workflows.
+            텍스트, 음성, 이미지, 문서 워크플로 전반에서 번역하세요.
           </h2>
           <p className="mt-4 text-sm leading-7 text-muted-foreground">
-            MZO AI Translator helps organizations communicate faster and more accurately across real
-            operational environments, from field conversations to multilingual documents, while
-            fitting naturally into enterprise systems.
+            AI Translator는 현장 대화부터 다국어 문서까지 실제 운영 환경 전반에서 조직이
+            더 빠르고 정확하게 소통하도록 돕는 동시에, 엔터프라이즈 시스템에 자연스럽게
+            녹아듭니다.
           </p>
         </motion.section>
 
         <motion.section className="mt-16 border-t border-border pt-16 text-center" {...inView}>
           <h2 className="text-2xl font-semibold tracking-tight text-foreground">
-            Plan MZO AI Translator for your multilingual programs
+            여러분의 다국어 프로그램에 맞춰 AI Translator 도입을 계획하세요
           </h2>
           <p className="mx-auto mt-4 max-w-2xl text-sm leading-7 text-muted-foreground">
-            We can walk through chat versus document flows, glossary strategy, and how translation
-            sits alongside MZO Chat Platform, MZO RAG Platform, and MZO Email Agent in your stack.
+            채팅 방식과 문서 방식의 차이, 용어집 전략, 그리고 번역이 여러분의 스택에서
+            Chat Platform, RAG Platform, Email Agent와 어떻게 함께 동작하는지 함께
+            살펴볼 수 있습니다.
           </p>
           <Button asChild size="lg" className="mt-8 rounded-full px-8">
-            <a href={`mailto:${CONTACT_MAIL}`}>Contact us</a>
+            <a href={`mailto:${CONTACT_MAIL}`}>문의하기</a>
           </Button>
         </motion.section>
 

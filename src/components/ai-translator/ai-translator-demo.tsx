@@ -31,7 +31,7 @@ const DOCUMENT_BODY = `Q3 재무 보고서 — 번역본
 2. 비용 구조
 • 영업비용 주요 항목은 인력 및 클라우드 인프라입니다.`
 
-const DOCUMENT_SUMMARY_EN = `This quarter's financial pack highlights sustained revenue growth, disciplined operating expense, and stronger operating margin versus the prior period. Regional performance remained mixed, while enterprise demand supported headline results.`
+const DOCUMENT_SUMMARY_EN = `이번 분기 재무 자료는 지속적인 매출 성장, 절제된 영업비용, 그리고 전 분기 대비 개선된 운영 마진을 강조합니다. 지역별 실적은 엇갈렸으나, 기업 부문 수요가 주요 실적을 뒷받침했습니다.`
 
 /** One chat turn: source (EN) + translation (KO) share a single bubble (product UI). */
 const CHAT_SOURCE =
@@ -40,13 +40,13 @@ const CHAT_SOURCE =
 const CHAT_TRANSLATION_KO =
   "3분기 재무 보고서가 최종 완성되었습니다. 금요일 브리핑 세션 참석 가능 여부를 확인해 주시기 바랍니다."
 
-const CHAT_DEMO_TIMESTAMP = "Apr 21, 2026, 4:30 PM"
+const CHAT_DEMO_TIMESTAMP = "2026년 4월 21일 오후 4:30"
 
 const CHAT_SOURCE_2 = "I can attend after 2 PM this Friday."
 
 const CHAT_TRANSLATION_KO_2 = "이번주 금요일 2시 이후 참석 가능합니다."
 
-const CHAT_DEMO_TIMESTAMP_2 = "Apr 21, 2026, 4:32 PM"
+const CHAT_DEMO_TIMESTAMP_2 = "2026년 4월 21일 오후 4:32"
 
 type ChatDemoTurn = {
   source: string
@@ -99,9 +99,9 @@ function WorkspaceTopBar() {
   return (
     <div className="flex items-center justify-end border-b border-border/40 bg-background px-4 py-2.5 dark:border-zinc-800/60">
       <div className="rounded-full border border-border/50 bg-muted/20 px-2.5 py-1 text-[9.5px] font-medium text-muted-foreground dark:border-zinc-800/80">
-        <span className="text-emerald-600 dark:text-emerald-400">On-device</span>
+        <span className="text-emerald-600 dark:text-emerald-400">온디바이스</span>
         <span className="mx-1 text-muted-foreground/50">·</span>
-        Active
+        활성
       </div>
     </div>
   )
@@ -321,10 +321,10 @@ export function AiTranslatorDemo() {
               <WorkspaceTopBar />
               <div className="px-5 pb-8 pt-8 sm:px-8">
                 <h2 className="text-center text-lg font-semibold tracking-tight text-foreground sm:text-xl">
-                  New Project
+                  새 프로젝트
                 </h2>
                 <p className="mx-auto mt-1 max-w-md text-center text-[12px] text-muted-foreground">
-                  Select a translation mode to get started
+                  시작하려면 번역 모드를 선택하세요
                 </p>
 
                 <div className="mx-auto mt-8 grid max-w-lg gap-3 sm:grid-cols-2 sm:gap-4">
@@ -338,20 +338,20 @@ export function AiTranslatorDemo() {
                   >
                     {pickerSelection === "chat" && (
                       <span className="absolute right-3 top-3 rounded border border-border/60 bg-muted/40 px-1.5 py-0.5 text-[8px] font-semibold uppercase tracking-wide text-muted-foreground dark:border-zinc-700">
-                        Most used
+                        가장 많이 사용
                       </span>
                     )}
                     <div className="mb-3 flex size-10 items-center justify-center rounded-lg border border-border/50 bg-muted/30 dark:border-zinc-800">
                       <MessageSquare className="size-5 text-foreground/80" aria-hidden />
                     </div>
-                    <div className="text-[13px] font-semibold text-foreground">Chat Translation</div>
+                    <div className="text-[13px] font-semibold text-foreground">채팅 번역</div>
                     <p className="mt-1.5 text-[11px] leading-relaxed text-muted-foreground">
-                      Real-time conversation translation with streaming output and glossary support.
+                      스트리밍 출력과 용어집 지원을 갖춘 실시간 대화 번역.
                     </p>
                     {pickerSelection === "chat" && (
                       <div className="mt-4 flex items-center gap-1.5 text-[10px] font-medium text-foreground">
                         <Check className="size-3.5" strokeWidth={2.5} aria-hidden />
-                        Selected
+                        선택됨
                       </div>
                     )}
                   </div>
@@ -367,14 +367,14 @@ export function AiTranslatorDemo() {
                     <div className="mb-3 flex size-10 items-center justify-center rounded-lg border border-border/50 bg-muted/30 dark:border-zinc-800">
                       <FileText className="size-5 text-foreground/80" aria-hidden />
                     </div>
-                    <div className="text-[13px] font-semibold text-foreground">Document Translation</div>
+                    <div className="text-[13px] font-semibold text-foreground">문서 번역</div>
                     <p className="mt-1.5 text-[11px] leading-relaxed text-muted-foreground">
-                      Process PDFs and documents with page-range control and download.
+                      페이지 범위 제어와 다운로드 기능으로 PDF와 문서를 처리하세요.
                     </p>
                     {pickerSelection === "document" && (
                       <div className="mt-4 flex items-center gap-1.5 text-[10px] font-medium text-foreground">
                         <Check className="size-3.5" strokeWidth={2.5} aria-hidden />
-                        Selected
+                        선택됨
                       </div>
                     )}
                   </div>
@@ -389,7 +389,7 @@ export function AiTranslatorDemo() {
                     )}
                   >
                     <Plus className="size-4" strokeWidth={2.5} aria-hidden />
-                    Create New Project
+                    새 프로젝트 만들기
                   </button>
                 </div>
               </div>
@@ -407,9 +407,9 @@ export function AiTranslatorDemo() {
               <div className="flex min-h-[420px] flex-1 flex-col md:min-h-[520px] md:flex-row">
                 <aside className="w-full shrink-0 border-b border-border/50 bg-muted/15 p-4 md:w-[260px] md:border-b-0 md:border-r dark:border-zinc-800/80">
                   <div className="mb-4 text-[10px] text-muted-foreground">
-                    <span className="text-muted-foreground/80">Projects</span>
+                    <span className="text-muted-foreground/80">프로젝트</span>
                     <span className="mx-1">/</span>
-                    <span className="font-medium text-foreground">Document</span>
+                    <span className="font-medium text-foreground">문서</span>
                   </div>
 
                   <div className="mb-4 rounded-lg border border-border/50 bg-background p-2.5 shadow-sm dark:border-zinc-800/80">
@@ -419,17 +419,17 @@ export function AiTranslatorDemo() {
                       </div>
                       <div className="min-w-0">
                         <div className="truncate text-[11px] font-semibold text-foreground">Q3_Report_2024.pdf</div>
-                        <div className="text-[10px] text-muted-foreground">2.4 MB · 42 pages</div>
+                        <div className="text-[10px] text-muted-foreground">2.4 MB · 42페이지</div>
                       </div>
                     </div>
                   </div>
 
                   <div className="space-y-3">
-                    <SelectRow label="Source language" value="English" />
-                    <SelectRow label="Target language" value="Korean" />
+                    <SelectRow label="출발어" value="영어" />
+                    <SelectRow label="도착어" value="한국어" />
                     <div>
                       <div className="mb-1 text-[10px] font-medium uppercase tracking-wide text-muted-foreground">
-                        Page range
+                        페이지 범위
                       </div>
                       <div className="flex items-center gap-2">
                         <button
@@ -438,7 +438,7 @@ export function AiTranslatorDemo() {
                         >
                           1
                         </button>
-                        <span className="text-[10px] text-muted-foreground">to</span>
+                        <span className="text-[10px] text-muted-foreground">~</span>
                         <button
                           type="button"
                           className="h-8 flex-1 rounded-md border border-border/50 bg-background px-2 text-center text-[11px] dark:border-zinc-800"
@@ -447,14 +447,14 @@ export function AiTranslatorDemo() {
                         </button>
                       </div>
                     </div>
-                    <Toggle on label="Glossary" />
+                    <Toggle on label="용어집" />
                     <div className="rounded-lg border border-border/40 bg-background/80 p-2.5 dark:border-zinc-800/80">
                       <div className="flex items-center gap-2 text-[10px] font-medium text-foreground">
                         <span className="size-1.5 rounded-full bg-emerald-500" aria-hidden />
-                        On-device
+                        온디바이스
                       </div>
                       <p className="mt-1 text-[9.5px] leading-snug text-muted-foreground">
-                        Use cloud processing for faster results.
+                        더 빠른 결과를 위해 클라우드 처리를 사용하세요.
                       </p>
                     </div>
                     <button
@@ -466,26 +466,26 @@ export function AiTranslatorDemo() {
                           : "bg-foreground/90",
                       )}
                     >
-                      Translate
+                      번역
                     </button>
                   </div>
                 </aside>
 
                 <div className="flex min-h-0 flex-1 flex-col">
                   <div className="flex flex-wrap items-center justify-between gap-2 border-b border-border/50 px-4 py-2.5 dark:border-zinc-800/80">
-                    <span className="text-[12px] font-semibold text-foreground">Translation Result</span>
+                    <span className="text-[12px] font-semibold text-foreground">번역 결과</span>
                     <div className="flex items-center gap-2">
                       <button
                         type="button"
                         className="h-7 rounded-md border border-border/50 bg-background px-2.5 text-[10px] font-medium text-foreground dark:border-zinc-800"
                       >
-                        Summary
+                        요약
                       </button>
                       <button
                         type="button"
                         className="h-7 rounded-md bg-foreground px-2.5 text-[10px] font-medium text-background"
                       >
-                        Download
+                        다운로드
                       </button>
                     </div>
                   </div>
@@ -502,7 +502,7 @@ export function AiTranslatorDemo() {
                     {docSummary.length > 0 && (
                       <div className="mt-5 border-t border-border/40 pt-4 dark:border-zinc-800/80">
                         <div className="mb-2 text-[10px] font-semibold uppercase tracking-wide text-muted-foreground">
-                          # Document Summary
+                          # 문서 요약
                         </div>
                         <p className="text-[11.5px] leading-relaxed text-muted-foreground">
                           {docSummary}
@@ -534,28 +534,28 @@ export function AiTranslatorDemo() {
                   <button
                     type="button"
                     className="flex size-8 items-center justify-center rounded-md border border-border/50 text-muted-foreground dark:border-zinc-800"
-                    aria-label="Panel"
+                    aria-label="패널"
                   >
                     <LayoutPanelLeft className="size-4" />
                   </button>
                   <button
                     type="button"
                     className="flex size-8 items-center justify-center rounded-md border border-border/50 text-muted-foreground dark:border-zinc-800"
-                    aria-label="Edit"
+                    aria-label="편집"
                   >
                     <Pencil className="size-4" />
                   </button>
                   <div className="ml-2 text-[10px] text-muted-foreground">
-                    <span className="text-muted-foreground/80">Projects</span>
+                    <span className="text-muted-foreground/80">프로젝트</span>
                     <span className="mx-1">/</span>
-                    <span className="font-medium text-foreground">Chat Translation</span>
+                    <span className="font-medium text-foreground">채팅 번역</span>
                   </div>
                 </div>
                 <button
                   type="button"
                   className="rounded-md border border-dashed border-border/60 px-2.5 py-1 text-[10px] font-medium text-muted-foreground"
                 >
-                  Summary
+                  요약
                 </button>
               </div>
 
@@ -590,7 +590,7 @@ export function AiTranslatorDemo() {
                         <button
                           type="button"
                           className="mt-0.5 shrink-0 rounded-md p-1.5 text-muted-foreground transition-colors hover:bg-muted/80 hover:text-foreground"
-                          aria-label="Play translation (TTS preview)"
+                          aria-label="번역 재생 (TTS 미리보기)"
                         >
                           <Volume2 className="size-4" aria-hidden />
                         </button>
@@ -630,7 +630,7 @@ export function AiTranslatorDemo() {
                         type="button"
                         className="flex h-7 items-center gap-1 rounded-md border border-border/50 bg-background px-2 text-[10px] dark:border-zinc-800"
                       >
-                        English
+                        영어
                         <ChevronDown className="size-3 opacity-60" aria-hidden />
                       </button>
                       <span className="text-[10px] text-muted-foreground">↔</span>
@@ -638,11 +638,11 @@ export function AiTranslatorDemo() {
                         type="button"
                         className="flex h-7 items-center gap-1 rounded-md border border-border/50 bg-background px-2 text-[10px] dark:border-zinc-800"
                       >
-                        Korean
+                        한국어
                         <ChevronDown className="size-3 opacity-60" aria-hidden />
                       </button>
                       <div className="flex items-center gap-1.5 pl-1">
-                        <span className="text-[10px] font-medium text-muted-foreground">Glossary</span>
+                        <span className="text-[10px] font-medium text-muted-foreground">용어집</span>
                         <div
                           className="relative h-4 w-7 shrink-0 rounded-full bg-foreground"
                           aria-hidden
@@ -655,14 +655,14 @@ export function AiTranslatorDemo() {
                       <button
                         type="button"
                         className="flex size-8 items-center justify-center rounded-md border border-border/50 text-muted-foreground dark:border-zinc-800"
-                        aria-label="Voice"
+                        aria-label="음성"
                       >
                         <Mic className="size-4" />
                       </button>
                       <button
                         type="button"
                         className="flex size-9 items-center justify-center rounded-full bg-foreground text-background"
-                        aria-label="Send"
+                        aria-label="보내기"
                       >
                         <ArrowUp className="size-4" />
                       </button>
@@ -675,7 +675,7 @@ export function AiTranslatorDemo() {
         </AnimatePresence>
 
         <p className="border-t border-border bg-muted/30 px-3 py-2 text-center text-[9.5px] text-muted-foreground">
-          Client-side preview · No API calls
+          클라이언트 측 미리보기 · API 호출 없음
         </p>
       </Card>
     </section>

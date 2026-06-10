@@ -4,11 +4,11 @@ import { motion, useReducedMotion } from "motion/react"
 const ease = [0.16, 1, 0.3, 1] as const
 
 const BULLETS = [
-  "Chat and document translation in one product",
-  "50+ languages supported",
-  "On-device or cloud deployment",
-  "Glossary-aware and summary-ready",
-  "Built for enterprise privacy and control",
+  "채팅과 문서 번역을 하나의 제품에서",
+  "50개 이상의 언어 지원",
+  "온디바이스 또는 클라우드 배포",
+  "용어집 인식 및 요약 지원",
+  "엔터프라이즈 프라이버시와 제어를 위한 설계",
 ] as const
 
 /**
@@ -22,7 +22,7 @@ export function AiTranslatorHero() {
     <section className="w-full border-b border-border px-4 pb-14 pt-8 text-center sm:px-6 sm:pb-16 sm:pt-12 lg:px-8">
       <div className="mx-auto max-w-3xl">
         <p className="text-xs font-medium tracking-[0.2em] text-muted-foreground uppercase">
-          Products
+          제품
         </p>
 
         <motion.h1
@@ -35,7 +35,7 @@ export function AiTranslatorHero() {
           }}
           className="mt-3 text-balance text-4xl font-bold tracking-tight text-foreground sm:text-5xl"
         >
-          MZO AI Translator
+          AI Translator
         </motion.h1>
 
         <motion.p
@@ -48,8 +48,8 @@ export function AiTranslatorHero() {
           }}
           className="mx-auto mt-4 max-w-2xl text-pretty text-lg text-muted-foreground sm:text-xl"
         >
-          Translate chats, documents, voice, and images in one workspace — with streaming output,
-          glossary control, and summary built in.
+          채팅, 문서, 음성, 이미지를 하나의 워크스페이스에서 번역하세요 — 스트리밍
+          출력, 용어집 제어, 요약 기능이 내장되어 있습니다.
         </motion.p>
 
         <motion.ul
@@ -77,15 +77,15 @@ export function AiTranslatorHero() {
           className="mt-10 flex justify-center"
         >
           <span className="inline-flex items-center gap-2 rounded-full border border-border bg-background/80 px-3.5 py-1.5 text-[11px] font-medium tracking-tight text-foreground shadow-sm dark:border-zinc-800 dark:bg-zinc-900/80">
-            <span>On-device</span>
+            <span>온디바이스</span>
             <span className="text-muted-foreground/45" aria-hidden>
               ·
             </span>
-            <span>Cloud</span>
+            <span>클라우드</span>
             <span className="text-muted-foreground/45" aria-hidden>
               ·
             </span>
-            <span>On-premise</span>
+            <span>온프레미스</span>
           </span>
         </motion.div>
 

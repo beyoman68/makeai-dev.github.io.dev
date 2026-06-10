@@ -8,23 +8,23 @@ const ease = [0.16, 1, 0.3, 1] as const
 const FEATURES = [
   {
     icon: Languages,
-    title: "Chat and document translation in one product",
-    body: "Move between conversational turns and file-backed pages without changing tools—one workspace, consistent controls, and support for 50+ languages.",
+    title: "채팅과 문서 번역을 하나의 제품에서",
+    body: "도구를 바꾸지 않고 대화형 메시지와 파일 기반 페이지 사이를 오갈 수 있습니다. 하나의 워크스페이스, 일관된 제어, 그리고 50개 이상의 언어 지원.",
   },
   {
     icon: Cloud,
-    title: "On-device or cloud deployment",
-    body: "Choose where models and speech run so sensitive programs can stay air-gapped while others scale on managed cloud.",
+    title: "온디바이스 또는 클라우드 배포",
+    body: "모델과 음성 처리가 실행되는 위치를 선택하여, 민감한 프로그램은 망분리 환경에 두고 그 외에는 관리형 클라우드에서 확장할 수 있습니다.",
   },
   {
     icon: FileText,
-    title: "Glossary-aware and summary-ready",
-    body: "Keep terminology aligned when glossaries are enabled, and surface document summaries alongside translations for faster review.",
+    title: "용어집 인식 및 요약 지원",
+    body: "용어집이 활성화되면 용어를 일관되게 유지하고, 번역과 함께 문서 요약을 제공하여 더 빠른 검토를 돕습니다.",
   },
   {
     icon: ShieldCheck,
-    title: "Built for enterprise privacy and control",
-    body: "Design for identity, retention, and audit expectations so multilingual output follows the same posture as the rest of your stack.",
+    title: "엔터프라이즈 프라이버시와 제어를 위한 설계",
+    body: "ID, 보존, 감사 요건을 고려해 설계하여, 다국어 결과물이 나머지 스택과 동일한 보안 환경을 따르도록 합니다.",
   },
 ] as const
 
@@ -78,14 +78,14 @@ export function AiTranslatorFeatureCards() {
         >
           <div className="mb-4 inline-flex max-w-full items-center rounded-full border border-border bg-card px-3 py-1.5 dark:border-white/10 dark:bg-white/[0.06]">
             <span className="text-left text-[11px] font-medium uppercase leading-snug tracking-[0.04em] text-muted-foreground dark:text-zinc-300">
-              Platform highlights
+              플랫폼 주요 기능
             </span>
           </div>
           <h2 className="max-w-xl text-balance text-[clamp(1.625rem,3vw,2.25rem)] font-semibold tracking-tight text-foreground dark:text-white">
-            One translator for how teams actually work
+            팀이 실제로 일하는 방식에 맞춘 하나의 번역기
           </h2>
           <p className="mt-3 max-w-lg text-[15px] leading-relaxed text-muted-foreground dark:text-zinc-300">
-            Deploy on-device, on-premise, or in the cloud — whatever your environment requires.
+            온디바이스, 온프레미스, 클라우드 — 환경이 요구하는 어디에든 배포하세요.
           </p>
         </motion.div>
 
