@@ -679,8 +679,8 @@ function ReportDetail({ palette }: { palette: Palette }) {
   ];
 
   const CX = 100;
-  const CY = 95;
-  const MAX_R = 50;
+  const CY = 100;
+  const MAX_R = 38;
 
   function radarPoints(sc: number[]): string {
     return sc
@@ -708,10 +708,34 @@ function ReportDetail({ palette }: { palette: Palette }) {
     };
   }
 
-  function labelPos(i: number): { x: number; y: number } {
+  const LABEL_ADJUST = [
+    { extraR: 14, dx: 0, dy: -2 },
+    { extraR: 12, dx: -8, dy: 2 },
+    { extraR: 12, dx: -10, dy: -4 },
+    { extraR: 12, dx: 10, dy: -4 },
+    { extraR: 12, dx: 8, dy: 2 },
+  ] as const;
+
+  function labelPos(i: number): {
+    x: number;
+    y: number;
+    dx: number;
+    dy: number;
+  } {
     const a = -Math.PI / 2 + (i * 2 * Math.PI) / 5;
-    const r = MAX_R + (i === 2 || i === 3 ? 26 : 22);
-    return { x: CX + r * Math.cos(a), y: CY + r * Math.sin(a) };
+    const { extraR, dx, dy } = LABEL_ADJUST[i];
+    const r = MAX_R + extraR;
+    return {
+      x: CX + r * Math.cos(a),
+      y: CY + r * Math.sin(a),
+      dx,
+      dy,
+    };
+  }
+
+  function labelLines(dim: string): string[] {
+    if (dim.includes("-")) return dim.split("-");
+    return [dim];
   }
 
   const LABEL_ANCHOR = ["middle", "start", "start", "end", "end"] as const;
@@ -731,10 +755,10 @@ function ReportDetail({ palette }: { palette: Palette }) {
       avgDiff: -26,
       dimensions: [
         "디지털-리터러시",
-        "데이터-분석-역량",
+        "데이터 분석-역량",
         "업무-자동화",
-        "협업-및-커뮤니케이션",
-        "문제-해결-및-혁신",
+        "협업 및-커뮤니케이션",
+        "문제 해결 및-혁신",
       ],
       myScores: [47, 45, 45, 47, 41],
       avgScores: [71, 71, 70, 71, 71],
@@ -952,11 +976,11 @@ function ReportDetail({ palette }: { palette: Palette }) {
               </div>
 
               {/* Radar chart SVG */}
-              <div style={{ overflow: "visible" }}>
+              <div style={{ overflow: "hidden" }}>
                 <svg
                   viewBox="0 0 200 200"
                   width="100%"
-                  style={{ overflow: "visible", display: "block" }}
+                  style={{ overflow: "hidden", display: "block" }}
                 >
                   {/* Grid rings */}
                   {[0.25, 0.5, 0.75, 1.0].map((scale) => (
@@ -1018,18 +1042,37 @@ function ReportDetail({ palette }: { palette: Palette }) {
 
                   {/* Axis labels */}
                   {dimensions.map((dim, i) => {
-                    const { x, y } = labelPos(i);
+                    const lines = labelLines(dim);
+                    const lineHeight = 8;
+                    const { x, y, dx, dy } = labelPos(i);
+                    const textX = x + dx;
+                    const baseline = LABEL_BASELINE[i];
+                    const startY =
+                      baseline === "hanging"
+                        ? y + dy
+                        : y + dy - ((lines.length - 1) * lineHeight) / 2;
+
                     return (
                       <text
                         key={dim}
-                        x={x.toFixed(1)}
-                        y={y.toFixed(1)}
+                        x={textX.toFixed(1)}
+                        y={startY.toFixed(1)}
                         textAnchor={LABEL_ANCHOR[i]}
-                        dominantBaseline={LABEL_BASELINE[i]}
-                        fontSize="8"
+                        dominantBaseline={
+                          baseline === "hanging" ? "hanging" : "middle"
+                        }
+                        fontSize="7.5"
                         fill={palette.previewMuted}
                       >
-                        {dim}
+                        {lines.map((line, j) => (
+                          <tspan
+                            key={line}
+                            x={textX}
+                            dy={j === 0 ? 0 : lineHeight}
+                          >
+                            {line}
+                          </tspan>
+                        ))}
                       </text>
                     );
                   })}
