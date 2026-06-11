@@ -21,7 +21,7 @@ export function RagPlatformHero() {
           }}
           className="mt-3 text-balance text-4xl font-bold tracking-tight text-foreground sm:text-5xl"
         >
-          MZO RAG Platform
+          RAG Platform
         </motion.h1>
 
         <motion.p
@@ -33,9 +33,8 @@ export function RagPlatformHero() {
           }}
           className="mt-4 text-pretty text-lg text-muted-foreground sm:text-xl"
         >
-          Mazelone은 언어 모델을 여러분의 지식에 연결합니다 — 다양한 소스를
-          검색하고, 근거를 마련하며, 추론하고, 프로덕션에 적합한 제어 기능을
-          제공합니다.
+          언어 모델을 여러분의 지식에 연결합니다 — 다양한 소스를 검색하고,
+          근거를 마련하며, 추론하고, 프로덕션에 적합한 제어 기능을 제공합니다.
         </motion.p>
 
         <motion.div
