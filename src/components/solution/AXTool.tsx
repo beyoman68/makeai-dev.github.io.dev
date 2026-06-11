@@ -864,245 +864,256 @@ function ReportDetail({ palette }: { palette: Palette }) {
 
       {/* Radar chart cards */}
       <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 10 }}>
-        {CHARTS.map(({ title, icon, subtitle, avgDiff, dimensions, myScores, avgScores, scoreItems }) => (
-          <div
-            key={title}
-            style={{
-              border: `1px solid ${palette.previewBorder}`,
-              borderRadius: 12,
-              padding: "14px",
-              display: "flex",
-              flexDirection: "column",
-              gap: "0.75rem",
-            }}
-          >
-            {/* Card header */}
+        {CHARTS.map(
+          ({
+            title,
+            icon,
+            subtitle,
+            avgDiff,
+            dimensions,
+            myScores,
+            avgScores,
+            scoreItems,
+          }) => (
             <div
+              key={title}
               style={{
+                border: `1px solid ${palette.previewBorder}`,
+                borderRadius: 12,
+                padding: "14px",
                 display: "flex",
-                justifyContent: "space-between",
-                alignItems: "flex-start",
+                flexDirection: "column",
+                gap: "0.75rem",
               }}
             >
-              <div>
-                <div
-                  style={{
-                    display: "flex",
-                    alignItems: "center",
-                    gap: 6,
-                    marginBottom: 3,
-                  }}
-                >
-                  <span style={{ fontSize: "1rem" }}>{icon}</span>
-                  <span
-                    style={{
-                      fontWeight: 700,
-                      fontSize: "0.85rem",
-                      color: palette.previewTitle,
-                    }}
-                  >
-                    {title}
-                  </span>
-                </div>
-                <div
-                  style={{ fontSize: "0.65rem", color: palette.previewMuted }}
-                >
-                  {subtitle}
-                </div>
-              </div>
-              <div style={{ textAlign: "right", flexShrink: 0, marginLeft: 8 }}>
-                <div
-                  style={{
-                    fontSize: "0.6rem",
-                    color: palette.previewMuted,
-                    marginBottom: 2,
-                  }}
-                >
-                  평균 대비
-                </div>
-                <div
-                  style={{
-                    fontWeight: 800,
-                    fontSize: "1.05rem",
-                    color:
-                      avgDiff < 0
-                        ? "#ef4444"
-                        : avgDiff === 0
-                          ? palette.previewTitle
-                          : "#22c55e",
-                    lineHeight: 1,
-                  }}
-                >
-                  {avgDiff > 0 ? "+" : ""}
-                  {avgDiff}점
-                </div>
-              </div>
-            </div>
-
-            {/* Radar chart SVG */}
-            <div style={{ overflow: "visible" }}>
-              <svg
-                viewBox="0 0 200 200"
-                width="100%"
-                style={{ overflow: "visible", display: "block" }}
+              {/* Card header */}
+              <div
+                style={{
+                  display: "flex",
+                  justifyContent: "space-between",
+                  alignItems: "flex-start",
+                }}
               >
-                {/* Grid rings */}
-                {[0.25, 0.5, 0.75, 1.0].map((scale) => (
-                  <polygon
-                    key={scale}
-                    points={gridRing(scale)}
-                    fill="none"
-                    stroke={palette.previewBorder}
-                    strokeWidth="0.8"
-                  />
-                ))}
-
-                {/* Axis lines */}
-                {Array.from({ length: 5 }, (_, i) => {
-                  const { x, y } = axisEnd(i);
-                  return (
-                    <line
-                      key={i}
-                      x1={CX}
-                      y1={CY}
-                      x2={x}
-                      y2={y}
-                      stroke={palette.previewBorder}
-                      strokeWidth="0.8"
-                    />
-                  );
-                })}
-
-                {/* Scale numbers along top axis */}
-                {[25, 50, 75, 100].map((val) => (
-                  <text
-                    key={val}
-                    x={CX + 3}
-                    y={CY - (val / 100) * MAX_R}
-                    fontSize="7"
-                    fill={palette.previewMuted}
-                    dominantBaseline="middle"
-                  >
-                    {val}
-                  </text>
-                ))}
-
-                {/* 전체 평균 (orange dashed) */}
-                <polygon
-                  points={radarPoints(avgScores)}
-                  fill="rgba(245,158,11,0.1)"
-                  stroke="#f59e0b"
-                  strokeWidth="1.5"
-                  strokeDasharray="4,3"
-                />
-
-                {/* 나의 점수 (purple filled) */}
-                <polygon
-                  points={radarPoints(myScores)}
-                  fill="rgba(109,40,217,0.2)"
-                  stroke="#7c3aed"
-                  strokeWidth="1.8"
-                />
-
-                {/* Axis labels */}
-                {dimensions.map((dim, i) => {
-                  const { x, y } = labelPos(i);
-                  return (
-                    <text
-                      key={dim}
-                      x={x.toFixed(1)}
-                      y={y.toFixed(1)}
-                      textAnchor={LABEL_ANCHOR[i]}
-                      dominantBaseline={LABEL_BASELINE[i]}
-                      fontSize="8"
-                      fill={palette.previewMuted}
-                    >
-                      {dim}
-                    </text>
-                  );
-                })}
-              </svg>
-            </div>
-
-            {/* Legend */}
-            <div
-              style={{
-                display: "flex",
-                gap: 14,
-                justifyContent: "center",
-                marginTop: -4,
-              }}
-            >
-              {[
-                { color: "#7c3aed", label: "나의 점수" },
-                { color: "#f59e0b", label: "전체 평균" },
-              ].map(({ color, label: lg }) => (
-                <div
-                  key={lg}
-                  style={{
-                    display: "flex",
-                    alignItems: "center",
-                    gap: 5,
-                    fontSize: "0.68rem",
-                  }}
-                >
+                <div>
                   <div
                     style={{
-                      width: 10,
-                      height: 10,
-                      background: color,
-                      borderRadius: 2,
-                      flexShrink: 0,
+                      display: "flex",
+                      alignItems: "center",
+                      gap: 6,
+                      marginBottom: 3,
                     }}
-                  />
-                  <span style={{ color: palette.previewBody }}>{lg}</span>
+                  >
+                    <span style={{ fontSize: "1rem" }}>{icon}</span>
+                    <span
+                      style={{
+                        fontWeight: 700,
+                        fontSize: "0.85rem",
+                        color: palette.previewTitle,
+                      }}
+                    >
+                      {title}
+                    </span>
+                  </div>
+                  <div
+                    style={{ fontSize: "0.65rem", color: palette.previewMuted }}
+                  >
+                    {subtitle}
+                  </div>
                 </div>
-              ))}
-            </div>
-
-            {/* Score items grid */}
-            <div
-              style={{
-                display: "grid",
-                gridTemplateColumns: "1fr 1fr 1fr",
-                gap: "6px 10px",
-                borderTop: `1px solid ${palette.previewBorder}`,
-                paddingTop: 10,
-              }}
-            >
-              {scoreItems.map(({ label: sl, score, avg }) => (
-                <div key={sl}>
+                <div
+                  style={{ textAlign: "right", flexShrink: 0, marginLeft: 8 }}
+                >
                   <div
                     style={{
                       fontSize: "0.6rem",
                       color: palette.previewMuted,
                       marginBottom: 2,
-                      lineHeight: 1.3,
                     }}
                   >
-                    {sl}
+                    평균 대비
                   </div>
-                  <div style={{ lineHeight: 1 }}>
-                    <strong
-                      style={{ fontSize: "0.82rem", color: "#7c3aed" }}
-                    >
-                      {score}점
-                    </strong>
-                    <span
-                      style={{
-                        fontSize: "0.62rem",
-                        color: palette.previewMuted,
-                        marginLeft: 3,
-                      }}
-                    >
-                      (평균 {avg})
-                    </span>
+                  <div
+                    style={{
+                      fontWeight: 800,
+                      fontSize: "1.05rem",
+                      color:
+                        avgDiff < 0
+                          ? "#ef4444"
+                          : avgDiff === 0
+                            ? palette.previewTitle
+                            : "#22c55e",
+                      lineHeight: 1,
+                    }}
+                  >
+                    {avgDiff > 0 ? "+" : ""}
+                    {avgDiff}점
                   </div>
                 </div>
-              ))}
+              </div>
+
+              {/* Radar chart SVG */}
+              <div style={{ overflow: "visible" }}>
+                <svg
+                  viewBox="0 0 200 200"
+                  width="100%"
+                  style={{ overflow: "visible", display: "block" }}
+                >
+                  {/* Grid rings */}
+                  {[0.25, 0.5, 0.75, 1.0].map((scale) => (
+                    <polygon
+                      key={scale}
+                      points={gridRing(scale)}
+                      fill="none"
+                      stroke={palette.previewBorder}
+                      strokeWidth="0.8"
+                    />
+                  ))}
+
+                  {/* Axis lines */}
+                  {Array.from({ length: 5 }, (_, i) => {
+                    const { x, y } = axisEnd(i);
+                    return (
+                      <line
+                        key={i}
+                        x1={CX}
+                        y1={CY}
+                        x2={x}
+                        y2={y}
+                        stroke={palette.previewBorder}
+                        strokeWidth="0.8"
+                      />
+                    );
+                  })}
+
+                  {/* Scale numbers along top axis */}
+                  {[25, 50, 75, 100].map((val) => (
+                    <text
+                      key={val}
+                      x={CX + 3}
+                      y={CY - (val / 100) * MAX_R}
+                      fontSize="7"
+                      fill={palette.previewMuted}
+                      dominantBaseline="middle"
+                    >
+                      {val}
+                    </text>
+                  ))}
+
+                  {/* 전체 평균 (orange dashed) */}
+                  <polygon
+                    points={radarPoints(avgScores)}
+                    fill="rgba(245,158,11,0.1)"
+                    stroke="#f59e0b"
+                    strokeWidth="1.5"
+                    strokeDasharray="4,3"
+                  />
+
+                  {/* 나의 점수 (purple filled) */}
+                  <polygon
+                    points={radarPoints(myScores)}
+                    fill="rgba(109,40,217,0.2)"
+                    stroke="#7c3aed"
+                    strokeWidth="1.8"
+                  />
+
+                  {/* Axis labels */}
+                  {dimensions.map((dim, i) => {
+                    const { x, y } = labelPos(i);
+                    return (
+                      <text
+                        key={dim}
+                        x={x.toFixed(1)}
+                        y={y.toFixed(1)}
+                        textAnchor={LABEL_ANCHOR[i]}
+                        dominantBaseline={LABEL_BASELINE[i]}
+                        fontSize="8"
+                        fill={palette.previewMuted}
+                      >
+                        {dim}
+                      </text>
+                    );
+                  })}
+                </svg>
+              </div>
+
+              {/* Legend */}
+              <div
+                style={{
+                  display: "flex",
+                  gap: 14,
+                  justifyContent: "center",
+                  marginTop: -4,
+                }}
+              >
+                {[
+                  { color: "#7c3aed", label: "나의 점수" },
+                  { color: "#f59e0b", label: "전체 평균" },
+                ].map(({ color, label: lg }) => (
+                  <div
+                    key={lg}
+                    style={{
+                      display: "flex",
+                      alignItems: "center",
+                      gap: 5,
+                      fontSize: "0.68rem",
+                    }}
+                  >
+                    <div
+                      style={{
+                        width: 10,
+                        height: 10,
+                        background: color,
+                        borderRadius: 2,
+                        flexShrink: 0,
+                      }}
+                    />
+                    <span style={{ color: palette.previewBody }}>{lg}</span>
+                  </div>
+                ))}
+              </div>
+
+              {/* Score items grid */}
+              <div
+                style={{
+                  display: "grid",
+                  gridTemplateColumns: "1fr 1fr 1fr",
+                  gap: "6px 10px",
+                  borderTop: `1px solid ${palette.previewBorder}`,
+                  paddingTop: 10,
+                }}
+              >
+                {scoreItems.map(({ label: sl, score, avg }) => (
+                  <div key={sl}>
+                    <div
+                      style={{
+                        fontSize: "0.6rem",
+                        color: palette.previewMuted,
+                        marginBottom: 2,
+                        lineHeight: 1.3,
+                      }}
+                    >
+                      {sl}
+                    </div>
+                    <div style={{ lineHeight: 1 }}>
+                      <strong style={{ fontSize: "0.82rem", color: "#7c3aed" }}>
+                        {score}점
+                      </strong>
+                      <span
+                        style={{
+                          fontSize: "0.62rem",
+                          color: palette.previewMuted,
+                          marginLeft: 3,
+                        }}
+                      >
+                        (평균 {avg})
+                      </span>
+                    </div>
+                  </div>
+                ))}
+              </div>
             </div>
-          </div>
-        ))}
+          ),
+        )}
       </div>
     </div>
   );
@@ -1114,27 +1125,27 @@ function ReportDetail({ palette }: { palette: Palette }) {
 function RoadmapDetail({ palette }: { palette: Palette }) {
   const pathSteps = [
     {
-      range: "1~2단계",
-      title: "AI기초 역량 강화",
+      range: "1~2주차",
+      title: "AI 기초 역량 강화",
       items: [
-        "AI기초 핵심 역량 강화\n2~3개 항목 완료",
-        "AI기초 역량 강화\n2개 항목 완료",
+        "AI 도구의 기본 개념과 활용법 학습,\n프롬프트 작성 기초",
+        // "AI기초 역량 강화\n2개 항목 완료",
       ],
     },
     {
-      range: "3~4단계",
+      range: "3~5주차",
       title: "실무 활용 능력 계발",
       items: [
-        "업무 연계 AI 도구\n활용 능력 계발",
-        "팀 협업 AI 활용\n능력 계발",
+        "업무에 AI 도구를 적용하는 실전 연습",
+        // "팀 협업 AI 활용\n능력 계발",
       ],
     },
     {
-      range: "5~8단계",
-      title: "고급 활용 & 과제",
+      range: "6~8주차",
+      title: "고급 활용 및 심화",
       items: [
-        "고급 기능 응용 및\n창의적 과제 수행",
-        "종합 활용 능력\n완성도 제고",
+        "고급 기능 활용 및 복잡한 업무 적용",
+        // "종합 활용 능력\n완성도 제고",
       ],
     },
   ];
@@ -1144,19 +1155,19 @@ function RoadmapDetail({ palette }: { palette: Palette }) {
       dot: "#d946ef",
       week: "2주차",
       title: "기초 역량 점검",
-      desc: "AI기초 핵심 역량의 학습 진도 확인",
+      desc: "기본 AI 활용 능력 확보",
     },
     {
       dot: "#a855f7",
       week: "5주차",
       title: "중간 점검",
-      desc: "실무 활용 능력 중간 평가 및 피드백",
+      desc: "실무 적용 능력 확보",
     },
     {
       dot: "#6d28d9",
       week: "8주차",
-      title: "최종 수료 심사",
-      desc: "전체 역량 종합 평가 및 수료 인증",
+      title: "최종 점검",
+      desc: "독립적 AI 활용 가능",
     },
   ];
 
@@ -1183,7 +1194,7 @@ function RoadmapDetail({ palette }: { palette: Palette }) {
             AI 맞춤 학습 로드맵
           </div>
           <div style={{ fontSize: "0.68rem", color: palette.previewMuted }}>
-            프로토도 정리(2.0후), 업무 정리후, AI 도구 활용 공략
+            프롬프트 엔지니어링, 업무 자동화, AI 도구 활용 강화
           </div>
         </div>
         <div
@@ -1197,7 +1208,7 @@ function RoadmapDetail({ palette }: { palette: Palette }) {
             flexShrink: 0,
           }}
         >
-          적용하기
+          재생성
         </div>
       </div>
 
@@ -1205,14 +1216,15 @@ function RoadmapDetail({ palette }: { palette: Palette }) {
       <div
         style={{
           display: "grid",
-          gridTemplateColumns: "repeat(3, 1fr)",
+          gridTemplateColumns: "repeat(4, 1fr)",
           gap: 8,
         }}
       >
         {[
-          { label: "AI 기초 핵심 단계", value: "8주" },
-          { label: "AI 활용 전문가수준 달성", value: "8주" },
-          { label: "총 기간", value: "8주" },
+          { label: "현재 레벨", value: "AI 활용 중급 단계" },
+          { label: "목표 레벨", value: "AI 활용 전문가 수준 달성" },
+          { label: "예상 기간", value: "8주" },
+          { label: "총 주차", value: "8주" },
         ].map(({ label, value }) => (
           <div
             key={label}
