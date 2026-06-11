@@ -305,7 +305,6 @@ function BlackboxWidget({ palette }: { palette: ProblemPalette }) {
 }
 
 function ProblemCard({
-  icon,
   title,
   index,
   reduceMotion,
@@ -313,7 +312,6 @@ function ProblemCard({
   palette,
   description = PLACEHOLDER,
 }: {
-  icon: string;
   title: string;
   index: number;
   reduceMotion: boolean;
@@ -352,7 +350,6 @@ function ProblemCard({
           background: DRIFT_COLORS.red,
         }}
       />
-      <div style={{ fontSize: "2rem", marginBottom: "1rem" }}>{icon}</div>
       <h3
         style={{
           fontSize: "1.1rem",
@@ -501,7 +498,6 @@ export function ProblemSection() {
           {cards.map((card, i) => (
             <ProblemCard
               key={card.title}
-              icon={card.icon}
               title={card.title}
               description={"description" in card ? card.description : undefined}
               index={i}
