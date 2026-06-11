@@ -1,14 +1,14 @@
-import * as React from "react"
-import { Link, useLocation } from "react-router-dom"
+import * as React from "react";
+import { Link, useLocation } from "react-router-dom";
 
-import { Button } from "@/components/ui/button"
-import { cn } from "@/lib/utils"
+import { Button } from "@/components/ui/button";
+import { cn } from "@/lib/utils";
 import {
   CONTACT_MAIL,
   productNav,
   solutionNav,
   // researchHref, // re-enable with Research desktop + mobile links below (`/research` route stays in App.tsx)
-} from "@/lib/nav-config"
+} from "@/lib/nav-config";
 
 function ChevronDown({ className }: { className?: string }) {
   return (
@@ -27,7 +27,7 @@ function ChevronDown({ className }: { className?: string }) {
     >
       <path d="m6 9 6 6 6-6" />
     </svg>
-  )
+  );
 }
 
 function MenuIcon({ className }: { className?: string }) {
@@ -46,7 +46,7 @@ function MenuIcon({ className }: { className?: string }) {
     >
       <path d="M4 6h16M4 12h16M4 18h16" />
     </svg>
-  )
+  );
 }
 
 function CloseIcon({ className }: { className?: string }) {
@@ -65,7 +65,7 @@ function CloseIcon({ className }: { className?: string }) {
     >
       <path d="M18 6 6 18M6 6l12 12" />
     </svg>
-  )
+  );
 }
 
 function DesktopDropdown({
@@ -76,30 +76,30 @@ function DesktopDropdown({
   onPointerOpen,
   onPointerClose,
 }: {
-  id: string
-  label: string
-  items: readonly { label: string; href: string }[]
-  open: boolean
-  onPointerOpen: () => void
-  onPointerClose: () => void
+  id: string;
+  label: string;
+  items: readonly { label: string; href: string }[];
+  open: boolean;
+  onPointerOpen: () => void;
+  onPointerClose: () => void;
 }) {
-  const wrapRef = React.useRef<HTMLDivElement>(null)
+  const wrapRef = React.useRef<HTMLDivElement>(null);
 
   React.useEffect(() => {
-    const el = wrapRef.current
+    const el = wrapRef.current;
     if (!el) {
-      return undefined
+      return undefined;
     }
     const onFocusOut = (e: FocusEvent) => {
-      const next = e.relatedTarget
+      const next = e.relatedTarget;
       if (next instanceof Node && el.contains(next)) {
-        return
+        return;
       }
-      onPointerClose()
-    }
-    el.addEventListener("focusout", onFocusOut)
-    return () => el.removeEventListener("focusout", onFocusOut)
-  }, [onPointerClose])
+      onPointerClose();
+    };
+    el.addEventListener("focusout", onFocusOut);
+    return () => el.removeEventListener("focusout", onFocusOut);
+  }, [onPointerClose]);
 
   return (
     <div
@@ -148,15 +148,15 @@ function DesktopDropdown({
         </ul>
       </div>
     </div>
-  )
+  );
 }
 
 function MobileNavSection({
   title,
   items,
 }: {
-  title: string
-  items: readonly { label: string; href: string }[]
+  title: string;
+  items: readonly { label: string; href: string }[];
 }) {
   return (
     <div className="border-b border-zinc-200 py-3 last:border-b-0 dark:border-zinc-800">
@@ -176,33 +176,33 @@ function MobileNavSection({
         ))}
       </ul>
     </div>
-  )
+  );
 }
 
 export function SiteHeader() {
-  const location = useLocation()
-  const [mobileOpen, setMobileOpen] = React.useState(false)
+  const location = useLocation();
+  const [mobileOpen, setMobileOpen] = React.useState(false);
   /** Only one desktop flyout at a time — avoids hover + focus keeping two panels open. */
   const [openDesktopMenu, setOpenDesktopMenu] = React.useState<string | null>(
     null,
-  )
+  );
 
   React.useEffect(() => {
-    setMobileOpen(false)
-  }, [location.pathname, location.hash])
+    setMobileOpen(false);
+  }, [location.pathname, location.hash]);
 
   React.useEffect(() => {
     if (!mobileOpen) {
-      return undefined
+      return undefined;
     }
 
-    const prev = document.body.style.overflow
-    document.body.style.overflow = "hidden"
+    const prev = document.body.style.overflow;
+    document.body.style.overflow = "hidden";
 
     return () => {
-      document.body.style.overflow = prev
-    }
-  }, [mobileOpen])
+      document.body.style.overflow = prev;
+    };
+  }, [mobileOpen]);
 
   return (
     <header className="sticky top-0 z-50 border-b border-zinc-200 bg-white text-zinc-950 dark:border-zinc-800 dark:bg-zinc-950 dark:text-zinc-50">
@@ -257,7 +257,7 @@ export function SiteHeader() {
             href={`mailto:${CONTACT_MAIL}`}
             className="text-sm font-medium text-zinc-900 underline-offset-4 hover:text-zinc-950 hover:underline sm:hidden dark:text-zinc-300 dark:hover:text-white"
           >
-            Contact
+            도입 문의
           </a>
           <Button
             asChild
@@ -265,7 +265,7 @@ export function SiteHeader() {
             size="sm"
             className="hidden h-9 rounded-full bg-black px-5 text-white shadow-sm hover:bg-zinc-800 hover:text-white dark:bg-white dark:text-zinc-950 dark:hover:bg-zinc-200 sm:inline-flex"
           >
-            <a href={`mailto:${CONTACT_MAIL}`}>Contact us</a>
+            <a href={`mailto:${CONTACT_MAIL}`}>도입 문의</a>
           </Button>
 
           <button
@@ -305,12 +305,12 @@ export function SiteHeader() {
                 variant="ghost"
                 className="h-10 w-full rounded-full bg-black px-5 text-white shadow-sm hover:bg-zinc-800 hover:text-white dark:bg-white dark:text-zinc-950 dark:hover:bg-zinc-200"
               >
-                <a href={`mailto:${CONTACT_MAIL}`}>Contact us</a>
+                <a href={`mailto:${CONTACT_MAIL}`}>도입 문의</a>
               </Button>
             </div>
           </div>
         </div>
       ) : null}
     </header>
-  )
+  );
 }

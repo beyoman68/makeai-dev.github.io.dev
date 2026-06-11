@@ -1,20 +1,20 @@
-import { motion, useReducedMotion } from "motion/react"
+import { motion, useReducedMotion } from "motion/react";
 
-import { Button } from "@/components/ui/button"
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
-import { BackToHome } from "@/components/back-to-home"
-import { DataPlatformArchitectureFigure } from "@/components/data-platform-architecture-figure"
-import { DataPlatformDemo } from "@/components/data-platform/data-platform-demo"
-import { CONTACT_MAIL } from "@/lib/nav-config"
+import { Button } from "@/components/ui/button";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { BackToHome } from "@/components/back-to-home";
+import { DataPlatformArchitectureFigure } from "@/components/data-platform-architecture-figure";
+import { DataPlatformDemo } from "@/components/data-platform/data-platform-demo";
+import { CONTACT_MAIL } from "@/lib/nav-config";
 
-const ease = [0.16, 1, 0.3, 1] as const
+const ease = [0.16, 1, 0.3, 1] as const;
 
 /**
  * MZO Data Platform — `/products/data-platform`
  * @see `.dev/md/20260421_1416_products-data-platform-planning.md`
  */
 export function DataPlatformPage() {
-  const reduce = useReducedMotion() ?? false
+  const reduce = useReducedMotion() ?? false;
 
   const inView = {
     initial: reduce ? false : ({ opacity: 0, y: 18 } as const),
@@ -24,7 +24,7 @@ export function DataPlatformPage() {
       duration: reduce ? 0 : 0.65,
       ease,
     },
-  } as const
+  } as const;
 
   return (
     <main className="flex w-full flex-1 flex-col">
@@ -34,7 +34,11 @@ export function DataPlatformPage() {
           <motion.p
             initial={reduce ? false : { opacity: 0, y: 10 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: reduce ? 0 : 0.55, delay: reduce ? 0 : 0.06, ease }}
+            transition={{
+              duration: reduce ? 0 : 0.55,
+              delay: reduce ? 0 : 0.06,
+              ease,
+            }}
             className="text-xs font-medium tracking-[0.2em] text-muted-foreground uppercase"
           >
             Products
@@ -90,9 +94,14 @@ export function DataPlatformPage() {
             className="mt-8 flex flex-col items-center justify-center gap-3 sm:flex-row sm:gap-4"
           >
             <Button asChild size="lg" className="rounded-full px-8">
-              <a href={`mailto:${CONTACT_MAIL}`}>Contact us</a>
+              <a href={`mailto:${CONTACT_MAIL}`}>도입 문의</a>
             </Button>
-            <Button asChild variant="ghost" size="lg" className="text-foreground">
+            <Button
+              asChild
+              variant="ghost"
+              size="lg"
+              className="text-foreground"
+            >
               <a href="#supported-formats">See supported formats</a>
             </Button>
           </motion.div>
@@ -174,7 +183,10 @@ export function DataPlatformPage() {
         </motion.section>
 
         {/* How it works */}
-        <motion.section className="mt-16 border-t border-border pt-16" {...inView}>
+        <motion.section
+          className="mt-16 border-t border-border pt-16"
+          {...inView}
+        >
           <h2 className="text-2xl font-semibold tracking-tight text-foreground">
             From file to usable intelligence
           </h2>
@@ -209,7 +221,9 @@ export function DataPlatformPage() {
                 }}
                 className="rounded-lg border border-border p-4"
               >
-                <p className="text-sm font-semibold text-foreground">{s.step}</p>
+                <p className="text-sm font-semibold text-foreground">
+                  {s.step}
+                </p>
                 <p className="mt-2 text-sm leading-relaxed text-muted-foreground">
                   {s.desc}
                 </p>
@@ -273,7 +287,10 @@ export function DataPlatformPage() {
         </motion.section>
 
         {/* Use cases */}
-        <motion.section className="mt-16 border-t border-border pt-16" {...inView}>
+        <motion.section
+          className="mt-16 border-t border-border pt-16"
+          {...inView}
+        >
           <h2 className="text-2xl font-semibold tracking-tight text-foreground">
             Designed for real-world workflows
           </h2>
@@ -321,7 +338,10 @@ export function DataPlatformPage() {
         </motion.section>
 
         {/* Closing CTA */}
-        <motion.section className="mt-16 border-t border-border pt-16 text-center" {...inView}>
+        <motion.section
+          className="mt-16 border-t border-border pt-16 text-center"
+          {...inView}
+        >
           <h2 className="text-2xl font-semibold tracking-tight text-foreground">
             Need to parse documents at scale?
           </h2>
@@ -333,11 +353,15 @@ export function DataPlatformPage() {
             initial={reduce ? false : { opacity: 0, y: 8 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, amount: 0.3 }}
-            transition={{ duration: reduce ? 0 : 0.5, delay: reduce ? 0 : 0.12, ease }}
+            transition={{
+              duration: reduce ? 0 : 0.5,
+              delay: reduce ? 0 : 0.12,
+              ease,
+            }}
             className="mt-8"
           >
             <Button asChild size="lg" className="rounded-full px-8">
-              <a href={`mailto:${CONTACT_MAIL}`}>Contact us</a>
+              <a href={`mailto:${CONTACT_MAIL}`}>도입 문의</a>
             </Button>
           </motion.div>
         </motion.section>
@@ -347,5 +371,5 @@ export function DataPlatformPage() {
         </motion.div>
       </div>
     </main>
-  )
+  );
 }

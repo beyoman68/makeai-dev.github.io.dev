@@ -1,25 +1,25 @@
-import * as React from "react"
+import * as React from "react";
 
-import { Badge } from "@/components/ui/badge"
-import { CONTACT_MAIL } from "@/lib/nav-config"
-import { cn } from "@/lib/utils"
+import { Badge } from "@/components/ui/badge";
+import { CONTACT_MAIL } from "@/lib/nav-config";
+import { cn } from "@/lib/utils";
 
 /** Allowed row labels — fixed set per IA. */
-type ResearchTag = "Research" | "Publication" | "Patent"
+type ResearchTag = "Research" | "Publication" | "Patent";
 
-type FilterTab = "all" | ResearchTag
+type FilterTab = "all" | ResearchTag;
 
-type SortKey = "date-desc" | "date-asc" | "title-asc"
+type SortKey = "date-desc" | "date-asc" | "title-asc";
 
 type ResearchListItem = {
-  id: string
-  tag: ResearchTag
+  id: string;
+  tag: ResearchTag;
   /** ISO date string for sorting */
-  dateIso: string
-  dateLabel: string
-  title: string
-  summary: string
-}
+  dateIso: string;
+  dateLabel: string;
+  title: string;
+  summary: string;
+};
 
 /** MVP static feed — replace with CMS/API later; layout stays the same. */
 const RESEARCH_ITEMS: ResearchListItem[] = [
@@ -50,20 +50,20 @@ const RESEARCH_ITEMS: ResearchListItem[] = [
     summary:
       "Patent filing update on RAG orchestration and guardrails tailored to regulated environments.",
   },
-]
+];
 
 const FILTER_TABS: { id: FilterTab; label: string }[] = [
   { id: "all", label: "All" },
   { id: "Research", label: "Research" },
   { id: "Publication", label: "Publication" },
   { id: "Patent", label: "Patent" },
-]
+];
 
 const SORT_OPTIONS: { key: SortKey; label: string }[] = [
   { key: "date-desc", label: "Newest first" },
   { key: "date-asc", label: "Oldest first" },
   { key: "title-asc", label: "Title (A–Z)" },
-]
+];
 
 /** Same chevron as `site-header` `DesktopDropdown`. */
 function ChevronDown({ className }: { className?: string }) {
@@ -83,7 +83,7 @@ function ChevronDown({ className }: { className?: string }) {
     >
       <path d="m6 9 6 6 6-6" />
     </svg>
-  )
+  );
 }
 
 /**
@@ -94,42 +94,42 @@ function ResearchSortMenu({
   value,
   onChange,
 }: {
-  value: SortKey
-  onChange: (next: SortKey) => void
+  value: SortKey;
+  onChange: (next: SortKey) => void;
 }) {
-  const [open, setOpen] = React.useState(false)
-  const wrapRef = React.useRef<HTMLDivElement>(null)
-  const menuId = "research-sort-menu"
+  const [open, setOpen] = React.useState(false);
+  const wrapRef = React.useRef<HTMLDivElement>(null);
+  const menuId = "research-sort-menu";
 
   const currentLabel =
-    SORT_OPTIONS.find((o) => o.key === value)?.label ?? SORT_OPTIONS[0].label
+    SORT_OPTIONS.find((o) => o.key === value)?.label ?? SORT_OPTIONS[0].label;
 
   React.useEffect(() => {
     if (!open) {
-      return undefined
+      return undefined;
     }
     const onDoc = (e: MouseEvent) => {
       if (wrapRef.current?.contains(e.target as Node)) {
-        return
+        return;
       }
-      setOpen(false)
-    }
-    document.addEventListener("mousedown", onDoc)
-    return () => document.removeEventListener("mousedown", onDoc)
-  }, [open])
+      setOpen(false);
+    };
+    document.addEventListener("mousedown", onDoc);
+    return () => document.removeEventListener("mousedown", onDoc);
+  }, [open]);
 
   React.useEffect(() => {
     if (!open) {
-      return undefined
+      return undefined;
     }
     const onKey = (e: KeyboardEvent) => {
       if (e.key === "Escape") {
-        setOpen(false)
+        setOpen(false);
       }
-    }
-    document.addEventListener("keydown", onKey)
-    return () => document.removeEventListener("keydown", onKey)
-  }, [open])
+    };
+    document.addEventListener("keydown", onKey);
+    return () => document.removeEventListener("keydown", onKey);
+  }, [open]);
 
   return (
     <div ref={wrapRef} className="relative">
@@ -160,7 +160,7 @@ function ResearchSortMenu({
           className="rounded-lg border border-border bg-popover py-2 text-muted-foreground shadow-xl"
         >
           {SORT_OPTIONS.map((opt) => {
-            const selected = value === opt.key
+            const selected = value === opt.key;
             return (
               <li key={opt.key} role="presentation">
                 <button
@@ -174,31 +174,38 @@ function ResearchSortMenu({
                       "bg-muted/80 text-foreground/75 dark:bg-muted dark:text-zinc-300",
                   )}
                   onClick={() => {
-                    onChange(opt.key)
-                    setOpen(false)
+                    onChange(opt.key);
+                    setOpen(false);
                   }}
                 >
                   {opt.label}
                 </button>
               </li>
-            )
+            );
           })}
         </ul>
       </div>
     </div>
-  )
+  );
 }
 
-function sortItems(items: ResearchListItem[], sort: SortKey): ResearchListItem[] {
-  const copy = [...items]
+function sortItems(
+  items: ResearchListItem[],
+  sort: SortKey,
+): ResearchListItem[] {
+  const copy = [...items];
   if (sort === "date-desc") {
-    copy.sort((a, b) => (a.dateIso < b.dateIso ? 1 : a.dateIso > b.dateIso ? -1 : 0))
+    copy.sort((a, b) =>
+      a.dateIso < b.dateIso ? 1 : a.dateIso > b.dateIso ? -1 : 0,
+    );
   } else if (sort === "date-asc") {
-    copy.sort((a, b) => (a.dateIso > b.dateIso ? 1 : a.dateIso < b.dateIso ? -1 : 0))
+    copy.sort((a, b) =>
+      a.dateIso > b.dateIso ? 1 : a.dateIso < b.dateIso ? -1 : 0,
+    );
   } else {
-    copy.sort((a, b) => a.title.localeCompare(b.title, "en"))
+    copy.sort((a, b) => a.title.localeCompare(b.title, "en"));
   }
-  return copy
+  return copy;
 }
 
 /**
@@ -206,16 +213,16 @@ function sortItems(items: ResearchListItem[], sort: SortKey): ResearchListItem[]
  * @see `.dev/md/20260417_1720_research-nav-planning.md`
  */
 export function ResearchPage() {
-  const [filter, setFilter] = React.useState<FilterTab>("all")
-  const [sort, setSort] = React.useState<SortKey>("date-desc")
+  const [filter, setFilter] = React.useState<FilterTab>("all");
+  const [sort, setSort] = React.useState<SortKey>("date-desc");
 
   const filtered =
     filter === "all"
       ? RESEARCH_ITEMS
-      : RESEARCH_ITEMS.filter((item) => item.tag === filter)
+      : RESEARCH_ITEMS.filter((item) => item.tag === filter);
 
-  const rows = sortItems(filtered, sort)
-  const catalogEmpty = RESEARCH_ITEMS.length === 0
+  const rows = sortItems(filtered, sort);
+  const catalogEmpty = RESEARCH_ITEMS.length === 0;
 
   return (
     <main className="flex w-full flex-1 flex-col">
@@ -225,14 +232,10 @@ export function ResearchPage() {
         </h1>
 
         <div className="mt-8 flex flex-col gap-4 border-b border-border pb-6 sm:flex-row sm:items-end sm:justify-between">
-          <div
-            className="min-w-0 flex-1"
-            role="tablist"
-            aria-label="Category"
-          >
+          <div className="min-w-0 flex-1" role="tablist" aria-label="Category">
             <div className="-mx-1 flex gap-1 overflow-x-auto pb-1 sm:flex-wrap sm:overflow-visible">
               {FILTER_TABS.map((tab) => {
-                const selected = filter === tab.id
+                const selected = filter === tab.id;
                 return (
                   <button
                     key={tab.id}
@@ -249,7 +252,7 @@ export function ResearchPage() {
                   >
                     {tab.label}
                   </button>
-                )
+                );
               })}
             </div>
           </div>
@@ -271,19 +274,20 @@ export function ResearchPage() {
               href={`mailto:${CONTACT_MAIL}`}
               className="mt-4 inline-block text-sm font-medium text-primary underline-offset-4 hover:underline"
             >
-              Contact us
+              도입 문의
             </a>
           </div>
         ) : rows.length === 0 ? (
           <div className="py-16 text-center">
             <p className="text-muted-foreground">
-              No items match this filter yet. Research and updates will appear here.
+              No items match this filter yet. Research and updates will appear
+              here.
             </p>
             <a
               href={`mailto:${CONTACT_MAIL}`}
               className="mt-4 inline-block text-sm font-medium text-primary underline-offset-4 hover:underline"
             >
-              Contact us
+              도입 문의
             </a>
           </div>
         ) : (
@@ -321,5 +325,5 @@ export function ResearchPage() {
         )}
       </div>
     </main>
-  )
+  );
 }

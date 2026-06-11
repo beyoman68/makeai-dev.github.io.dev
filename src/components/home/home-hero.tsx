@@ -12,11 +12,9 @@ import { solutionNav } from "@/lib/nav-config";
  */
 
 const TYPEWRITER_MIDDLE = [
-  "모델 드리프트 실시간 감지",
-  "예측 정확도 자동 모니터링",
-  "자동 재학습 및 배포",
-  "시계열 데이터 특화 분석",
-  "현장 AI 모델 운영 자동화",
+  "자동 드리프트 감지",
+  "완전 자동화 파이프라인",
+  "투명한 모델 관리",
 ] as const;
 
 function HomeHeroTypewriter({
@@ -350,7 +348,7 @@ export function HomeHero() {
               e.currentTarget.style.color = secondaryBtn.color;
             }}
           >
-            도입문의
+            도입 문의
           </button>
         </motion.div>
 
