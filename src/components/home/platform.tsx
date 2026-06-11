@@ -3046,6 +3046,128 @@ function DemoSection({
                   </div>
                   <div
                     style={{
+                      background: bg3,
+                      border: `1px solid ${border2}`,
+                      borderRadius: 10,
+                      overflow: "hidden",
+                    }}
+                  >
+                    <table
+                      style={{
+                        width: "100%",
+                        borderCollapse: "collapse",
+                        fontSize: "0.8rem",
+                      }}
+                    >
+                      <thead>
+                        <tr>
+                          {[
+                            "모델",
+                            "타입",
+                            "세대",
+                            "F1",
+                            "앙상블 포함",
+                          ].map((h) => (
+                            <th
+                              key={h}
+                              style={{
+                                color: textMuted,
+                                fontSize: "0.7rem",
+                                textTransform: "uppercase",
+                                letterSpacing: "0.5px",
+                                padding: "0.5rem 0.8rem",
+                                borderBottom: `1px solid ${border2}`,
+                                textAlign: "left",
+                              }}
+                            >
+                              {h}
+                            </th>
+                          ))}
+                        </tr>
+                      </thead>
+                      <tbody>
+                        {[
+                          {
+                            model: "evo_17794...",
+                            type: "FFN",
+                            gen: "3세대 / Pop 30",
+                            f1: "0.489",
+                            f1Color: C.teal,
+                            included: true,
+                          },
+                          {
+                            model: "evo_17793...",
+                            type: "XGBoost",
+                            gen: "3세대 / Pop 30",
+                            f1: "0.461",
+                            f1Color: C.blue,
+                            included: true,
+                          },
+                          {
+                            model: "evo_17790...",
+                            type: "LSTM",
+                            gen: "2세대 / Pop 10",
+                            f1: "0.421",
+                            f1Color: palette.body,
+                            included: false,
+                          },
+                          {
+                            model: "evo_17788...",
+                            type: "Transformer",
+                            gen: "3세대 / Pop 30",
+                            f1: "0.453",
+                            f1Color: C.purple,
+                            included: true,
+                          },
+                        ].map((row) => (
+                          <tr key={row.model}>
+                            <td
+                              style={{
+                                padding: "0.5rem 0.8rem",
+                                color: palette.body,
+                              }}
+                            >
+                              {row.model}
+                            </td>
+                            <td
+                              style={{
+                                padding: "0.5rem 0.8rem",
+                                color: palette.body,
+                              }}
+                            >
+                              {row.type}
+                            </td>
+                            <td
+                              style={{
+                                padding: "0.5rem 0.8rem",
+                                color: palette.body,
+                              }}
+                            >
+                              {row.gen}
+                            </td>
+                            <td
+                              style={{
+                                padding: "0.5rem 0.8rem",
+                                color: row.f1Color,
+                                fontWeight: 700,
+                              }}
+                            >
+                              {row.f1}
+                            </td>
+                            <td style={{ padding: "0.5rem 0.8rem" }}>
+                              {row.included ? (
+                                <span style={{ color: C.teal }}>✓ 포함</span>
+                              ) : (
+                                <span style={{ color: textMuted }}>제외</span>
+                              )}
+                            </td>
+                          </tr>
+                        ))}
+                      </tbody>
+                    </table>
+                  </div>
+                  <div
+                    style={{
                       background: "rgba(0,212,170,0.06)",
                       border: "1px solid rgba(0,212,170,0.15)",
                       borderRadius: 8,
