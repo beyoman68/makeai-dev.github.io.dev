@@ -8,10 +8,9 @@ export const researchHref = "/research" as const;
 /** Solution — homepage platform section, no dropdown. */
 export const solutionHref = "/solution" as const;
 
-/** About → `/company/about` (top of page). Page still exposes `#about-us` | `#history` for deep links. No `#career` here. Career: `/company/career`. */
+/** About → homepage `#about-us` section. */
 export const companyNav = [
-  { label: "About", href: "/company/about" },
-  { label: "Career", href: "/company/career" },
+  { label: "About", href: "/#about-us" },
 ] as const;
 
 export const productNav = [

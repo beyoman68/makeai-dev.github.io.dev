@@ -7,7 +7,7 @@ import {
   footerContact,
   productNav,
   // researchHref, // re-enable with Research footer link below
-  // solutionNav, // re-enable with Solution column below
+  solutionNav,
 } from "@/lib/nav-config";
 import { phoneToTelHref } from "@/lib/utils";
 
@@ -45,10 +45,10 @@ export function SiteFooter() {
   return (
     <footer id="site-footer" className="border-t border-border bg-muted/30">
       <div className="mx-auto max-w-6xl px-4 py-12 sm:px-6 lg:px-8">
-        <div className="grid grid-cols-1 gap-10 gap-y-10 md:grid-cols-2 lg:grid-cols-4">
+        <div className="grid grid-cols-1 gap-10 gap-y-10 md:grid-cols-2 lg:grid-cols-5">
           <FooterColumn title="Company" items={companyNav} />
+          <FooterColumn title="Solution" items={solutionNav} />
           <FooterColumn title="Products" items={productNav} />
-          {/* <FooterColumn title="Solution" items={solutionNav} /> */}
           {/* Research — temporarily hidden from footer; `/research` route remains.
           <div>
             <h2 className="mb-3 text-sm font-semibold tracking-wide text-foreground">
