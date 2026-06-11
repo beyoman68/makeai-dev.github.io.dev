@@ -803,7 +803,7 @@ function CaseStudySection({
   isDark: boolean;
 }) {
   const reduceMotion = useReducedMotion() ?? false;
-  const sectionBg = isDark ? "#0a0e1a" : "#f8fafc";
+  const sectionBg = isDark ? "#111111" : "#ffffff";
   const bg2 = isDark ? "#111827" : "#f1f5f9";
   const bg3 = isDark ? "#1a2234" : "#e8edf5";
   const border2 = isDark ? "#1e3050" : "rgba(0,0,0,0.06)";
@@ -1860,7 +1860,7 @@ function DemoSection({
   isDark: boolean;
 }) {
   const [activeTab, setActiveTab] = useState<DemoTab>("collect");
-  const sectionBg = isDark ? "#111827" : "#f1f5f9";
+  const sectionBg = isDark ? "#111111" : "#ffffff";
   const bg3 = isDark ? "#1a2234" : "#e8edf5";
   const border2 = isDark ? "#1e3050" : "rgba(0,0,0,0.06)";
   const borderY = isDark ? "rgba(255,255,255,0.06)" : "rgba(0,0,0,0.08)";
@@ -4006,7 +4006,7 @@ function OptionsSection({
   isDark: boolean;
 }) {
   const reduceMotion = useReducedMotion() ?? false;
-  const sectionBg = isDark ? "#0a0e1a" : "#ffffff";
+  const sectionBg = isDark ? "#111111" : "#ffffff";
   const bg3 = isDark ? "#1a2234" : "#e8edf5";
   const border2 = isDark ? "#1e3050" : "rgba(0,0,0,0.06)";
   const borderY = isDark ? "rgba(255,255,255,0.06)" : "rgba(0,0,0,0.08)";
@@ -4363,7 +4363,7 @@ function ArchitectureSection({
   palette: PlatformPalette;
   isDark: boolean;
 }) {
-  const sectionBg = isDark ? "#111827" : "#f1f5f9";
+  const sectionBg = isDark ? "#111111" : "#ffffff";
   const borderY = isDark ? "rgba(255,255,255,0.06)" : "rgba(0,0,0,0.08)";
   const steps = [
     { icon: "📥", title: "데이터 수집", desc: "다중 소스 자동 수집" },
@@ -4488,7 +4488,7 @@ function UseCasesSection({
   isDark: boolean;
 }) {
   const reduceMotion = useReducedMotion() ?? false;
-  const sectionBg = isDark ? "#0a0e1a" : "#ffffff";
+  const sectionBg = isDark ? "#111111" : "#ffffff";
   const borderY = isDark ? "rgba(255,255,255,0.06)" : "rgba(0,0,0,0.08)";
 
   const cases = [
