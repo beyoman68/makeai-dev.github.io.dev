@@ -843,7 +843,7 @@ function CaseStudySection({
     {
       item: "예측 평균 (°C)",
       transformer: "23.54°C",
-      ffn: "22.91°C",
+      ffn: <span style={{ color: palette.body, fontWeight: 400 }}>22.91°C</span>,
       note: "Transformer는 후반부(따뜻한 구간)만 예측해 평균 ↑",
       bad: false,
     },
@@ -870,8 +870,8 @@ function CaseStudySection({
     },
     {
       item: "추세",
-      transformer: "▲ 상승",
-      ffn: "▲ 상승",
+      transformer: <span style={{ color: C.teal }}>▲ 상승</span>,
+      ffn: <span style={{ color: C.teal }}>▲ 상승</span>,
       note: "두 모델 모두 동일한 계절 방향성 포착 ✓",
       bad: false,
     },
