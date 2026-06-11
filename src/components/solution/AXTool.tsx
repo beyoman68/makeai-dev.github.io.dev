@@ -1441,12 +1441,19 @@ function ProcessSection({
           display: "flex",
           flexDirection: "column",
           gap: "0.6rem",
+          alignSelf: "stretch",
         }}
       >
         {WORKFLOW_TARGETS.map((target) => (
           <div
             key={target}
-            style={{ display: "flex", alignItems: "center", gap: "0.45rem" }}
+            style={{
+              display: "flex",
+              alignItems: "center",
+              gap: "0.45rem",
+              flex: 1,
+              minHeight: 0,
+            }}
           >
             <div
               style={{
@@ -1461,6 +1468,11 @@ function ProcessSection({
                 textAlign: "center",
                 lineHeight: 1.4,
                 minWidth: 90,
+                flex: 1,
+                height: "100%",
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "center",
               }}
             >
               {target}
@@ -1497,9 +1509,8 @@ function ProcessSection({
         <div
           style={{
             writingMode: "vertical-rl",
-            textOrientation: "mixed",
-            transform: "rotate(180deg)",
-            fontSize: "0.7rem",
+            textOrientation: "upright",
+            fontSize: "clamp(0.82rem, 1.2vw, 0.95rem)",
             fontWeight: 600,
             color: palette.muted,
             letterSpacing: "0.1em",
