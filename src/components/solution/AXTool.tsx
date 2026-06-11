@@ -20,12 +20,6 @@ const FRAMEWORK_OUTPUTS = [
 
 const FEATURES = [
   {
-    icon: "🌐",
-    title: "글로벌 기준 측정 지표",
-    description:
-      "EU·OECD·UNESCO·MIT 등 국제 표준 프레임워크를 기반으로 신뢰할 수 있는 측정 지표를 제공합니다.",
-  },
-  {
     icon: "📊",
     title: "5개 수준 역량 차원",
     description:
@@ -38,16 +32,16 @@ const FEATURES = [
       "개인·조직·기관 등 다양한 수준을 아우르는 체계적 평가로 전사적 AX 수준을 파악합니다.",
   },
   {
+    icon: "🌐",
+    title: "글로벌 기준 측정 지표",
+    description:
+      "EU·OECD·UNESCO·MIT 등 국제 표준 프레임워크를 기반으로 신뢰할 수 있는 측정 지표를 제공합니다.",
+  },
+  {
     icon: "🇰🇷",
     title: "한국형 리더십/경영 평가",
     description:
       "국내 조직 문화와 경영 환경을 반영한 한국형 리더십·경영 평가 지표를 함께 제공합니다.",
-  },
-  {
-    icon: "🛠️",
-    title: "지표 통합 및 자체 지표 개발",
-    description:
-      "기존 글로벌 지표를 통합하고, 조직 특성에 맞춘 자체 지표를 개발·확장할 수 있습니다.",
   },
 ] as const;
 
@@ -411,7 +405,7 @@ function AssessDetail({ palette }: { palette: Palette }) {
         <div style={{ display: "flex", alignItems: "center", gap: 10 }}>
           <div
             style={{
-              background: "#22c55e",
+              background: "#7c3aed",
               color: "#fff",
               padding: "4px 14px",
               borderRadius: 999,
@@ -1763,7 +1757,7 @@ export function AXTool() {
         >
           핵심 특징
         </div>
-        <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
+        <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-2">
           {FEATURES.map((feature, i) => (
             <FeatureCard
               key={feature.title}
