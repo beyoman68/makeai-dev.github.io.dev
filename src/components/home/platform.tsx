@@ -1843,13 +1843,13 @@ type DemoTab =
   | "registry";
 
 const DEMO_TABS: { key: DemoTab; label: string }[] = [
-  { key: "collect", label: "① 📥 데이터 수집" },
-  { key: "feature", label: "② 🔧 피처 엔지니어링" },
-  { key: "train", label: "③ 🧬 진화 학습" },
-  { key: "ensemble", label: "④ 🔀 앙상블 구성" },
-  { key: "predict", label: "⑤ 📈 Production 예측" },
-  { key: "monitor", label: "⑥ 🚨 드리프트 모니터링" },
-  { key: "registry", label: "⑦ 🗂️ 모델 레지스트리" },
+  { key: "collect", label: "① 데이터 수집" },
+  { key: "feature", label: "② 피처 엔지니어링" },
+  { key: "train", label: "③ 진화 학습" },
+  { key: "ensemble", label: "④ 앙상블 구성" },
+  { key: "predict", label: "⑤ Production 예측" },
+  { key: "monitor", label: "⑥ 드리프트 모니터링" },
+  { key: "registry", label: "⑦ 모델 레지스트리" },
 ];
 
 function DemoSection({
