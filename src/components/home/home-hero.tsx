@@ -222,7 +222,9 @@ export function HomeHero() {
             AI 모델이 현장에서 무너지는 이유,
           </span>
           <br />
-          <span style={{ color: h1Muted }}>Make AI가 해결합니다.</span>
+          <span style={{ color: h1Muted }}>
+            <span style={{ color: "#00d4aa" }}>Make AI</span>가 해결합니다.
+          </span>
         </motion.h1>
 
         <motion.p
