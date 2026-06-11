@@ -2060,7 +2060,7 @@ function DemoSection({
                   display: "inline-block",
                 }}
               />
-              {DEMO_TABS.find((t) => t.key === activeTab)?.label.slice(3)}
+              {DEMO_TABS.find((t) => t.key === activeTab)?.label.replace(/^.\s/, "")}
             </div>
             <span style={{ fontSize: "0.75rem", color: textMuted }}>
               {activeTab === "collect" &&
