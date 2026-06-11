@@ -420,7 +420,7 @@ export function HomeHero() {
         }}
         className="absolute bottom-8 left-1/2 flex -translate-x-1/2 cursor-pointer flex-col items-center"
         style={{ gap: 5 }}
-        onClick={() => scrollTo("#home-products")}
+        onClick={() => scrollTo("#problem")}
       >
         <span
           style={{ fontSize: 10, color: scrollMuted, letterSpacing: "0.08em" }}
