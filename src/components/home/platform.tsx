@@ -2050,6 +2050,24 @@ function DemoSection({
     position: "relative" as const,
   };
 
+  const chartAreaWithTitleStyle = {
+    ...chartAreaStyle,
+    height: "auto" as const,
+    display: "flex" as const,
+    flexDirection: "column" as const,
+    gap: "0.75rem",
+  };
+
+  const chartTitleStyle = {
+    fontSize: "0.65rem",
+    color: textMuted,
+  };
+
+  const chartCanvasWrapStyle = {
+    position: "relative" as const,
+    height: 168,
+  };
+
   return (
     <section
       id="demo"
@@ -2292,40 +2310,33 @@ function DemoSection({
                       </div>
                     ))}
                   </div>
-                  <div style={chartAreaStyle}>
-                    <div
-                      style={{
-                        fontSize: "0.65rem",
-                        color: textMuted,
-                        position: "absolute",
-                        top: 12,
-                        left: 12,
-                        zIndex: 1,
-                      }}
-                    >
+                  <div style={chartAreaWithTitleStyle}>
+                    <div style={chartTitleStyle}>
                       삼성전자(005930) 종가 — 수집된 원시 OHLCV
                     </div>
-                    <DemoLineChart
-                      id={`collect-${tabKey}`}
-                      buildData={() => {
-                        const n = 60;
-                        const labels = Array.from({ length: n }, () => "");
-                        const price = randDemoArr(n, 180, 25);
-                        return {
-                          labels,
-                          datasets: [
-                            {
-                              data: price,
-                              borderColor: "#4f9cf9",
-                              borderWidth: 2,
-                              pointRadius: 0,
-                              fill: false,
-                              tension: 0.4,
-                            },
-                          ],
-                        };
-                      }}
-                    />
+                    <div style={chartCanvasWrapStyle}>
+                      <DemoLineChart
+                        id={`collect-${tabKey}`}
+                        buildData={() => {
+                          const n = 60;
+                          const labels = Array.from({ length: n }, () => "");
+                          const price = randDemoArr(n, 180, 25);
+                          return {
+                            labels,
+                            datasets: [
+                              {
+                                data: price,
+                                borderColor: "#4f9cf9",
+                                borderWidth: 2,
+                                pointRadius: 0,
+                                fill: false,
+                                tension: 0.4,
+                              },
+                            ],
+                          };
+                        }}
+                      />
+                    </div>
                   </div>
                   <div
                     style={{
@@ -2502,50 +2513,43 @@ function DemoSection({
                       </div>
                     ))}
                   </div>
-                  <div style={chartAreaStyle}>
-                    <div
-                      style={{
-                        fontSize: "0.65rem",
-                        color: textMuted,
-                        position: "absolute",
-                        top: 12,
-                        left: 12,
-                        zIndex: 1,
-                      }}
-                    >
+                  <div style={chartAreaWithTitleStyle}>
+                    <div style={chartTitleStyle}>
                       피처 중요도 Top 10 (XGBoost 기준)
                     </div>
-                    <DemoBarChart
-                      id={`feature-${tabKey}`}
-                      buildData={() => ({
-                        labels: [
-                          "RSI_14",
-                          "MACD_signal",
-                          "Volume_20d",
-                          "BB_upper",
-                          "Return_5d",
-                          "Regime_HMM",
-                          "ATR_14",
-                          "Lag_1",
-                          "Std_20d",
-                          "Trend",
-                        ],
-                        data: [
-                          0.182, 0.154, 0.138, 0.121, 0.108, 0.097, 0.085,
-                          0.071, 0.063, 0.058,
-                        ],
-                        colors: [
-                          0.182, 0.154, 0.138, 0.121, 0.108, 0.097, 0.085,
-                          0.071, 0.063, 0.058,
-                        ].map((v) =>
-                          v > 0.15
-                            ? "#00d4aa"
-                            : v > 0.1
-                              ? "#4f9cf9"
-                              : "#64748b",
-                        ),
-                      })}
-                    />
+                    <div style={chartCanvasWrapStyle}>
+                      <DemoBarChart
+                        id={`feature-${tabKey}`}
+                        buildData={() => ({
+                          labels: [
+                            "RSI_14",
+                            "MACD_signal",
+                            "Volume_20d",
+                            "BB_upper",
+                            "Return_5d",
+                            "Regime_HMM",
+                            "ATR_14",
+                            "Lag_1",
+                            "Std_20d",
+                            "Trend",
+                          ],
+                          data: [
+                            0.182, 0.154, 0.138, 0.121, 0.108, 0.097, 0.085,
+                            0.071, 0.063, 0.058,
+                          ],
+                          colors: [
+                            0.182, 0.154, 0.138, 0.121, 0.108, 0.097, 0.085,
+                            0.071, 0.063, 0.058,
+                          ].map((v) =>
+                            v > 0.15
+                              ? "#00d4aa"
+                              : v > 0.1
+                                ? "#4f9cf9"
+                                : "#64748b",
+                          ),
+                        })}
+                      />
+                    </div>
                   </div>
                   <div
                     style={{
@@ -2765,68 +2769,61 @@ function DemoSection({
                       현재: 세대 2 — Pool 672 서브셋 샘플링·학습 중...
                     </div>
                   </div>
-                  <div style={chartAreaStyle}>
-                    <div
-                      style={{
-                        fontSize: "0.65rem",
-                        color: textMuted,
-                        position: "absolute",
-                        top: 12,
-                        left: 12,
-                        zIndex: 1,
-                      }}
-                    >
+                  <div style={chartAreaWithTitleStyle}>
+                    <div style={chartTitleStyle}>
                       Train Loss (실선) / Val Loss (점선) — Epoch별 수렴 곡선
                     </div>
-                    <DemoLineChartGrid
-                      id={`train-${tabKey}`}
-                      buildData={() => {
-                        const n = 50;
-                        const labels = Array.from({ length: n }, (_, i) =>
-                          String(i),
-                        );
-                        const loss = Array.from(
-                          { length: n },
-                          (_, i) =>
-                            +(
-                              0.82 * Math.exp(-i * 0.07) +
-                              0.042 +
-                              Math.random() * 0.018
-                            ).toFixed(4),
-                        );
-                        const valLoss = Array.from(
-                          { length: n },
-                          (_, i) =>
-                            +(
-                              0.88 * Math.exp(-i * 0.065) +
-                              0.055 +
-                              Math.random() * 0.025
-                            ).toFixed(4),
-                        );
-                        return {
-                          labels,
-                          datasets: [
-                            {
-                              data: loss,
-                              borderColor: "#00d4aa",
-                              borderWidth: 2,
-                              pointRadius: 0,
-                              fill: false,
-                              tension: 0.4,
-                            },
-                            {
-                              data: valLoss,
-                              borderColor: "#fbbf24",
-                              borderWidth: 1.5,
-                              pointRadius: 0,
-                              fill: false,
-                              tension: 0.4,
-                              borderDash: [3, 3],
-                            },
-                          ],
-                        };
-                      }}
-                    />
+                    <div style={chartCanvasWrapStyle}>
+                      <DemoLineChartGrid
+                        id={`train-${tabKey}`}
+                        buildData={() => {
+                          const n = 50;
+                          const labels = Array.from({ length: n }, (_, i) =>
+                            String(i),
+                          );
+                          const loss = Array.from(
+                            { length: n },
+                            (_, i) =>
+                              +(
+                                0.82 * Math.exp(-i * 0.07) +
+                                0.042 +
+                                Math.random() * 0.018
+                              ).toFixed(4),
+                          );
+                          const valLoss = Array.from(
+                            { length: n },
+                            (_, i) =>
+                              +(
+                                0.88 * Math.exp(-i * 0.065) +
+                                0.055 +
+                                Math.random() * 0.025
+                              ).toFixed(4),
+                          );
+                          return {
+                            labels,
+                            datasets: [
+                              {
+                                data: loss,
+                                borderColor: "#00d4aa",
+                                borderWidth: 2,
+                                pointRadius: 0,
+                                fill: false,
+                                tension: 0.4,
+                              },
+                              {
+                                data: valLoss,
+                                borderColor: "#fbbf24",
+                                borderWidth: 1.5,
+                                pointRadius: 0,
+                                fill: false,
+                                tension: 0.4,
+                                borderDash: [3, 3],
+                              },
+                            ],
+                          };
+                        }}
+                      />
+                    </div>
                   </div>
                   <div
                     style={{
@@ -3414,74 +3411,67 @@ function DemoSection({
                       </div>
                     ))}
                   </div>
-                  <div style={chartAreaStyle}>
-                    <div
-                      style={{
-                        fontSize: "0.65rem",
-                        color: textMuted,
-                        position: "absolute",
-                        top: 12,
-                        left: 12,
-                        zIndex: 1,
-                      }}
-                    >
+                  <div style={chartAreaWithTitleStyle}>
+                    <div style={chartTitleStyle}>
                       실제 vs 예측 (최근 30일 + 5일 선행)
                     </div>
-                    <DemoLineChart
-                      id={`predict-${tabKey}`}
-                      buildData={() => {
-                        const hist = 30;
-                        const future = 5;
-                        const n = hist + future;
-                        const labels = Array.from({ length: n }, () => "");
-                        const actual = randDemoArr(hist, 200, 18);
-                        const predHist = actual.map(
-                          (v) => +(v + (Math.random() - 0.5) * 3).toFixed(2),
-                        );
-                        const lastVal = actual[actual.length - 1];
-                        const predFuture = [
-                          lastVal * 1.0123,
-                          lastVal * 1.0213,
-                          lastVal * 1.0197,
-                          lastVal * 1.0261,
-                          lastVal * 1.0364,
-                        ].map((v) => +v.toFixed(2));
-                        return {
-                          labels,
-                          datasets: [
-                            {
-                              data: [...actual, ...Array(future).fill(null)],
-                              borderColor: "#94a3b8",
-                              borderWidth: 1.5,
-                              pointRadius: 0,
-                              fill: false,
-                              tension: 0.4,
-                            },
-                            {
-                              data: [...predHist, ...Array(future).fill(null)],
-                              borderColor: "#00d4aa",
-                              borderWidth: 1.5,
-                              pointRadius: 0,
-                              fill: false,
-                              tension: 0.4,
-                              borderDash: [2, 2],
-                            },
-                            {
-                              data: [
-                                ...Array(hist - 1).fill(null),
-                                actual[hist - 1],
-                                ...predFuture,
-                              ],
-                              borderColor: "#00d4aa",
-                              borderWidth: 2.5,
-                              pointRadius: 0,
-                              fill: false,
-                              tension: 0.3,
-                            },
-                          ],
-                        };
-                      }}
-                    />
+                    <div style={chartCanvasWrapStyle}>
+                      <DemoLineChart
+                        id={`predict-${tabKey}`}
+                        buildData={() => {
+                          const hist = 30;
+                          const future = 5;
+                          const n = hist + future;
+                          const labels = Array.from({ length: n }, () => "");
+                          const actual = randDemoArr(hist, 200, 18);
+                          const predHist = actual.map(
+                            (v) => +(v + (Math.random() - 0.5) * 3).toFixed(2),
+                          );
+                          const lastVal = actual[actual.length - 1];
+                          const predFuture = [
+                            lastVal * 1.0123,
+                            lastVal * 1.0213,
+                            lastVal * 1.0197,
+                            lastVal * 1.0261,
+                            lastVal * 1.0364,
+                          ].map((v) => +v.toFixed(2));
+                          return {
+                            labels,
+                            datasets: [
+                              {
+                                data: [...actual, ...Array(future).fill(null)],
+                                borderColor: "#94a3b8",
+                                borderWidth: 1.5,
+                                pointRadius: 0,
+                                fill: false,
+                                tension: 0.4,
+                              },
+                              {
+                                data: [...predHist, ...Array(future).fill(null)],
+                                borderColor: "#00d4aa",
+                                borderWidth: 1.5,
+                                pointRadius: 0,
+                                fill: false,
+                                tension: 0.4,
+                                borderDash: [2, 2],
+                              },
+                              {
+                                data: [
+                                  ...Array(hist - 1).fill(null),
+                                  actual[hist - 1],
+                                  ...predFuture,
+                                ],
+                                borderColor: "#00d4aa",
+                                borderWidth: 2.5,
+                                pointRadius: 0,
+                                fill: false,
+                                tension: 0.3,
+                              },
+                            ],
+                          };
+                        }}
+                      />
+                    </div>
                   </div>
                   <div
                     style={{
@@ -3631,97 +3621,81 @@ function DemoSection({
                     marginBottom: "1rem",
                   }}
                 >
-                  <div style={chartAreaStyle}>
-                    <div
-                      style={{
-                        fontSize: "0.65rem",
-                        color: textMuted,
-                        position: "absolute",
-                        top: 12,
-                        left: 12,
-                        zIndex: 1,
-                      }}
-                    >
+                  <div style={chartAreaWithTitleStyle}>
+                    <div style={chartTitleStyle}>
                       Drift Score 추이 (30일)
                     </div>
-                    <DemoLineChart
-                      id={`monitor-drift-${tabKey}`}
-                      buildData={() => {
-                        const n = 30;
-                        const labels = Array.from({ length: n }, () => "");
-                        const drift = Array.from(
-                          { length: n },
-                          (_, i) =>
-                            +(0.04 + i * 0.005 + Math.random() * 0.018).toFixed(
-                              3,
-                            ),
-                        );
-                        const threshold = Array(n).fill(0.2);
-                        return {
-                          labels,
-                          datasets: [
-                            {
-                              data: drift,
-                              borderColor: "#fbbf24",
-                              borderWidth: 2,
-                              pointRadius: 0,
-                              fill: false,
-                              tension: 0.4,
-                            },
-                            {
-                              data: threshold,
-                              borderColor: "#f87171",
-                              borderWidth: 1,
-                              pointRadius: 0,
-                              fill: false,
-                              tension: 0,
-                            },
-                          ],
-                        };
-                      }}
-                    />
-                  </div>
-                  <div style={chartAreaStyle}>
-                    <div
-                      style={{
-                        fontSize: "0.65rem",
-                        color: textMuted,
-                        position: "absolute",
-                        top: 12,
-                        left: 12,
-                        zIndex: 1,
-                      }}
-                    >
-                      피처별 PSI 점수
+                    <div style={chartCanvasWrapStyle}>
+                      <DemoLineChart
+                        id={`monitor-drift-${tabKey}`}
+                        buildData={() => {
+                          const n = 30;
+                          const labels = Array.from({ length: n }, () => "");
+                          const drift = Array.from(
+                            { length: n },
+                            (_, i) =>
+                              +(0.04 + i * 0.005 + Math.random() * 0.018).toFixed(
+                                3,
+                              ),
+                          );
+                          const threshold = Array(n).fill(0.2);
+                          return {
+                            labels,
+                            datasets: [
+                              {
+                                data: drift,
+                                borderColor: "#fbbf24",
+                                borderWidth: 2,
+                                pointRadius: 0,
+                                fill: false,
+                                tension: 0.4,
+                              },
+                              {
+                                data: threshold,
+                                borderColor: "#f87171",
+                                borderWidth: 1,
+                                pointRadius: 0,
+                                fill: false,
+                                tension: 0,
+                              },
+                            ],
+                          };
+                        }}
+                      />
                     </div>
-                    <DemoBarChart
-                      id={`monitor-psi-${tabKey}`}
-                      buildData={() => {
-                        const psi = [
-                          0.23, 0.19, 0.14, 0.11, 0.09, 0.08, 0.06, 0.04,
-                        ];
-                        return {
-                          labels: [
-                            "RSI_14",
-                            "Volume_20d",
-                            "MACD",
-                            "BB_upper",
-                            "Return_5d",
-                            "Regime",
-                            "ATR",
-                            "Lag_1",
-                          ],
-                          data: psi,
-                          colors: psi.map((v) =>
-                            v >= 0.2
-                              ? "#f87171"
-                              : v >= 0.15
-                                ? "#fbbf24"
-                                : "#00d4aa",
-                          ),
-                        };
-                      }}
-                    />
+                  </div>
+                  <div style={chartAreaWithTitleStyle}>
+                    <div style={chartTitleStyle}>피처별 PSI 점수</div>
+                    <div style={chartCanvasWrapStyle}>
+                      <DemoBarChart
+                        id={`monitor-psi-${tabKey}`}
+                        buildData={() => {
+                          const psi = [
+                            0.23, 0.19, 0.14, 0.11, 0.09, 0.08, 0.06, 0.04,
+                          ];
+                          return {
+                            labels: [
+                              "RSI_14",
+                              "Volume_20d",
+                              "MACD",
+                              "BB_upper",
+                              "Return_5d",
+                              "Regime",
+                              "ATR",
+                              "Lag_1",
+                            ],
+                            data: psi,
+                            colors: psi.map((v) =>
+                              v >= 0.2
+                                ? "#f87171"
+                                : v >= 0.15
+                                  ? "#fbbf24"
+                                  : "#00d4aa",
+                            ),
+                          };
+                        }}
+                      />
+                    </div>
                   </div>
                 </div>
                 <div
