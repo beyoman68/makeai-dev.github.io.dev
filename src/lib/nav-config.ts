@@ -1,6 +1,6 @@
 /** IA-driven nav targets; paths for future routing (same-origin). */
 
-export const CONTACT_MAIL = "jhcho@makeai.cloud" as const;
+export const CONTACT_MAIL = "jhcho@www.makeai.cloud " as const;
 
 /** Global Research hub — single page, no dropdown. */
 export const researchHref = "/research" as const;

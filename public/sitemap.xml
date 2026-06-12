@@ -1,61 +1,61 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
-    <loc>https://makeai.cloud/</loc>
+    <loc>https://www.makeai.cloud /</loc>
     <lastmod>2026-04-24</lastmod>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
   </url>
   <url>
-    <loc>https://makeai.cloud/company/about</loc>
+    <loc>https://www.makeai.cloud /company/about</loc>
     <lastmod>2026-04-24</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.85</priority>
   </url>
   <url>
-    <loc>https://makeai.cloud/company/career</loc>
+    <loc>https://www.makeai.cloud /company/career</loc>
     <lastmod>2026-04-24</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.75</priority>
   </url>
   <url>
-    <loc>https://makeai.cloud/products/data-platform</loc>
+    <loc>https://www.makeai.cloud /products/data-platform</loc>
     <lastmod>2026-04-24</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.85</priority>
   </url>
   <url>
-    <loc>https://makeai.cloud/products/rag-platform</loc>
+    <loc>https://www.makeai.cloud /products/rag-platform</loc>
     <lastmod>2026-04-24</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.85</priority>
   </url>
   <url>
-    <loc>https://makeai.cloud/products/chat-platform</loc>
+    <loc>https://www.makeai.cloud /products/chat-platform</loc>
     <lastmod>2026-04-24</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.85</priority>
   </url>
   <url>
-    <loc>https://makeai.cloud/products/email-agent</loc>
+    <loc>https://www.makeai.cloud /products/email-agent</loc>
     <lastmod>2026-04-24</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.85</priority>
   </url>
   <url>
-    <loc>https://makeai.cloud/products/ai-translator</loc>
+    <loc>https://www.makeai.cloud /products/ai-translator</loc>
     <lastmod>2026-04-24</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.85</priority>
   </url>
   <url>
-    <loc>https://makeai.cloud/products/docu-generator</loc>
+    <loc>https://www.makeai.cloud /products/docu-generator</loc>
     <lastmod>2026-04-24</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.85</priority>
   </url>
   <url>
-    <loc>https://makeai.cloud/research</loc>
+    <loc>https://www.makeai.cloud /research</loc>
     <lastmod>2026-04-24</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
