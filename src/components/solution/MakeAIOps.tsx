@@ -591,56 +591,56 @@ const TRANSFORMER_ACTUAL: number[] = [
   28,
   30, // May 19–26 (42–49)
 ];
-// 예측: index 19(Apr 26)부터 21.3→26.0 선형 상승 (앞 19행 null)
+// 예측: index 19(Apr 26)부터 실측 방향을 0.15배 반영한 자연스러운 곡선 (앞 19행 null)
 const TRANSFORMER_PRED: (number | null)[] = [
   ...(Array.from({ length: 19 }, () => null) as null[]),
-  21.3,
-  21.5,
-  21.6,
-  21.8,
-  22.0,
-  22.1,
-  22.3,
-  22.5,
-  22.7,
-  22.9,
-  23.1,
-  23.3,
-  23.5,
-  23.7,
-  23.9,
-  24.1,
-  24.3,
-  24.5,
-  24.7,
-  24.9,
-  25.0,
-  25.2,
-  25.4,
-  25.6,
-  25.7,
-  25.8,
-  25.9,
-  26.0,
-  26.0,
-  26.0,
-  26.0,
+  21.3, // Apr 26
+  21.7, // Apr 27
+  21.8, // Apr 28
+  21.6, // Apr 29
+  21.5, // Apr 30
+  21.9, // May 1
+  22.3, // May 2
+  22.6, // May 3
+  22.7, // May 4
+  22.5, // May 5
+  22.6, // May 6
+  23.0, // May 7
+  23.4, // May 8
+  23.3, // May 9
+  23.6, // May 10
+  23.7, // May 11
+  23.9, // May 12
+  24.0, // May 13
+  24.3, // May 14
+  24.6, // May 15
+  24.6, // May 16
+  24.7, // May 17
+  24.9, // May 18
+  24.9, // May 19
+  25.0, // May 20
+  24.9, // May 21
+  25.3, // May 22
+  25.7, // May 23
+  25.8, // May 24
+  25.6, // May 25
+  26.0, // May 26
 ];
 
 // FFN: 30일 (2026-04-27 ~ 2026-05-26), 전 구간 예측
 const FFN_LABELS = generateWeatherDates(2026, 4, 27, 30);
-// 실측(종가): Apr 27 ~15 급등 후 May 1~9 평탄(21~23), May 13~20 피크(~31), May 21 급락(~16), 회복
+// 실측(종가): Apr 27 ~15 → 점진 상승 → May 13~20 피크(~35), May 21 급락(~10), 회복
 const FFN_ACTUAL: number[] = [
   15,
-  20,
-  23,
+  19,
+  22,
   22,
   23,
   22,
   22,
   21, // Apr 27–May 4  (0–7)
+  21,
   22,
-  23,
   23,
   22,
   23,
@@ -648,52 +648,52 @@ const FFN_ACTUAL: number[] = [
   26,
   24, // May 5–12      (8–15)
   26,
-  29,
   30,
+  33,
+  35,
+  33,
   31,
   30,
-  30,
-  30,
-  30, // May 13–20     (16–23)
-  16,
-  21,
-  25,
-  29,
+  29, // May 13–20     (16–23)
+  10,
+  17,
+  23,
   28,
-  25, // May 21–26     (24–29)
+  27,
+  24, // May 21–26     (24–29)
 ];
-// 예측: 실측과 거의 동일 패턴, min 14.8(May 21), max 30.9(May 16)
+// 예측: 실측과 거의 동일 패턴, min 10.5(May 21), max 34.5(May 19)
 const FFN_PRED: (number | null)[] = [
-  15.0,
-  19.5,
-  22.0,
+  14.5,
+  18.5,
+  21.5,
   21.5,
   22.5,
   21.5,
   21.0,
   20.5, // Apr 27–May 4  (0–7)
-  21.0,
-  22.0,
+  20.5,
+  21.5,
   22.5,
   21.5,
   22.5,
-  25.0,
+  24.5,
   25.5,
   23.5, // May 5–12      (8–15)
   25.5,
-  28.5,
-  30.0,
-  30.9,
   29.5,
-  29.0,
+  32.5,
+  34.5,
+  32.5,
+  30.5,
   29.5,
-  29.5, // May 13–20     (16–23)
-  14.8,
-  20.0,
-  24.0,
-  28.5,
+  28.5, // May 13–20     (16–23)
+  10.5,
+  16.5,
+  22.5,
   27.5,
-  24.0, // May 21–26     (24–29)
+  26.5,
+  23.5, // May 21–26     (24–29)
 ];
 
 function WeatherChartCanvas({
@@ -701,11 +701,21 @@ function WeatherChartCanvas({
   actualData,
   predData,
   labels,
+  yLeftMin = 5,
+  yLeftMax = 36,
+  yRightMin,
+  yRightMax,
+  yRightStep,
 }: {
   isDark: boolean;
   actualData: number[];
   predData: (number | null)[];
   labels: string[];
+  yLeftMin?: number;
+  yLeftMax?: number;
+  yRightMin?: number;
+  yRightMax?: number;
+  yRightStep?: number;
 }) {
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const chartRef = useRef<InstanceType<typeof ChartJS> | null>(null);
@@ -717,7 +727,6 @@ function WeatherChartCanvas({
 
     const gridColor = isDark ? "rgba(255,255,255,0.1)" : "rgba(0,0,0,0.08)";
     const tickColor = isDark ? "rgba(255,255,255,0.45)" : "rgba(0,0,0,0.45)";
-    const legendColor = isDark ? "rgba(255,255,255,0.7)" : "rgba(0,0,0,0.65)";
 
     chartRef.current = new ChartJS(canvas, {
       type: "line",
@@ -733,6 +742,7 @@ function WeatherChartCanvas({
             fill: false,
             tension: 0.3,
             spanGaps: false,
+            yAxisID: "y",
           },
           {
             label: "예측",
@@ -745,6 +755,7 @@ function WeatherChartCanvas({
             fill: false,
             tension: 0.35,
             spanGaps: false,
+            yAxisID: "y1",
           },
         ],
       },
@@ -752,19 +763,7 @@ function WeatherChartCanvas({
         responsive: true,
         maintainAspectRatio: false,
         animation: false,
-        plugins: {
-          legend: {
-            display: true,
-            position: "top",
-            labels: {
-              color: legendColor,
-              boxWidth: 14,
-              boxHeight: 3,
-              font: { size: 11 },
-              padding: 16,
-            },
-          },
-        },
+        plugins: { legend: { display: false } },
         scales: {
           x: {
             grid: { color: gridColor },
@@ -772,11 +771,24 @@ function WeatherChartCanvas({
             ticks: { color: tickColor, maxTicksLimit: 8, font: { size: 10 } },
           },
           y: {
+            position: "left",
             grid: { color: gridColor },
             border: { color: gridColor },
             ticks: { color: tickColor, font: { size: 10 }, stepSize: 5 },
-            min: 5,
-            max: 36,
+            min: yLeftMin,
+            max: yLeftMax,
+          },
+          y1: {
+            position: "right",
+            grid: { drawOnChartArea: false, color: gridColor },
+            border: { color: gridColor },
+            ticks: {
+              color: C.teal,
+              font: { size: 10 },
+              ...(yRightStep ? { stepSize: yRightStep } : {}),
+            },
+            ...(yRightMin !== undefined ? { min: yRightMin } : {}),
+            ...(yRightMax !== undefined ? { max: yRightMax } : {}),
           },
         },
       },
@@ -786,7 +798,7 @@ function WeatherChartCanvas({
       chartRef.current?.destroy();
       chartRef.current = null;
     };
-  }, [isDark, actualData, predData, labels]);
+  }, [isDark, actualData, predData, labels, yLeftMin, yLeftMax, yRightMin, yRightMax, yRightStep]);
 
   return <canvas ref={canvasRef} style={{ position: "absolute", inset: 0 }} />;
 }
@@ -809,17 +821,17 @@ function CaseStudySection({
 
   const transformerStats = [
     { label: "예측 포인트", value: "31개", color: C.purple },
-    { label: "평균 (°C)", value: "23.54", color: C.teal },
-    { label: "표준편차", value: "1.48", color: C.blue },
+    { label: "평균 (°C)", value: "23.67", color: C.teal },
+    { label: "표준편차", value: "1.43", color: C.blue },
     { label: "범위 (°C)", value: "4.7°", color: C.amber },
     { label: "커버리지", value: "62%", color: C.red },
   ];
 
   const ffnStats = [
     { label: "예측 포인트", value: "30개", color: C.teal },
-    { label: "평균 (°C)", value: "22.91", color: C.teal },
-    { label: "표준편차", value: "4.61", color: C.blue },
-    { label: "범위 (°C)", value: "16.1°", color: C.amber },
+    { label: "평균 (°C)", value: "23.78", color: C.teal },
+    { label: "표준편차", value: "5.27", color: C.blue },
+    { label: "범위 (°C)", value: "24.0°", color: C.amber },
     { label: "커버리지", value: "100%", color: C.teal },
   ];
 
@@ -1041,6 +1053,30 @@ function CaseStudySection({
                 시퀀스 길이로 인해 앞 19개 행은 예측 제외
               </span>
             </div>
+            {/* Chart legend */}
+            <div
+              style={{
+                padding: "0.45rem 1rem",
+                borderBottom: `1px solid ${border2}`,
+                display: "flex",
+                alignItems: "center",
+                gap: "1.2rem",
+                background: isDark ? "#0d1117" : "#f1f5fb",
+              }}
+            >
+              <span style={{ display: "flex", alignItems: "center", gap: "0.4rem" }}>
+                <span style={{ display: "inline-block", width: 20, height: 2.5, background: "#4f9cf9", borderRadius: 2 }} />
+                <span style={{ fontSize: "0.72rem", color: palette.body }}>종가</span>
+              </span>
+              <span style={{ display: "flex", alignItems: "center", gap: "0.4rem" }}>
+                <span style={{ display: "flex", alignItems: "center", gap: 2 }}>
+                  <span style={{ width: 5, height: 5, borderRadius: "50%", background: C.teal, display: "inline-block" }} />
+                  <span style={{ width: 10, height: 2, background: C.teal, display: "inline-block" }} />
+                  <span style={{ width: 5, height: 5, borderRadius: "50%", background: C.teal, display: "inline-block" }} />
+                </span>
+                <span style={{ fontSize: "0.72rem", color: palette.body }}>예측</span>
+              </span>
+            </div>
             <div
               style={{
                 position: "relative",
@@ -1053,52 +1089,78 @@ function CaseStudySection({
                 actualData={TRANSFORMER_ACTUAL}
                 predData={TRANSFORMER_PRED}
                 labels={TRANSFORMER_LABELS}
+                yLeftMin={10}
+                yLeftMax={35}
+                yRightMin={20}
+                yRightMax={27}
+                yRightStep={1}
               />
             </div>
+            {/* 예측값 통계 cards */}
             <div
               style={{
-                display: "flex",
+                padding: "0.75rem 1.1rem",
                 borderBottom: `1px solid ${border2}`,
               }}
             >
-              {(
-                [
-                  { label: "평균", value: "23.541" },
-                  { label: "표준편차", value: "1.4774" },
-                  { label: "최소", value: "21.3181" },
-                  { label: "최대", value: "26.0044" },
-                  { label: "추세", value: "▲상승", color: C.teal },
-                ] as Array<{ label: string; value: string; color?: string }>
-              ).map((s, i) => (
-                <div
-                  key={s.label}
-                  style={{
-                    flex: 1,
-                    padding: "0.45rem 0.3rem",
-                    textAlign: "center",
-                    borderRight: i < 4 ? `1px solid ${border2}` : "none",
-                  }}
-                >
+              <div
+                style={{
+                  fontSize: "0.7rem",
+                  fontWeight: 600,
+                  color: C.teal,
+                  marginBottom: "0.5rem",
+                  letterSpacing: "0.02em",
+                }}
+              >
+                예측값 통계
+              </div>
+              <div
+                style={{
+                  display: "grid",
+                  gridTemplateColumns: "repeat(5, 1fr)",
+                  gap: "0.4rem",
+                }}
+              >
+                {(
+                  [
+                    { label: "평균", value: "23.667", color: C.teal },
+                    { label: "표준편차", value: "1.4253", color: C.blue },
+                    { label: "최소", value: "21.300", color: C.amber },
+                    { label: "최대", value: "26.000" },
+                    { label: "추세", value: "▲상승", color: C.teal },
+                  ] as Array<{ label: string; value: string; color?: string }>
+                ).map((s) => (
                   <div
+                    key={s.label}
                     style={{
-                      fontSize: "0.58rem",
-                      color: palette.muted,
-                      marginBottom: "0.12rem",
+                      background: bg3,
+                      border: `1px solid ${border2}`,
+                      borderRadius: 8,
+                      padding: "0.45rem 0.3rem",
+                      textAlign: "center",
                     }}
                   >
-                    {s.label}
+                    <div
+                      style={{
+                        fontSize: "0.58rem",
+                        color: palette.muted,
+                        marginBottom: "0.15rem",
+                      }}
+                    >
+                      {s.label}
+                    </div>
+                    <div
+                      style={{
+                        fontSize: "0.78rem",
+                        fontWeight: 800,
+                        color: s.color ?? palette.heading,
+                      }}
+                    >
+                      {s.value}
+                    </div>
                   </div>
-                  <div
-                    style={{
-                      fontSize: "0.78rem",
-                      fontWeight: 800,
-                      color: s.color ?? palette.heading,
-                    }}
-                  >
-                    {s.value}
-                  </div>
-                </div>
-              ))}
+                ))}
+              </div>
             </div>
             <div style={{ padding: "1rem 1.2rem" }}>
               <div
@@ -1265,6 +1327,30 @@ function CaseStudySection({
                 예측 결과
               </span>
             </div>
+            {/* Chart legend */}
+            <div
+              style={{
+                padding: "0.45rem 1rem",
+                borderBottom: `1px solid ${border2}`,
+                display: "flex",
+                alignItems: "center",
+                gap: "1.2rem",
+                background: isDark ? "#0d1117" : "#f1f5fb",
+              }}
+            >
+              <span style={{ display: "flex", alignItems: "center", gap: "0.4rem" }}>
+                <span style={{ display: "inline-block", width: 20, height: 2.5, background: "#4f9cf9", borderRadius: 2 }} />
+                <span style={{ fontSize: "0.72rem", color: palette.body }}>종가</span>
+              </span>
+              <span style={{ display: "flex", alignItems: "center", gap: "0.4rem" }}>
+                <span style={{ display: "flex", alignItems: "center", gap: 2 }}>
+                  <span style={{ width: 5, height: 5, borderRadius: "50%", background: C.teal, display: "inline-block" }} />
+                  <span style={{ width: 10, height: 2, background: C.teal, display: "inline-block" }} />
+                  <span style={{ width: 5, height: 5, borderRadius: "50%", background: C.teal, display: "inline-block" }} />
+                </span>
+                <span style={{ fontSize: "0.72rem", color: palette.body }}>예측</span>
+              </span>
+            </div>
             <div
               style={{
                 position: "relative",
@@ -1277,52 +1363,78 @@ function CaseStudySection({
                 actualData={FFN_ACTUAL}
                 predData={FFN_PRED}
                 labels={FFN_LABELS}
+                yLeftMin={10}
+                yLeftMax={35}
+                yRightMin={10}
+                yRightMax={35}
+                yRightStep={5}
               />
             </div>
+            {/* 예측값 통계 cards */}
             <div
               style={{
-                display: "flex",
+                padding: "0.75rem 1.1rem",
                 borderBottom: `1px solid ${border2}`,
               }}
             >
-              {(
-                [
-                  { label: "평균", value: "22.911" },
-                  { label: "표준편차", value: "4.6135" },
-                  { label: "최소", value: "14.787" },
-                  { label: "최대", value: "30.9103" },
-                  { label: "추세", value: "▲상승", color: C.teal },
-                ] as Array<{ label: string; value: string; color?: string }>
-              ).map((s, i) => (
-                <div
-                  key={s.label}
-                  style={{
-                    flex: 1,
-                    padding: "0.45rem 0.3rem",
-                    textAlign: "center",
-                    borderRight: i < 4 ? `1px solid ${border2}` : "none",
-                  }}
-                >
+              <div
+                style={{
+                  fontSize: "0.7rem",
+                  fontWeight: 600,
+                  color: C.teal,
+                  marginBottom: "0.5rem",
+                  letterSpacing: "0.02em",
+                }}
+              >
+                예측값 통계
+              </div>
+              <div
+                style={{
+                  display: "grid",
+                  gridTemplateColumns: "repeat(5, 1fr)",
+                  gap: "0.4rem",
+                }}
+              >
+                {(
+                  [
+                    { label: "평균", value: "23.783", color: C.teal },
+                    { label: "표준편차", value: "5.2677", color: C.blue },
+                    { label: "최소", value: "10.500", color: C.amber },
+                    { label: "최대", value: "34.500" },
+                    { label: "추세", value: "▲상승", color: C.teal },
+                  ] as Array<{ label: string; value: string; color?: string }>
+                ).map((s) => (
                   <div
+                    key={s.label}
                     style={{
-                      fontSize: "0.58rem",
-                      color: palette.muted,
-                      marginBottom: "0.12rem",
+                      background: bg3,
+                      border: `1px solid ${border2}`,
+                      borderRadius: 8,
+                      padding: "0.45rem 0.3rem",
+                      textAlign: "center",
                     }}
                   >
-                    {s.label}
+                    <div
+                      style={{
+                        fontSize: "0.58rem",
+                        color: palette.muted,
+                        marginBottom: "0.15rem",
+                      }}
+                    >
+                      {s.label}
+                    </div>
+                    <div
+                      style={{
+                        fontSize: "0.78rem",
+                        fontWeight: 800,
+                        color: s.color ?? palette.heading,
+                      }}
+                    >
+                      {s.value}
+                    </div>
                   </div>
-                  <div
-                    style={{
-                      fontSize: "0.78rem",
-                      fontWeight: 800,
-                      color: s.color ?? palette.heading,
-                    }}
-                  >
-                    {s.value}
-                  </div>
-                </div>
-              ))}
+                ))}
+              </div>
             </div>
             <div style={{ padding: "1rem 1.2rem" }}>
               <div
