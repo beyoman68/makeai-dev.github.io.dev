@@ -182,7 +182,7 @@ export function CompanyPage() {
           </h2>
           <div className="mt-6 space-y-6 text-sm leading-7 text-muted-foreground">
             <p>
-              Mazelone is an AI company that turns complex, messy, real-world
+              Make AI is an AI company that turns complex, messy, real-world
               data into systems people can actually use.
             </p>
             <p>
@@ -205,7 +205,7 @@ export function CompanyPage() {
                 Our mission
               </h3>
               <p className="mt-3">
-                At Mazelone, our mission is to bridge advanced AI research and
+                At Make AI, our mission is to bridge advanced AI research and
                 real business execution.
               </p>
               <p className="mt-4">
@@ -260,8 +260,8 @@ export function CompanyPage() {
                 How we work
               </h3>
               <p className="mt-3">
-                At Mazelone, we care about more than model quality. We care
-                about whether AI works in practice.
+                At Make AI, we care about more than model quality. We care about
+                whether AI works in practice.
               </p>
               <p className="mt-4">
                 We work with a strong sense of ownership, technical depth, and
@@ -281,7 +281,7 @@ export function CompanyPage() {
               </p>
               <p className="mt-4">
                 It should help people do meaningful work better — with less
-                friction, more accuracy, and greater confidence. Mazelone exists
+                friction, more accuracy, and greater confidence. Make AI exists
                 to build that kind of AI: practical, reliable, and ready for the
                 real world.
               </p>
@@ -349,7 +349,7 @@ export function CompanyPage() {
               </address>
               <div className="mt-4 overflow-hidden rounded-2xl border border-border shadow-sm">
                 <iframe
-                  title="Mazelone headquarters location"
+                  title="Make AI headquarters location"
                   src={MAP_EMBED_HEADQUARTERS}
                   width="100%"
                   height={420}
@@ -370,7 +370,7 @@ export function CompanyPage() {
               </address>
               <div className="mt-4 overflow-hidden rounded-2xl border border-border shadow-sm">
                 <iframe
-                  title="Mazelone AI Lab location"
+                  title="Make AI AI Lab location"
                   src={MAP_EMBED_AI_LAB}
                   width="100%"
                   height={320}
