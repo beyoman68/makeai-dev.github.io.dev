@@ -9,9 +9,7 @@ export const researchHref = "/research" as const;
 export const solutionHref = "/solution" as const;
 
 /** About → homepage `#about-us` section. */
-export const companyNav = [
-  { label: "About", href: "/#about-us" },
-] as const;
+export const companyNav = [{ label: "About", href: "/#about-us" }] as const;
 
 export const productNav = [
   { label: "RAG Platform", href: "/products/rag-platform" },
@@ -31,5 +29,5 @@ export const solutionNav = [
 export const footerContact = {
   phones: [{ n: "(+82) 10-9174-3516" }] as const,
   email: CONTACT_MAIL,
-  headquarters: "서울시 강남구 학동로 161 (건일빌딩 4층)",
+  headquarters: "서울시 강남구 테헤란로1길 28-11 (5층)",
 } as const;
