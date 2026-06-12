@@ -22,3 +22,5 @@ pnpm-debug.log*
 
 # local notes (keep folder; optional: do not track)
 .dev/
+
+.claude
