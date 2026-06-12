@@ -1264,9 +1264,6 @@ function CaseStudySection({
               >
                 예측 결과
               </span>
-              <span style={{ fontSize: "0.66rem", color: palette.muted }}>
-                100% 구간 예측 달성
-              </span>
             </div>
             <div
               style={{
