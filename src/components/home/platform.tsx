@@ -843,7 +843,9 @@ function CaseStudySection({
     {
       item: "예측 평균 (°C)",
       transformer: "23.54°C",
-      ffn: <span style={{ color: palette.body, fontWeight: 400 }}>22.91°C</span>,
+      ffn: (
+        <span style={{ color: palette.body, fontWeight: 400 }}>22.91°C</span>
+      ),
       note: "Transformer는 후반부(따뜻한 구간)만 예측해 평균 ↑",
       bad: false,
     },
@@ -2060,7 +2062,10 @@ function DemoSection({
                   display: "inline-block",
                 }}
               />
-              {DEMO_TABS.find((t) => t.key === activeTab)?.label.replace(/^.\s/, "")}
+              {DEMO_TABS.find((t) => t.key === activeTab)?.label.replace(
+                /^.\s/,
+                "",
+              )}
             </div>
             <span style={{ fontSize: "0.75rem", color: textMuted }}>
               {activeTab === "collect" &&
@@ -3061,28 +3066,24 @@ function DemoSection({
                     >
                       <thead>
                         <tr>
-                          {[
-                            "모델",
-                            "타입",
-                            "세대",
-                            "F1",
-                            "앙상블 포함",
-                          ].map((h) => (
-                            <th
-                              key={h}
-                              style={{
-                                color: textMuted,
-                                fontSize: "0.7rem",
-                                textTransform: "uppercase",
-                                letterSpacing: "0.5px",
-                                padding: "0.5rem 0.8rem",
-                                borderBottom: `1px solid ${border2}`,
-                                textAlign: "left",
-                              }}
-                            >
-                              {h}
-                            </th>
-                          ))}
+                          {["모델", "타입", "세대", "F1", "앙상블 포함"].map(
+                            (h) => (
+                              <th
+                                key={h}
+                                style={{
+                                  color: textMuted,
+                                  fontSize: "0.7rem",
+                                  textTransform: "uppercase",
+                                  letterSpacing: "0.5px",
+                                  padding: "0.5rem 0.8rem",
+                                  borderBottom: `1px solid ${border2}`,
+                                  textAlign: "left",
+                                }}
+                              >
+                                {h}
+                              </th>
+                            ),
+                          )}
                         </tr>
                       </thead>
                       <tbody>
@@ -3998,485 +3999,485 @@ function DemoSection({
 
 // ─── Options / Extensibility Section ─────────────────────────────────────────
 
-function OptionsSection({
-  palette,
-  isDark,
-}: {
-  palette: PlatformPalette;
-  isDark: boolean;
-}) {
-  const reduceMotion = useReducedMotion() ?? false;
-  const sectionBg = isDark ? "#111111" : "#ffffff";
-  const bg3 = isDark ? "#1a2234" : "#e8edf5";
-  const border2 = isDark ? "#1e3050" : "rgba(0,0,0,0.06)";
-  const borderY = isDark ? "rgba(255,255,255,0.06)" : "rgba(0,0,0,0.08)";
+// function OptionsSection({
+//   palette,
+//   isDark,
+// }: {
+//   palette: PlatformPalette;
+//   isDark: boolean;
+// }) {
+//   const reduceMotion = useReducedMotion() ?? false;
+//   const sectionBg = isDark ? "#111111" : "#ffffff";
+//   const bg3 = isDark ? "#1a2234" : "#e8edf5";
+//   const border2 = isDark ? "#1e3050" : "rgba(0,0,0,0.06)";
+//   const borderY = isDark ? "rgba(255,255,255,0.06)" : "rgba(0,0,0,0.08)";
 
-  const tagStyle = (type: "available" | "custom" | "coming") => ({
-    fontSize: "0.65rem",
-    fontWeight: 700,
-    padding: "0.15rem 0.5rem",
-    borderRadius: 4,
-    background:
-      type === "available"
-        ? "rgba(0,212,170,0.15)"
-        : type === "custom"
-          ? "rgba(167,139,250,0.15)"
-          : isDark
-            ? "rgba(100,116,139,0.1)"
-            : "rgba(0,0,0,0.06)",
-    color:
-      type === "available"
-        ? C.teal
-        : type === "custom"
-          ? C.purple
-          : palette.muted,
-  });
+//   const tagStyle = (type: "available" | "custom" | "coming") => ({
+//     fontSize: "0.65rem",
+//     fontWeight: 700,
+//     padding: "0.15rem 0.5rem",
+//     borderRadius: 4,
+//     background:
+//       type === "available"
+//         ? "rgba(0,212,170,0.15)"
+//         : type === "custom"
+//           ? "rgba(167,139,250,0.15)"
+//           : isDark
+//             ? "rgba(100,116,139,0.1)"
+//             : "rgba(0,0,0,0.06)",
+//     color:
+//       type === "available"
+//         ? C.teal
+//         : type === "custom"
+//           ? C.purple
+//           : palette.muted,
+//   });
 
-  const optionItem = (
-    name: string,
-    type: "available" | "custom" | "coming",
-  ) => (
-    <div
-      key={name}
-      style={{
-        display: "flex",
-        alignItems: "center",
-        justifyContent: "space-between",
-        background: bg3,
-        borderRadius: 8,
-        padding: "0.6rem 1rem",
-      }}
-    >
-      <span style={{ fontSize: "0.85rem", color: palette.body }}>{name}</span>
-      <span style={tagStyle(type)}>
-        {type === "available"
-          ? "내장"
-          : type === "custom"
-            ? "확장 가능"
-            : "예정"}
-      </span>
-    </div>
-  );
+//   const optionItem = (
+//     name: string,
+//     type: "available" | "custom" | "coming",
+//   ) => (
+//     <div
+//       key={name}
+//       style={{
+//         display: "flex",
+//         alignItems: "center",
+//         justifyContent: "space-between",
+//         background: bg3,
+//         borderRadius: 8,
+//         padding: "0.6rem 1rem",
+//       }}
+//     >
+//       <span style={{ fontSize: "0.85rem", color: palette.body }}>{name}</span>
+//       <span style={tagStyle(type)}>
+//         {type === "available"
+//           ? "내장"
+//           : type === "custom"
+//             ? "확장 가능"
+//             : "예정"}
+//       </span>
+//     </div>
+//   );
 
-  const cardData = [
-    {
-      title: "📥 데이터 수집",
-      items: [
-        ["Yahoo Finance (주식/ETF/지수)", "available"],
-        ["FRED (미국 경제 지표 800+종)", "available"],
-        ["Binance (암호화폐 OHLCV)", "available"],
-        ["CSV / Excel 파일 직접 업로드", "available"],
-        ["사내 DB / 사설 API 연동", "custom"],
-        ["실시간 스트리밍 (WebSocket)", "custom"],
-      ] as [string, "available" | "custom" | "coming"][],
-      note: {
-        path: "src/data/collectors.py",
-        desc: "에 함수 하나 추가 후 대시보드 드롭다운에 이름을 등록하면 즉시 사용 가능합니다. 반환 형식은 pd.DataFrame이면 충분합니다.",
-      },
-    },
-    {
-      title: "🔧 피처 엔지니어링",
-      items: [
-        ["기술적 지표 (RSI·MACD·볼린저·스토캐스틱·ATR)", "available"],
-        ["롤링 통계 (평균·표준편차·첨도·왜도)", "available"],
-        ["시계열 분해 (추세·계절성·잔차)", "available"],
-        ["시장 국면 레이블 (HMM 3-State)", "available"],
-        ["Lag 피처 / 자기상관 피처", "available"],
-        ["외부 NLP 감성·이벤트 피처", "custom"],
-      ] as [string, "available" | "custom" | "coming"][],
-      note: {
-        path: "src/features/feature_engineering.py",
-        desc: "의 add_custom_features(df)에 원하는 계산식을 추가하면 학습 파이프라인에 자동 포함됩니다.",
-      },
-    },
-    {
-      title: "🤖 모델 옵션",
-      items: [
-        ["XGBoost — 프리셋: 기본·정밀·경량", "available"],
-        ["LSTM — 단방향/양방향·레이어·시퀀스 길이", "available"],
-        ["Transformer — d_model·헤드 수·레이어 수", "available"],
-        ["AutoEncoder — 인코더 차원·이상 임계값", "available"],
-        ["Prophet · N-BEATS · TiDE", "custom"],
-        ["LLM 기반 제로샷 예측", "coming"],
-      ] as [string, "available" | "custom" | "coming"][],
-      note: {
-        path: "BaseTimeSeriesModel",
-        desc: "을 상속하고 fit()·predict() 두 메서드만 구현하면 레지스트리·모니터링·앙상블 전체에 자동 통합됩니다.",
-      },
-    },
-    {
-      title: "📊 모니터링 & 메트릭",
-      items: [
-        ["Sharpe · Calmar · Sortino Ratio", "available"],
-        ["MDD (최대 낙폭) · RMSE · MAE", "available"],
-        ["PSI 드리프트 점수 (피처별)", "available"],
-        ["피처 중요도 시계열 추적", "available"],
-        ["드리프트 임계값 자동 알림", "available"],
-        ["Slack · 이메일 외부 알림", "custom"],
-      ] as [string, "available" | "custom" | "coming"][],
-      note: {
-        path: "src/monitoring/drift_detector.py",
-        desc: "에 커스텀 메트릭을 추가합니다. 드리프트 임계값(기본 PSI 0.2)은 대시보드 슬라이더로 즉시 조정됩니다.",
-      },
-    },
-  ];
+//   const cardData = [
+//     {
+//       title: "📥 데이터 수집",
+//       items: [
+//         ["Yahoo Finance (주식/ETF/지수)", "available"],
+//         ["FRED (미국 경제 지표 800+종)", "available"],
+//         ["Binance (암호화폐 OHLCV)", "available"],
+//         ["CSV / Excel 파일 직접 업로드", "available"],
+//         ["사내 DB / 사설 API 연동", "custom"],
+//         ["실시간 스트리밍 (WebSocket)", "custom"],
+//       ] as [string, "available" | "custom" | "coming"][],
+//       note: {
+//         path: "src/data/collectors.py",
+//         desc: "에 함수 하나 추가 후 대시보드 드롭다운에 이름을 등록하면 즉시 사용 가능합니다. 반환 형식은 pd.DataFrame이면 충분합니다.",
+//       },
+//     },
+//     {
+//       title: "🔧 피처 엔지니어링",
+//       items: [
+//         ["기술적 지표 (RSI·MACD·볼린저·스토캐스틱·ATR)", "available"],
+//         ["롤링 통계 (평균·표준편차·첨도·왜도)", "available"],
+//         ["시계열 분해 (추세·계절성·잔차)", "available"],
+//         ["시장 국면 레이블 (HMM 3-State)", "available"],
+//         ["Lag 피처 / 자기상관 피처", "available"],
+//         ["외부 NLP 감성·이벤트 피처", "custom"],
+//       ] as [string, "available" | "custom" | "coming"][],
+//       note: {
+//         path: "src/features/feature_engineering.py",
+//         desc: "의 add_custom_features(df)에 원하는 계산식을 추가하면 학습 파이프라인에 자동 포함됩니다.",
+//       },
+//     },
+//     {
+//       title: "🤖 모델 옵션",
+//       items: [
+//         ["XGBoost — 프리셋: 기본·정밀·경량", "available"],
+//         ["LSTM — 단방향/양방향·레이어·시퀀스 길이", "available"],
+//         ["Transformer — d_model·헤드 수·레이어 수", "available"],
+//         ["AutoEncoder — 인코더 차원·이상 임계값", "available"],
+//         ["Prophet · N-BEATS · TiDE", "custom"],
+//         ["LLM 기반 제로샷 예측", "coming"],
+//       ] as [string, "available" | "custom" | "coming"][],
+//       note: {
+//         path: "BaseTimeSeriesModel",
+//         desc: "을 상속하고 fit()·predict() 두 메서드만 구현하면 레지스트리·모니터링·앙상블 전체에 자동 통합됩니다.",
+//       },
+//     },
+//     {
+//       title: "📊 모니터링 & 메트릭",
+//       items: [
+//         ["Sharpe · Calmar · Sortino Ratio", "available"],
+//         ["MDD (최대 낙폭) · RMSE · MAE", "available"],
+//         ["PSI 드리프트 점수 (피처별)", "available"],
+//         ["피처 중요도 시계열 추적", "available"],
+//         ["드리프트 임계값 자동 알림", "available"],
+//         ["Slack · 이메일 외부 알림", "custom"],
+//       ] as [string, "available" | "custom" | "coming"][],
+//       note: {
+//         path: "src/monitoring/drift_detector.py",
+//         desc: "에 커스텀 메트릭을 추가합니다. 드리프트 임계값(기본 PSI 0.2)은 대시보드 슬라이더로 즉시 조정됩니다.",
+//       },
+//     },
+//   ];
 
-  return (
-    <section
-      id="options"
-      aria-labelledby="options-heading"
-      className="scroll-mt-24"
-      style={{
-        background: sectionBg,
-        padding: "clamp(72px, 12vw, 120px) 32px",
-        borderTop: `1px solid ${borderY}`,
-      }}
-    >
-      <div className="mx-auto max-w-[1200px]">
-        <motion.div
-          initial={reduceMotion ? false : { opacity: 0, y: 24 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: reduceMotion ? 0 : 0.65 }}
-          viewport={{ once: true, margin: "-80px" }}
-          style={{ marginBottom: "3rem" }}
-        >
-          <div
-            className="uppercase"
-            style={{
-              fontSize: 11,
-              fontWeight: 600,
-              color: palette.overline,
-              letterSpacing: "0.1em",
-              marginBottom: 16,
-            }}
-          >
-            확장성
-          </div>
-          <h2
-            id="options-heading"
-            className="text-balance"
-            style={{
-              fontSize: "clamp(24px, 3.5vw, 2.2rem)",
-              fontWeight: 600,
-              letterSpacing: "-0.03em",
-              color: palette.heading,
-              lineHeight: 1.1,
-              margin: "0 0 1rem",
-            }}
-          >
-            모든 옵션이 커스터마이징 가능합니다
-          </h2>
-          <p
-            style={{
-              fontSize: "1rem",
-              color: palette.body,
-              maxWidth: 600,
-              lineHeight: 1.8,
-              margin: 0,
-            }}
-          >
-            기본 설정만으로도 즉시 운영 가능하며, 도메인 전문 지식에 맞게 각
-            단계를 세밀하게 조정할 수 있습니다.
-          </p>
-        </motion.div>
+//   return (
+//     <section
+//       id="options"
+//       aria-labelledby="options-heading"
+//       className="scroll-mt-24"
+//       style={{
+//         background: sectionBg,
+//         padding: "clamp(72px, 12vw, 120px) 32px",
+//         borderTop: `1px solid ${borderY}`,
+//       }}
+//     >
+//       <div className="mx-auto max-w-[1200px]">
+//         <motion.div
+//           initial={reduceMotion ? false : { opacity: 0, y: 24 }}
+//           whileInView={{ opacity: 1, y: 0 }}
+//           transition={{ duration: reduceMotion ? 0 : 0.65 }}
+//           viewport={{ once: true, margin: "-80px" }}
+//           style={{ marginBottom: "3rem" }}
+//         >
+//           <div
+//             className="uppercase"
+//             style={{
+//               fontSize: 11,
+//               fontWeight: 600,
+//               color: palette.overline,
+//               letterSpacing: "0.1em",
+//               marginBottom: 16,
+//             }}
+//           >
+//             확장성
+//           </div>
+//           <h2
+//             id="options-heading"
+//             className="text-balance"
+//             style={{
+//               fontSize: "clamp(24px, 3.5vw, 2.2rem)",
+//               fontWeight: 600,
+//               letterSpacing: "-0.03em",
+//               color: palette.heading,
+//               lineHeight: 1.1,
+//               margin: "0 0 1rem",
+//             }}
+//           >
+//             모든 옵션이 커스터마이징 가능합니다
+//           </h2>
+//           <p
+//             style={{
+//               fontSize: "1rem",
+//               color: palette.body,
+//               maxWidth: 600,
+//               lineHeight: 1.8,
+//               margin: 0,
+//             }}
+//           >
+//             기본 설정만으로도 즉시 운영 가능하며, 도메인 전문 지식에 맞게 각
+//             단계를 세밀하게 조정할 수 있습니다.
+//           </p>
+//         </motion.div>
 
-        {/* Design principle + code example */}
-        <div
-          className="grid grid-cols-1 gap-8 lg:grid-cols-2"
-          style={{ marginBottom: "2rem" }}
-        >
-          <div
-            style={{
-              background: palette.cardBg,
-              border: `1px solid ${palette.cardBorder}`,
-              borderRadius: 14,
-              padding: "1.8rem",
-            }}
-          >
-            <div
-              style={{
-                fontSize: "0.75rem",
-                fontWeight: 700,
-                color: C.teal,
-                letterSpacing: "1px",
-                textTransform: "uppercase",
-                marginBottom: "0.8rem",
-              }}
-            >
-              설계 원칙
-            </div>
-            <p
-              style={{
-                fontSize: "0.9rem",
-                color: palette.body,
-                lineHeight: 1.8,
-                marginBottom: "1rem",
-              }}
-            >
-              모든 구성 요소는{" "}
-              <strong style={{ color: palette.heading }}>독립 모듈</strong>로
-              분리되어 있습니다. 데이터 수집기·피처 생성기·모델·메트릭 중 어느
-              하나를 교체하거나 추가해도 나머지 파이프라인은 변경 없이
-              작동합니다.
-            </p>
-            {[
-              "기본값만으로 즉시 운영 가능",
-              "도메인 전문 지식 반영 위한 세밀한 조정 지원",
-              "추가 코드 최소화 — 표준 인터페이스 준수만으로 통합",
-            ].map((item) => (
-              <div
-                key={item}
-                style={{
-                  display: "flex",
-                  alignItems: "center",
-                  gap: "0.6rem",
-                  fontSize: "0.82rem",
-                  color: palette.body,
-                  marginBottom: "0.4rem",
-                }}
-              >
-                <span style={{ color: C.teal }}>✓</span>
-                {item}
-              </div>
-            ))}
-          </div>
-          <div
-            style={{
-              background: palette.cardBg,
-              border: `1px solid ${palette.cardBorder}`,
-              borderRadius: 14,
-              padding: "1.8rem",
-            }}
-          >
-            <div
-              style={{
-                fontSize: "0.75rem",
-                fontWeight: 700,
-                color: C.purple,
-                letterSpacing: "1px",
-                textTransform: "uppercase",
-                marginBottom: "0.8rem",
-              }}
-            >
-              새 모델 추가 예시
-            </div>
-            <pre
-              style={{
-                background: isDark ? "#0a0e1a" : "#f1f5f9",
-                border: `1px solid ${border2}`,
-                borderRadius: 8,
-                padding: "1rem",
-                fontSize: "0.72rem",
-                color: palette.body,
-                overflowX: "auto",
-                lineHeight: 1.6,
-              }}
-            >
-              {`from src.models.base_model import BaseTimeSeriesModel\n\nclass MyModel(BaseTimeSeriesModel):\n    def __init__(self):\n        super().__init__("MyModel", is_regression=True)\n\n    def fit(self, X, y, **kwargs):\n        # 학습 로직\n        self.is_fitted = True\n        return self\n\n    def predict(self, X):\n        return self.model.predict(X)`}
-            </pre>
-            <div
-              style={{
-                marginTop: "0.7rem",
-                fontSize: "0.78rem",
-                color: palette.muted,
-              }}
-            >
-              이것이 전부입니다. 대시보드에 자동으로 등록됩니다.
-            </div>
-          </div>
-        </div>
+//         {/* Design principle + code example */}
+//         <div
+//           className="grid grid-cols-1 gap-8 lg:grid-cols-2"
+//           style={{ marginBottom: "2rem" }}
+//         >
+//           <div
+//             style={{
+//               background: palette.cardBg,
+//               border: `1px solid ${palette.cardBorder}`,
+//               borderRadius: 14,
+//               padding: "1.8rem",
+//             }}
+//           >
+//             <div
+//               style={{
+//                 fontSize: "0.75rem",
+//                 fontWeight: 700,
+//                 color: C.teal,
+//                 letterSpacing: "1px",
+//                 textTransform: "uppercase",
+//                 marginBottom: "0.8rem",
+//               }}
+//             >
+//               설계 원칙
+//             </div>
+//             <p
+//               style={{
+//                 fontSize: "0.9rem",
+//                 color: palette.body,
+//                 lineHeight: 1.8,
+//                 marginBottom: "1rem",
+//               }}
+//             >
+//               모든 구성 요소는{" "}
+//               <strong style={{ color: palette.heading }}>독립 모듈</strong>로
+//               분리되어 있습니다. 데이터 수집기·피처 생성기·모델·메트릭 중 어느
+//               하나를 교체하거나 추가해도 나머지 파이프라인은 변경 없이
+//               작동합니다.
+//             </p>
+//             {[
+//               "기본값만으로 즉시 운영 가능",
+//               "도메인 전문 지식 반영 위한 세밀한 조정 지원",
+//               "추가 코드 최소화 — 표준 인터페이스 준수만으로 통합",
+//             ].map((item) => (
+//               <div
+//                 key={item}
+//                 style={{
+//                   display: "flex",
+//                   alignItems: "center",
+//                   gap: "0.6rem",
+//                   fontSize: "0.82rem",
+//                   color: palette.body,
+//                   marginBottom: "0.4rem",
+//                 }}
+//               >
+//                 <span style={{ color: C.teal }}>✓</span>
+//                 {item}
+//               </div>
+//             ))}
+//           </div>
+//           <div
+//             style={{
+//               background: palette.cardBg,
+//               border: `1px solid ${palette.cardBorder}`,
+//               borderRadius: 14,
+//               padding: "1.8rem",
+//             }}
+//           >
+//             <div
+//               style={{
+//                 fontSize: "0.75rem",
+//                 fontWeight: 700,
+//                 color: C.purple,
+//                 letterSpacing: "1px",
+//                 textTransform: "uppercase",
+//                 marginBottom: "0.8rem",
+//               }}
+//             >
+//               새 모델 추가 예시
+//             </div>
+//             <pre
+//               style={{
+//                 background: isDark ? "#0a0e1a" : "#f1f5f9",
+//                 border: `1px solid ${border2}`,
+//                 borderRadius: 8,
+//                 padding: "1rem",
+//                 fontSize: "0.72rem",
+//                 color: palette.body,
+//                 overflowX: "auto",
+//                 lineHeight: 1.6,
+//               }}
+//             >
+//               {`from src.models.base_model import BaseTimeSeriesModel\n\nclass MyModel(BaseTimeSeriesModel):\n    def __init__(self):\n        super().__init__("MyModel", is_regression=True)\n\n    def fit(self, X, y, **kwargs):\n        # 학습 로직\n        self.is_fitted = True\n        return self\n\n    def predict(self, X):\n        return self.model.predict(X)`}
+//             </pre>
+//             <div
+//               style={{
+//                 marginTop: "0.7rem",
+//                 fontSize: "0.78rem",
+//                 color: palette.muted,
+//               }}
+//             >
+//               이것이 전부입니다. 대시보드에 자동으로 등록됩니다.
+//             </div>
+//           </div>
+//         </div>
 
-        {/* Options cards grid */}
-        <div className="grid grid-cols-1 gap-8 lg:grid-cols-2">
-          {cardData.map((card) => (
-            <motion.div
-              key={card.title}
-              initial={reduceMotion ? false : { opacity: 0, y: 16 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: reduceMotion ? 0 : 0.5 }}
-              viewport={{ once: true, margin: "-40px" }}
-              style={{
-                background: palette.cardBg,
-                border: `1px solid ${palette.cardBorder}`,
-                borderRadius: 16,
-                padding: "2rem",
-              }}
-            >
-              <h3
-                style={{
-                  fontSize: "1.05rem",
-                  fontWeight: 700,
-                  color: palette.heading,
-                  marginBottom: "1.2rem",
-                }}
-              >
-                {card.title}
-              </h3>
-              <div
-                style={{
-                  display: "flex",
-                  flexDirection: "column",
-                  gap: "0.6rem",
-                  marginBottom: "1rem",
-                }}
-              >
-                {card.items.map(([name, type]) => optionItem(name, type))}
-              </div>
-              <div
-                style={{
-                  padding: "0.8rem 1rem",
-                  background: isDark
-                    ? "rgba(0,212,170,0.05)"
-                    : "rgba(0,212,170,0.04)",
-                  border: "1px dashed rgba(0,212,170,0.2)",
-                  borderRadius: 8,
-                  fontSize: "0.8rem",
-                  color: palette.body,
-                }}
-              >
-                <div
-                  style={{
-                    fontWeight: 600,
-                    color: palette.heading,
-                    marginBottom: "0.3rem",
-                  }}
-                >
-                  확장 방법
-                </div>
-                <code style={{ color: C.teal }}>{card.note.path}</code>
-                {card.note.desc}
-              </div>
-            </motion.div>
-          ))}
-        </div>
-      </div>
-    </section>
-  );
-}
+//         {/* Options cards grid */}
+//         <div className="grid grid-cols-1 gap-8 lg:grid-cols-2">
+//           {cardData.map((card) => (
+//             <motion.div
+//               key={card.title}
+//               initial={reduceMotion ? false : { opacity: 0, y: 16 }}
+//               whileInView={{ opacity: 1, y: 0 }}
+//               transition={{ duration: reduceMotion ? 0 : 0.5 }}
+//               viewport={{ once: true, margin: "-40px" }}
+//               style={{
+//                 background: palette.cardBg,
+//                 border: `1px solid ${palette.cardBorder}`,
+//                 borderRadius: 16,
+//                 padding: "2rem",
+//               }}
+//             >
+//               <h3
+//                 style={{
+//                   fontSize: "1.05rem",
+//                   fontWeight: 700,
+//                   color: palette.heading,
+//                   marginBottom: "1.2rem",
+//                 }}
+//               >
+//                 {card.title}
+//               </h3>
+//               <div
+//                 style={{
+//                   display: "flex",
+//                   flexDirection: "column",
+//                   gap: "0.6rem",
+//                   marginBottom: "1rem",
+//                 }}
+//               >
+//                 {card.items.map(([name, type]) => optionItem(name, type))}
+//               </div>
+//               <div
+//                 style={{
+//                   padding: "0.8rem 1rem",
+//                   background: isDark
+//                     ? "rgba(0,212,170,0.05)"
+//                     : "rgba(0,212,170,0.04)",
+//                   border: "1px dashed rgba(0,212,170,0.2)",
+//                   borderRadius: 8,
+//                   fontSize: "0.8rem",
+//                   color: palette.body,
+//                 }}
+//               >
+//                 <div
+//                   style={{
+//                     fontWeight: 600,
+//                     color: palette.heading,
+//                     marginBottom: "0.3rem",
+//                   }}
+//                 >
+//                   확장 방법
+//                 </div>
+//                 <code style={{ color: C.teal }}>{card.note.path}</code>
+//                 {card.note.desc}
+//               </div>
+//             </motion.div>
+//           ))}
+//         </div>
+//       </div>
+//     </section>
+//   );
+// }
 
 // ─── Architecture Section ─────────────────────────────────────────────────────
 
-function ArchitectureSection({
-  palette,
-  isDark,
-}: {
-  palette: PlatformPalette;
-  isDark: boolean;
-}) {
-  const sectionBg = isDark ? "#111111" : "#ffffff";
-  const borderY = isDark ? "rgba(255,255,255,0.06)" : "rgba(0,0,0,0.08)";
-  const steps = [
-    { icon: "📥", title: "데이터 수집", desc: "다중 소스 자동 수집" },
-    { icon: "🔧", title: "피처 엔지니어링", desc: "60+ 시계열 피처 생성" },
-    { icon: "🧠", title: "Walk-Forward 학습", desc: "시간 축 보존 검증" },
-    { icon: "🗂️", title: "모델 레지스트리", desc: "버전 관리 및 승격" },
-    { icon: "📊", title: "모니터링", desc: "드리프트 감지 · 재학습" },
-  ];
+// function ArchitectureSection({
+//   palette,
+//   isDark,
+// }: {
+//   palette: PlatformPalette;
+//   isDark: boolean;
+// }) {
+//   const sectionBg = isDark ? "#111111" : "#ffffff";
+//   const borderY = isDark ? "rgba(255,255,255,0.06)" : "rgba(0,0,0,0.08)";
+//   const steps = [
+//     { icon: "📥", title: "데이터 수집", desc: "다중 소스 자동 수집" },
+//     { icon: "🔧", title: "피처 엔지니어링", desc: "60+ 시계열 피처 생성" },
+//     { icon: "🧠", title: "Walk-Forward 학습", desc: "시간 축 보존 검증" },
+//     { icon: "🗂️", title: "모델 레지스트리", desc: "버전 관리 및 승격" },
+//     { icon: "📊", title: "모니터링", desc: "드리프트 감지 · 재학습" },
+//   ];
 
-  return (
-    <section
-      style={{
-        background: sectionBg,
-        padding: "clamp(48px, 8vw, 80px) 32px",
-        borderTop: `1px solid ${borderY}`,
-      }}
-    >
-      <div className="mx-auto max-w-[1200px]">
-        <div
-          className="uppercase"
-          style={{
-            fontSize: 11,
-            fontWeight: 600,
-            color: palette.overline,
-            letterSpacing: "0.1em",
-            marginBottom: 16,
-          }}
-        >
-          파이프라인 아키텍처
-        </div>
-        <h2
-          className="text-balance"
-          style={{
-            fontSize: "clamp(20px, 3vw, 1.8rem)",
-            fontWeight: 600,
-            letterSpacing: "-0.03em",
-            color: palette.heading,
-            lineHeight: 1.1,
-            margin: "0 0 3rem",
-          }}
-        >
-          end-to-end 자동화 파이프라인
-        </h2>
-        <div
-          style={{
-            display: "flex",
-            alignItems: "stretch",
-            gap: 0,
-            overflowX: "auto",
-            paddingBottom: "1rem",
-          }}
-        >
-          {steps.map((step, i) => (
-            <div
-              key={step.title}
-              style={{ display: "flex", alignItems: "center", flex: 1 }}
-            >
-              <div
-                style={{
-                  flex: 1,
-                  minWidth: 120,
-                  background: palette.cardBg,
-                  border: `1px solid ${palette.cardBorder}`,
-                  borderRadius: 12,
-                  padding: "1.2rem",
-                  textAlign: "center",
-                }}
-              >
-                <div style={{ fontSize: "1.8rem", marginBottom: "0.5rem" }}>
-                  {step.icon}
-                </div>
-                <h4
-                  style={{
-                    fontSize: "0.8rem",
-                    fontWeight: 700,
-                    color: palette.heading,
-                    marginBottom: "0.25rem",
-                  }}
-                >
-                  {step.title}
-                </h4>
-                <p
-                  style={{
-                    fontSize: "0.7rem",
-                    color: palette.muted,
-                    margin: 0,
-                  }}
-                >
-                  {step.desc}
-                </p>
-              </div>
-              {i < steps.length - 1 && (
-                <div
-                  style={{
-                    width: 40,
-                    display: "flex",
-                    alignItems: "center",
-                    justifyContent: "center",
-                    color: C.teal,
-                    fontSize: "1.3rem",
-                    flexShrink: 0,
-                  }}
-                >
-                  →
-                </div>
-              )}
-            </div>
-          ))}
-        </div>
-      </div>
-    </section>
-  );
-}
+//   return (
+//     <section
+//       style={{
+//         background: sectionBg,
+//         padding: "clamp(48px, 8vw, 80px) 32px",
+//         borderTop: `1px solid ${borderY}`,
+//       }}
+//     >
+//       <div className="mx-auto max-w-[1200px]">
+//         <div
+//           className="uppercase"
+//           style={{
+//             fontSize: 11,
+//             fontWeight: 600,
+//             color: palette.overline,
+//             letterSpacing: "0.1em",
+//             marginBottom: 16,
+//           }}
+//         >
+//           파이프라인 아키텍처
+//         </div>
+//         <h2
+//           className="text-balance"
+//           style={{
+//             fontSize: "clamp(20px, 3vw, 1.8rem)",
+//             fontWeight: 600,
+//             letterSpacing: "-0.03em",
+//             color: palette.heading,
+//             lineHeight: 1.1,
+//             margin: "0 0 3rem",
+//           }}
+//         >
+//           end-to-end 자동화 파이프라인
+//         </h2>
+//         <div
+//           style={{
+//             display: "flex",
+//             alignItems: "stretch",
+//             gap: 0,
+//             overflowX: "auto",
+//             paddingBottom: "1rem",
+//           }}
+//         >
+//           {steps.map((step, i) => (
+//             <div
+//               key={step.title}
+//               style={{ display: "flex", alignItems: "center", flex: 1 }}
+//             >
+//               <div
+//                 style={{
+//                   flex: 1,
+//                   minWidth: 120,
+//                   background: palette.cardBg,
+//                   border: `1px solid ${palette.cardBorder}`,
+//                   borderRadius: 12,
+//                   padding: "1.2rem",
+//                   textAlign: "center",
+//                 }}
+//               >
+//                 <div style={{ fontSize: "1.8rem", marginBottom: "0.5rem" }}>
+//                   {step.icon}
+//                 </div>
+//                 <h4
+//                   style={{
+//                     fontSize: "0.8rem",
+//                     fontWeight: 700,
+//                     color: palette.heading,
+//                     marginBottom: "0.25rem",
+//                   }}
+//                 >
+//                   {step.title}
+//                 </h4>
+//                 <p
+//                   style={{
+//                     fontSize: "0.7rem",
+//                     color: palette.muted,
+//                     margin: 0,
+//                   }}
+//                 >
+//                   {step.desc}
+//                 </p>
+//               </div>
+//               {i < steps.length - 1 && (
+//                 <div
+//                   style={{
+//                     width: 40,
+//                     display: "flex",
+//                     alignItems: "center",
+//                     justifyContent: "center",
+//                     color: C.teal,
+//                     fontSize: "1.3rem",
+//                     flexShrink: 0,
+//                   }}
+//                 >
+//                   →
+//                 </div>
+//               )}
+//             </div>
+//           ))}
+//         </div>
+//       </div>
+//     </section>
+//   );
+// }
 
 // ─── Use Cases Section ────────────────────────────────────────────────────────
 
@@ -4650,137 +4651,137 @@ function UseCasesSection({
 
 // ─── CTA Section ──────────────────────────────────────────────────────────────
 
-function CTASection({
-  palette,
-  isDark,
-}: {
-  palette: PlatformPalette;
-  isDark: boolean;
-}) {
-  const borderY = isDark ? "rgba(255,255,255,0.06)" : "rgba(0,0,0,0.08)";
-  const sectionBg = isDark
-    ? "linear-gradient(135deg, rgba(0,212,170,0.08) 0%, rgba(79,156,249,0.05) 100%)"
-    : "linear-gradient(135deg, rgba(0,212,170,0.06) 0%, rgba(79,156,249,0.04) 100%)";
+// function CTASection({
+//   palette,
+//   isDark,
+// }: {
+//   palette: PlatformPalette;
+//   isDark: boolean;
+// }) {
+//   const borderY = isDark ? "rgba(255,255,255,0.06)" : "rgba(0,0,0,0.08)";
+//   const sectionBg = isDark
+//     ? "linear-gradient(135deg, rgba(0,212,170,0.08) 0%, rgba(79,156,249,0.05) 100%)"
+//     : "linear-gradient(135deg, rgba(0,212,170,0.06) 0%, rgba(79,156,249,0.04) 100%)";
 
-  return (
-    <section
-      id="platform-cta"
-      style={{
-        background: sectionBg,
-        borderTop: `1px solid ${borderY}`,
-        textAlign: "center",
-        padding: "clamp(72px, 12vw, 120px) 32px",
-      }}
-    >
-      <div className="mx-auto max-w-[1200px]">
-        <div
-          style={{
-            display: "inline-flex",
-            alignItems: "center",
-            gap: "0.5rem",
-            background: "rgba(0,212,170,0.1)",
-            border: "1px solid rgba(0,212,170,0.3)",
-            color: C.teal,
-            padding: "0.35rem 0.9rem",
-            borderRadius: 20,
-            fontSize: "0.8rem",
-            fontWeight: 600,
-            marginBottom: "1.5rem",
-          }}
-        >
-          지금 바로 시작할 수 있습니다
-        </div>
-        <h2
-          style={{
-            fontSize: "clamp(28px, 4vw, 2.8rem)",
-            fontWeight: 700,
-            color: palette.heading,
-            marginBottom: "1rem",
-            letterSpacing: "-0.03em",
-          }}
-        >
-          AI 모델을 <span style={{ color: C.teal }}>살아있게</span> 만드세요
-        </h2>
-        <p
-          style={{
-            fontSize: "1.1rem",
-            color: palette.body,
-            marginBottom: "2.5rem",
-            maxWidth: 560,
-            marginLeft: "auto",
-            marginRight: "auto",
-          }}
-        >
-          한 번 만들고 방치하는 AI가 아닌, 데이터와 함께 진화하는 AI 시스템을
-          구축하세요. 설치부터 첫 Production 배포까지 30분이면 충분합니다.
-        </p>
-        <div
-          style={{
-            display: "flex",
-            gap: "1rem",
-            justifyContent: "center",
-            flexWrap: "wrap" as const,
-            marginBottom: "3rem",
-          }}
-        >
-          <a
-            href="#demo"
-            style={{
-              background: C.teal,
-              color: "#0a0e1a",
-              padding: "0.85rem 2rem",
-              borderRadius: 8,
-              fontWeight: 700,
-              fontSize: "1rem",
-              textDecoration: "none",
-            }}
-          >
-            데모 다시 보기
-          </a>
-          <a
-            href="#casestudy"
-            style={{
-              border: `1px solid ${palette.cardBorder}`,
-              color: palette.body,
-              padding: "0.85rem 2rem",
-              borderRadius: 8,
-              fontWeight: 600,
-              fontSize: "1rem",
-              textDecoration: "none",
-            }}
-          >
-            실측 결과 확인
-          </a>
-        </div>
-        <div
-          style={{
-            display: "flex",
-            justifyContent: "center",
-            gap: "3rem",
-            flexWrap: "wrap" as const,
-          }}
-        >
-          {[
-            { val: "100%", label: "로컬 설치 · 데이터 외부 전송 없음" },
-            { val: "4종", label: "내장 AI 모델 + 무제한 확장" },
-            { val: "No-Code", label: "웹 대시보드 완전 운영" },
-          ].map((s) => (
-            <div key={s.val} style={{ textAlign: "center" }}>
-              <div
-                style={{ fontSize: "1.8rem", fontWeight: 800, color: C.teal }}
-              >
-                {s.val}
-              </div>
-              <div style={{ fontSize: "0.85rem", color: palette.muted }}>
-                {s.label}
-              </div>
-            </div>
-          ))}
-        </div>
-      </div>
-    </section>
-  );
-}
+//   return (
+//     <section
+//       id="platform-cta"
+//       style={{
+//         background: sectionBg,
+//         borderTop: `1px solid ${borderY}`,
+//         textAlign: "center",
+//         padding: "clamp(72px, 12vw, 120px) 32px",
+//       }}
+//     >
+//       <div className="mx-auto max-w-[1200px]">
+//         <div
+//           style={{
+//             display: "inline-flex",
+//             alignItems: "center",
+//             gap: "0.5rem",
+//             background: "rgba(0,212,170,0.1)",
+//             border: "1px solid rgba(0,212,170,0.3)",
+//             color: C.teal,
+//             padding: "0.35rem 0.9rem",
+//             borderRadius: 20,
+//             fontSize: "0.8rem",
+//             fontWeight: 600,
+//             marginBottom: "1.5rem",
+//           }}
+//         >
+//           지금 바로 시작할 수 있습니다
+//         </div>
+//         <h2
+//           style={{
+//             fontSize: "clamp(28px, 4vw, 2.8rem)",
+//             fontWeight: 700,
+//             color: palette.heading,
+//             marginBottom: "1rem",
+//             letterSpacing: "-0.03em",
+//           }}
+//         >
+//           AI 모델을 <span style={{ color: C.teal }}>살아있게</span> 만드세요
+//         </h2>
+//         <p
+//           style={{
+//             fontSize: "1.1rem",
+//             color: palette.body,
+//             marginBottom: "2.5rem",
+//             maxWidth: 560,
+//             marginLeft: "auto",
+//             marginRight: "auto",
+//           }}
+//         >
+//           한 번 만들고 방치하는 AI가 아닌, 데이터와 함께 진화하는 AI 시스템을
+//           구축하세요. 설치부터 첫 Production 배포까지 30분이면 충분합니다.
+//         </p>
+//         <div
+//           style={{
+//             display: "flex",
+//             gap: "1rem",
+//             justifyContent: "center",
+//             flexWrap: "wrap" as const,
+//             marginBottom: "3rem",
+//           }}
+//         >
+//           <a
+//             href="#demo"
+//             style={{
+//               background: C.teal,
+//               color: "#0a0e1a",
+//               padding: "0.85rem 2rem",
+//               borderRadius: 8,
+//               fontWeight: 700,
+//               fontSize: "1rem",
+//               textDecoration: "none",
+//             }}
+//           >
+//             데모 다시 보기
+//           </a>
+//           <a
+//             href="#casestudy"
+//             style={{
+//               border: `1px solid ${palette.cardBorder}`,
+//               color: palette.body,
+//               padding: "0.85rem 2rem",
+//               borderRadius: 8,
+//               fontWeight: 600,
+//               fontSize: "1rem",
+//               textDecoration: "none",
+//             }}
+//           >
+//             실측 결과 확인
+//           </a>
+//         </div>
+//         <div
+//           style={{
+//             display: "flex",
+//             justifyContent: "center",
+//             gap: "3rem",
+//             flexWrap: "wrap" as const,
+//           }}
+//         >
+//           {[
+//             { val: "100%", label: "로컬 설치 · 데이터 외부 전송 없음" },
+//             { val: "4종", label: "내장 AI 모델 + 무제한 확장" },
+//             { val: "No-Code", label: "웹 대시보드 완전 운영" },
+//           ].map((s) => (
+//             <div key={s.val} style={{ textAlign: "center" }}>
+//               <div
+//                 style={{ fontSize: "1.8rem", fontWeight: 800, color: C.teal }}
+//               >
+//                 {s.val}
+//               </div>
+//               <div style={{ fontSize: "0.85rem", color: palette.muted }}>
+//                 {s.label}
+//               </div>
+//             </div>
+//           ))}
+//         </div>
+//       </div>
+//     </section>
+//   );
+// }
 
 export function Platform() {
   const reduceMotion = useReducedMotion() ?? false;
@@ -4792,6 +4793,8 @@ export function Platform() {
 
   return (
     <>
+      <DemoSection palette={palette} isDark={isDark} />
+
       <section
         id="platform"
         aria-labelledby="platform-heading"
@@ -4875,11 +4878,11 @@ export function Platform() {
         </div>
       </section>
       <CaseStudySection palette={palette} isDark={isDark} />
-      <DemoSection palette={palette} isDark={isDark} />
-      <OptionsSection palette={palette} isDark={isDark} />
-      <ArchitectureSection palette={palette} isDark={isDark} />
+      {/* <DemoSection palette={palette} isDark={isDark} /> */}
+      {/* <OptionsSection palette={palette} isDark={isDark} /> */}
+      {/* <ArchitectureSection palette={palette} isDark={isDark} /> */}
       <UseCasesSection palette={palette} isDark={isDark} />
-      <CTASection palette={palette} isDark={isDark} />
+      {/* <CTASection palette={palette} isDark={isDark} /> */}
     </>
   );
 }
