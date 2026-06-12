@@ -1259,7 +1259,7 @@ function RoadmapDetail({ palette }: { palette: Palette }) {
       >
         {[
           { label: "현재 레벨", value: "AI 활용 중급 단계" },
-          { label: "목표 레벨", value: "AI 활용 전문가 수준 달성" },
+          { label: "목표 레벨", value: "AI 활용 전문가 수준" },
           { label: "예상 기간", value: "8주" },
           { label: "총 주차", value: "8주" },
         ].map(({ label, value }) => (

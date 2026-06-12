@@ -279,7 +279,7 @@ function BlackboxWidget({ palette }: { palette: ProblemPalette }) {
                 marginBottom: "0.3rem",
               }}
             >
-              ❌ {item.title}
+              {item.title}
             </div>
             <div style={{ color: palette.body }}>{item.rest}</div>
           </div>

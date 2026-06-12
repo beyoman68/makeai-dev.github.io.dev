@@ -259,7 +259,7 @@ export function MakeMoney() {
               AI 모델이 24시간 시장을 분석합니다.
             </p>
 
-            <div
+            {/* <div
               style={{
                 marginTop: 36,
                 display: "flex",
@@ -315,7 +315,7 @@ export function MakeMoney() {
               >
                 시스템 둘러보기
               </button>
-            </div>
+            </div> */}
           </motion.div>
         </div>
       </section>

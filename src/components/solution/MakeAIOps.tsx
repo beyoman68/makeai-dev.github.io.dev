@@ -1470,7 +1470,7 @@ function CaseStudySection({
                       borderBottom: `1px solid ${palette.cardBorder}`,
                     }}
                   >
-                    ⚡ Transformer
+                    Transformer
                   </th>
                   <th
                     style={{
@@ -1481,7 +1481,7 @@ function CaseStudySection({
                       borderBottom: `1px solid ${palette.cardBorder}`,
                     }}
                   >
-                    🧬 진화학습 FFN
+                    진화학습 FFN
                   </th>
                   <th
                     style={{
