@@ -154,10 +154,19 @@ function createSeededRandom(seed: number) {
   };
 }
 
-function randArr(n: number, base: number, amp: number, rand: () => number): number[] {
+function randArr(
+  n: number,
+  base: number,
+  amp: number,
+  rand: () => number,
+): number[] {
   return Array.from(
     { length: n },
-    (_, i) => +(base + amp * (Math.sin(i * 0.35 + rand() * 0.4) + rand() * 0.25)).toFixed(3),
+    (_, i) =>
+      +(
+        base +
+        amp * (Math.sin(i * 0.35 + rand() * 0.4) + rand() * 0.25)
+      ).toFixed(3),
   );
 }
 
@@ -246,11 +255,22 @@ function WalkForwardChart({ palette }: { palette: Palette }) {
       <div style={{ height: 200, position: "relative" }}>
         <canvas ref={canvasRef} style={{ position: "absolute", inset: 0 }} />
       </div>
-      <div style={{ display: "flex", gap: "1rem", marginTop: "1rem", flexWrap: "wrap" }}>
+      <div
+        style={{
+          display: "flex",
+          gap: "1rem",
+          marginTop: "1rem",
+          flexWrap: "wrap",
+        }}
+      >
         {[
           { label: "Bull 국면", bg: "rgba(0,212,170,0.15)", color: C.teal },
           { label: "Bear 국면", bg: "rgba(248,113,113,0.15)", color: C.red },
-          { label: "Sideways 국면", bg: "rgba(251,191,36,0.15)", color: C.amber },
+          {
+            label: "Sideways 국면",
+            bg: "rgba(251,191,36,0.15)",
+            color: C.amber,
+          },
           { label: "모델 예측", bg: "rgba(79,156,249,0.15)", color: C.blue },
         ].map((pill) => (
           <span
@@ -277,18 +297,40 @@ function WalkForwardChart({ palette }: { palette: Palette }) {
           border: `1px solid ${palette.statsBoxBorder}`,
         }}
       >
-        <div style={{ fontSize: "0.75rem", color: palette.muted, marginBottom: "0.5rem" }}>
+        <div
+          style={{
+            fontSize: "0.75rem",
+            color: palette.muted,
+            marginBottom: "0.5rem",
+          }}
+        >
           Walk-Forward Split 5회 검증 결과
         </div>
-        <div style={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: "0.5rem" }}>
+        <div
+          style={{
+            display: "grid",
+            gridTemplateColumns: "repeat(3, 1fr)",
+            gap: "0.5rem",
+          }}
+        >
           {[
             { value: "2.41", label: "평균 Sharpe", color: C.teal },
             { value: "87.3%", label: "방향 정확도", color: C.blue },
             { value: "-12.4%", label: "최대 낙폭", color: C.amber },
           ].map((stat) => (
             <div key={stat.label} style={{ textAlign: "center" }}>
-              <div style={{ fontSize: "1.1rem", fontWeight: 800, color: stat.color }}>{stat.value}</div>
-              <div style={{ fontSize: "0.65rem", color: palette.muted }}>{stat.label}</div>
+              <div
+                style={{
+                  fontSize: "1.1rem",
+                  fontWeight: 800,
+                  color: stat.color,
+                }}
+              >
+                {stat.value}
+              </div>
+              <div style={{ fontSize: "0.65rem", color: palette.muted }}>
+                {stat.label}
+              </div>
             </div>
           ))}
         </div>
@@ -799,7 +841,9 @@ function CaseStudySection({
     {
       item: "예측 평균 (°C)",
       transformer: "23.54°C",
-      ffn: <span style={{ color: palette.body, fontWeight: 400 }}>22.91°C</span>,
+      ffn: (
+        <span style={{ color: palette.body, fontWeight: 400 }}>22.91°C</span>
+      ),
       note: "Transformer는 후반부(따뜻한 구간)만 예측해 평균 ↑",
       bad: false,
     },
@@ -2016,7 +2060,10 @@ function DemoSection({
                   display: "inline-block",
                 }}
               />
-              {DEMO_TABS.find((t) => t.key === activeTab)?.label.replace(/^.\s/, "")}
+              {DEMO_TABS.find((t) => t.key === activeTab)?.label.replace(
+                /^.\s/,
+                "",
+              )}
             </div>
             <span style={{ fontSize: "0.75rem", color: textMuted }}>
               {activeTab === "collect" &&
@@ -3017,28 +3064,24 @@ function DemoSection({
                     >
                       <thead>
                         <tr>
-                          {[
-                            "모델",
-                            "타입",
-                            "세대",
-                            "F1",
-                            "앙상블 포함",
-                          ].map((h) => (
-                            <th
-                              key={h}
-                              style={{
-                                color: textMuted,
-                                fontSize: "0.7rem",
-                                textTransform: "uppercase",
-                                letterSpacing: "0.5px",
-                                padding: "0.5rem 0.8rem",
-                                borderBottom: `1px solid ${border2}`,
-                                textAlign: "left",
-                              }}
-                            >
-                              {h}
-                            </th>
-                          ))}
+                          {["모델", "타입", "세대", "F1", "앙상블 포함"].map(
+                            (h) => (
+                              <th
+                                key={h}
+                                style={{
+                                  color: textMuted,
+                                  fontSize: "0.7rem",
+                                  textTransform: "uppercase",
+                                  letterSpacing: "0.5px",
+                                  padding: "0.5rem 0.8rem",
+                                  borderBottom: `1px solid ${border2}`,
+                                  textAlign: "left",
+                                }}
+                              >
+                                {h}
+                              </th>
+                            ),
+                          )}
                         </tr>
                       </thead>
                       <tbody>
@@ -4748,113 +4791,144 @@ export function MakeAIOps() {
 
   return (
     <>
-    <section
-      id="make-aiops"
-      aria-labelledby="make-aiops-heading"
-      className="scroll-mt-24"
-      style={{
-        background: sectionBg,
-        padding: "clamp(72px, 12vw, 120px) 32px",
-        borderTop: `1px solid ${borderY}`,
-      }}
-    >
-      <div className="mx-auto max-w-[1200px]">
-        <motion.div
-          initial={reduceMotion ? false : { opacity: 0, y: 24 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: reduceMotion ? 0 : 0.65 }}
-          viewport={{ once: true, margin: "-80px" }}
-          style={{ marginBottom: "4rem" }}
-        >
-          <div
-            className="uppercase"
-            style={{
-              fontSize: 11,
-              fontWeight: 600,
-              color: palette.overline,
-              letterSpacing: "0.1em",
-              marginBottom: 16,
-            }}
-          >
-            Make AIOps
-          </div>
-          <h2
-            id="make-aiops-heading"
-            className="text-balance"
-            style={{
-              fontSize: "clamp(40px, 7vw, 5rem)",
-              fontWeight: 700,
-              letterSpacing: "-0.03em",
-              color: palette.heading,
-              lineHeight: 1.02,
-              margin: 0,
-            }}
-          >
-            Make
-            <br />
-            <span style={{ color: C.teal }}>AIOps</span>
-          </h2>
-          <p
-            style={{
-              marginTop: 14,
-              fontSize: "clamp(18px, 2.6vw, 1.6rem)",
-              fontWeight: 600,
-              letterSpacing: "-0.01em",
-              color: palette.heading,
-              lineHeight: 1.3,
-              margin: "14px 0 0",
-            }}
-          >
-            똑똑한 인공지능을 만드는 플랫폼 Make Engine
-          </p>
-          <p
-            style={{
-              marginTop: 16,
-              fontSize: "clamp(16px, 2vw, 1.15rem)",
-              color: palette.body,
-              lineHeight: 1.6,
-              margin: "16px 0 0",
-            }}
-          >
-            시계열 데이터는 일반 ML과 다릅니다
-          </p>
-        </motion.div>
-
-        <div className="grid grid-cols-1 items-center gap-16 lg:grid-cols-2">
-          <div
-            style={{ display: "flex", flexDirection: "column", gap: "1.5rem" }}
-          >
-            <ComparisonTable palette={palette} />
-            {FEATURES.map((feature, i) => (
-              <FeatureItem
-                key={feature.title}
-                icon={feature.icon}
-                title={feature.title}
-                description={feature.description}
-                palette={palette}
-                index={i}
-                reduceMotion={reduceMotion}
-              />
-            ))}
-          </div>
-
+      <section
+        id="make-aiops"
+        aria-labelledby="make-aiops-heading"
+        className="scroll-mt-24"
+        style={{
+          background: sectionBg,
+          padding: "clamp(72px, 12vw, 120px) 32px",
+          borderTop: `1px solid ${borderY}`,
+        }}
+      >
+        <div className="mx-auto max-w-[1200px]">
           <motion.div
-            initial={reduceMotion ? false : { opacity: 0, y: 20 }}
+            initial={reduceMotion ? false : { opacity: 0, y: 24 }}
             whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: reduceMotion ? 0 : 0.6, delay: 0.1 }}
-            viewport={{ once: true, margin: "-60px" }}
+            transition={{ duration: reduceMotion ? 0 : 0.65 }}
+            viewport={{ once: true, margin: "-80px" }}
+            style={{ marginBottom: "4rem" }}
           >
-            <WalkForwardChart palette={palette} />
+            <div
+              className="uppercase"
+              style={{
+                fontSize: 11,
+                fontWeight: 600,
+                color: palette.overline,
+                letterSpacing: "0.1em",
+                marginBottom: 16,
+              }}
+            >
+              Make AIOps
+            </div>
+            <h2
+              id="make-aiops-heading"
+              className="text-balance"
+              style={{
+                fontSize: "clamp(40px, 7vw, 5rem)",
+                fontWeight: 700,
+                letterSpacing: "-0.03em",
+                color: palette.heading,
+                lineHeight: 1.02,
+                margin: 0,
+              }}
+            >
+              Make
+              <br />
+              <span style={{ color: C.teal }}>AIOps</span>
+            </h2>
+            <p
+              style={{
+                marginTop: 14,
+                fontSize: "clamp(18px, 2.6vw, 1.6rem)",
+                fontWeight: 600,
+                letterSpacing: "-0.01em",
+                color: palette.heading,
+                lineHeight: 1.3,
+                margin: "14px 0 0",
+              }}
+            >
+              똑똑한 인공지능을 만드는 플랫폼 Make Engine
+            </p>
           </motion.div>
         </div>
-      </div>
-    </section>
-    <CaseStudySection palette={palette} isDark={isDark} />
-    <DemoSection palette={palette} isDark={isDark} />
-    <OptionsSection palette={palette} isDark={isDark} />
-    <ArchitectureSection palette={palette} isDark={isDark} />
-    <UseCasesSection palette={palette} isDark={isDark} />
-    <CTASection palette={palette} isDark={isDark} />
+      </section>
+
+      <DemoSection palette={palette} isDark={isDark} />
+
+      <section
+        id="platform"
+        aria-labelledby="platform-heading"
+        className="scroll-mt-24"
+        style={{
+          background: sectionBg,
+          padding: "clamp(72px, 12vw, 120px) 32px",
+          borderTop: `1px solid ${borderY}`,
+        }}
+      >
+        <div className="mx-auto max-w-[1200px]">
+          <motion.div
+            initial={reduceMotion ? false : { opacity: 0, y: 24 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: reduceMotion ? 0 : 0.65 }}
+            viewport={{ once: true, margin: "-80px" }}
+            style={{ marginBottom: "4rem" }}
+          >
+            <h2
+              id="platform-heading"
+              className="text-balance"
+              style={{
+                fontSize: "clamp(24px, 3.5vw, 2.2rem)",
+                fontWeight: 600,
+                letterSpacing: "-0.03em",
+                color: palette.heading,
+                lineHeight: 1.1,
+                margin: 0,
+              }}
+            >
+              시계열 데이터는 일반 ML과 다릅니다
+            </h2>
+          </motion.div>
+
+          <div className="grid grid-cols-1 items-center gap-16 lg:grid-cols-2">
+            <div
+              style={{
+                display: "flex",
+                flexDirection: "column",
+                gap: "1.5rem",
+              }}
+            >
+              <ComparisonTable palette={palette} />
+              {FEATURES.map((feature, i) => (
+                <FeatureItem
+                  key={feature.title}
+                  icon={feature.icon}
+                  title={feature.title}
+                  description={feature.description}
+                  palette={palette}
+                  index={i}
+                  reduceMotion={reduceMotion}
+                />
+              ))}
+            </div>
+
+            <motion.div
+              initial={reduceMotion ? false : { opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: reduceMotion ? 0 : 0.6, delay: 0.1 }}
+              viewport={{ once: true, margin: "-60px" }}
+            >
+              <WalkForwardChart palette={palette} />
+            </motion.div>
+          </div>
+        </div>
+      </section>
+      <CaseStudySection palette={palette} isDark={isDark} />
+      {/* <DemoSection palette={palette} isDark={isDark} /> */}
+      <OptionsSection palette={palette} isDark={isDark} />
+      <ArchitectureSection palette={palette} isDark={isDark} />
+      <UseCasesSection palette={palette} isDark={isDark} />
+      <CTASection palette={palette} isDark={isDark} />
     </>
   );
 }
