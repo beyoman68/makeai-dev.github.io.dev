@@ -1,0 +1,89 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <script>
+      (function () {
+        try {
+          var k = "theme";
+          var t = localStorage.getItem(k);
+          var dark;
+          if (t === "light") {
+            dark = false;
+          } else if (t === "dark") {
+            dark = true;
+          } else if (t === "system") {
+            dark = window.matchMedia("(prefers-color-scheme: dark)").matches;
+          } else {
+            dark = true;
+          }
+          document.documentElement.classList.toggle("dark", dark);
+          document.documentElement.classList.toggle("light", !dark);
+        } catch (_) {}
+      })();
+    </script>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>MAKE AI</title>
+    <meta
+      name="description"
+      content="We Make Your AI. Make AI는 통합 AI Ops 플랫폼을 기반으로 기업의 AI 도입부터 운영까지 A to Z를 지원하며, 다양한 산업 분야의 문제를 해결하고 생산성을 혁신하는 AI 전문 기업입니다."
+    />
+    <meta name="keywords" content="Make AI, MakeAI, Make AI 주식회사, AI" />
+    <link rel="canonical" href="https://www.makeai.cloud " />
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="Make AI" />
+    <meta property="og:title" content="Make AI" />
+    <meta
+      property="og:description"
+      content="We Make Your AI. Make AI는 통합 AI Ops 플랫폼을 기반으로 기업의 AI 도입부터 운영까지 A to Z를 지원하며, 다양한 산업 분야의 문제를 해결하고 생산성을 혁신하는 AI 전문 기업입니다."
+    />
+    <meta property="og:url" content="https://www.makeai.cloud " />
+    <meta property="og:image" content="https://www.makeai.cloud /logo.png" />
+    <meta name="twitter:card" content="summary" />
+    <meta name="twitter:title" content="Make AI" />
+    <meta
+      name="twitter:description"
+      content="We Make Your AI. Make AI는 통합 AI Ops 플랫폼을 기반으로 기업의 AI 도입부터 운영까지 A to Z를 지원하며, 다양한 산업 분야의 문제를 해결하고 생산성을 혁신하는 AI 전문 기업입니다."
+    />
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "Organization",
+        "name": "Make AI",
+        "alternateName": "Make AI",
+        "url": "https://www.makeai.cloud ",
+        "logo": "https://www.makeai.cloud /logo.png",
+        "description": "We Make Your AI. Make AI는 통합 AI Ops 플랫폼을 기반으로 기업의 AI 도입부터 운영까지 A to Z를 지원하며, 다양한 산업 분야의 문제를 해결하고 생산성을 혁신하는 AI 전문 기업입니다."
+      }
+    </script>
+    <script>
+      // Single Page Apps for GitHub Pages
+      // https://github.com/rafgraph/spa-github-pages
+      // MIT License
+      //
+      // Decode the redirected path from 404.html back into a real URL so that
+      // the client-side router can render the correct page on a direct hit.
+      (function (l) {
+        if (l.search[1] === "/") {
+          var decoded = l.search
+            .slice(1)
+            .split("&")
+            .map(function (s) {
+              return s.replace(/~and~/g, "&");
+            })
+            .join("?");
+          window.history.replaceState(
+            null,
+            "",
+            l.pathname.slice(0, -1) + decoded + l.hash,
+          );
+        }
+      })(window.location);
+    </script>
+    <script type="module" crossorigin src="/assets/index-Dy3ePDVe.js"></script>
+    <link rel="stylesheet" crossorigin href="/assets/index-CvEutF45.css">
+  </head>
+  <body>
+    <div id="root"></div>
+  </body>
+</html>
