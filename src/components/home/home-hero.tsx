@@ -216,7 +216,7 @@ export function HomeHero() {
             marginBottom: 28,
           }}
         >
-          <span style={{ whiteSpace: "nowrap" }}>
+          <span className="whitespace-normal sm:whitespace-nowrap">
             AI 모델이 현장에서 무너지는 이유,
           </span>
           <br />
