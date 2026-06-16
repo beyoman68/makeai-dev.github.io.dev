@@ -41,29 +41,29 @@ const C = {
 
 const COMPARISON_ROWS = [
   {
-    item: "검증 방법",
-    general: "랜덤 분할 (미래 누출)",
-    ours: "진화적 학습",
+    item: "노이즈 type",
+    general: "레이블 오류",
+    ours: "극심한 변동성",
   },
   {
-    item: "데이터 누출",
-    general: "발생 가능",
-    ours: "원천 차단",
+    item: "예견 편향",
+    general: "빈도 낮음",
+    ours: "빈도 높음",
   },
   {
     item: "순서 의존성",
     general: "무시",
-    ours: "LSTM·Transformer 처리",
+    ours: "Sequencial Input",
   },
   {
     item: "국면 변화 대응",
     general: "없음",
-    ours: "HMM 자동 분류",
+    ours: "필요",
   },
   {
     item: "피처 생성",
     general: "일반 통계 피처",
-    ours: "RSI·MACD 등 60+ 자동생성",
+    ours: "Rolling 통계",
   },
 ] as const;
 
@@ -146,199 +146,6 @@ function paletteFor(isDark: boolean): Palette {
   };
 }
 
-function createSeededRandom(seed: number) {
-  let state = seed;
-  return () => {
-    state = (state * 1664525 + 1013904223) >>> 0;
-    return state / 0xffffffff;
-  };
-}
-
-function randArr(
-  n: number,
-  base: number,
-  amp: number,
-  rand: () => number,
-): number[] {
-  return Array.from(
-    { length: n },
-    (_, i) =>
-      +(
-        base +
-        amp * (Math.sin(i * 0.35 + rand() * 0.4) + rand() * 0.25)
-      ).toFixed(3),
-  );
-}
-
-function buildWalkForwardData() {
-  const rand = createSeededRandom(42);
-  const n = 80;
-  const labels = Array.from({ length: n }, () => "");
-  const price = randArr(n, 100, 18, rand);
-  const pred = price.map((v, i) =>
-    i < 8 ? null : +(v + 2.5 * (rand() - 0.5)).toFixed(2),
-  );
-  return { labels, price, pred };
-}
-
-function WalkForwardChart({ palette }: { palette: Palette }) {
-  const canvasRef = useRef<HTMLCanvasElement>(null);
-  const chartRef = useRef<ChartJS<"line"> | null>(null);
-
-  useEffect(() => {
-    const canvas = canvasRef.current;
-    if (!canvas) return;
-
-    const { labels, price, pred } = buildWalkForwardData();
-
-    chartRef.current?.destroy();
-
-    chartRef.current = new ChartJS(canvas, {
-      type: "line",
-      data: {
-        labels,
-        datasets: [
-          {
-            data: price,
-            borderColor: "#64748b",
-            borderWidth: 1.5,
-            pointRadius: 0,
-            fill: false,
-            tension: 0.4,
-          },
-          {
-            data: pred,
-            borderColor: C.blue,
-            borderWidth: 2,
-            pointRadius: 0,
-            fill: false,
-            tension: 0.4,
-            borderDash: [4, 2],
-          },
-        ],
-      },
-      options: {
-        responsive: true,
-        maintainAspectRatio: false,
-        animation: false,
-        plugins: { legend: { display: false } },
-        scales: { x: { display: false }, y: { display: false } },
-      },
-    });
-
-    return () => {
-      chartRef.current?.destroy();
-      chartRef.current = null;
-    };
-  }, []);
-
-  return (
-    <div
-      style={{
-        background: palette.cardBg,
-        border: `1px solid ${palette.cardBorder}`,
-        borderRadius: 16,
-        padding: "1.5rem",
-      }}
-    >
-      <div
-        style={{
-          fontSize: "0.8rem",
-          color: palette.muted,
-          marginBottom: "1rem",
-          textTransform: "uppercase",
-          letterSpacing: "0.5px",
-        }}
-      >
-        Walk-Forward 검증 시각화
-      </div>
-      <div style={{ height: 200, position: "relative" }}>
-        <canvas ref={canvasRef} style={{ position: "absolute", inset: 0 }} />
-      </div>
-      <div
-        style={{
-          display: "flex",
-          gap: "1rem",
-          marginTop: "1rem",
-          flexWrap: "wrap",
-        }}
-      >
-        {[
-          { label: "Bull 국면", bg: "rgba(0,212,170,0.15)", color: C.teal },
-          { label: "Bear 국면", bg: "rgba(248,113,113,0.15)", color: C.red },
-          {
-            label: "Sideways 국면",
-            bg: "rgba(251,191,36,0.15)",
-            color: C.amber,
-          },
-          { label: "모델 예측", bg: "rgba(79,156,249,0.15)", color: C.blue },
-        ].map((pill) => (
-          <span
-            key={pill.label}
-            style={{
-              padding: "0.25rem 0.7rem",
-              borderRadius: 20,
-              fontSize: "0.75rem",
-              fontWeight: 600,
-              background: pill.bg,
-              color: pill.color,
-            }}
-          >
-            {pill.label}
-          </span>
-        ))}
-      </div>
-      <div
-        style={{
-          marginTop: "1.2rem",
-          padding: "0.8rem",
-          background: palette.statsBoxBg,
-          borderRadius: 8,
-          border: `1px solid ${palette.statsBoxBorder}`,
-        }}
-      >
-        <div
-          style={{
-            fontSize: "0.75rem",
-            color: palette.muted,
-            marginBottom: "0.5rem",
-          }}
-        >
-          Walk-Forward Split 5회 검증 결과
-        </div>
-        <div
-          style={{
-            display: "grid",
-            gridTemplateColumns: "repeat(3, 1fr)",
-            gap: "0.5rem",
-          }}
-        >
-          {[
-            { value: "2.41", label: "평균 Sharpe", color: C.teal },
-            { value: "87.3%", label: "방향 정확도", color: C.blue },
-            { value: "-12.4%", label: "최대 낙폭", color: C.amber },
-          ].map((stat) => (
-            <div key={stat.label} style={{ textAlign: "center" }}>
-              <div
-                style={{
-                  fontSize: "1.1rem",
-                  fontWeight: 800,
-                  color: stat.color,
-                }}
-              >
-                {stat.value}
-              </div>
-              <div style={{ fontSize: "0.65rem", color: palette.muted }}>
-                {stat.label}
-              </div>
-            </div>
-          ))}
-        </div>
-      </div>
-    </div>
-  );
-}
-
 function ComparisonTable({ palette }: { palette: Palette }) {
   return (
     <div
@@ -361,7 +168,7 @@ function ComparisonTable({ palette }: { palette: Palette }) {
           textTransform: "uppercase",
         }}
       >
-        일반 ML vs 시계열 ML 핵심 차이
+        일반 데이터 vs 시계열 데이터 핵심 차이
       </div>
       <table
         style={{
@@ -392,7 +199,7 @@ function ComparisonTable({ palette }: { palette: Palette }) {
                 borderBottom: `1px solid ${palette.tableRowBorder}`,
               }}
             >
-              일반 ML
+              일반 데이터
             </th>
             <th
               style={{
@@ -403,7 +210,7 @@ function ComparisonTable({ palette }: { palette: Palette }) {
                 borderBottom: `1px solid ${palette.tableRowBorder}`,
               }}
             >
-              본 시스템 (시계열)
+              시계열 데이터
             </th>
           </tr>
         </thead>
@@ -798,7 +605,17 @@ function WeatherChartCanvas({
       chartRef.current?.destroy();
       chartRef.current = null;
     };
-  }, [isDark, actualData, predData, labels, yLeftMin, yLeftMax, yRightMin, yRightMax, yRightStep]);
+  }, [
+    isDark,
+    actualData,
+    predData,
+    labels,
+    yLeftMin,
+    yLeftMax,
+    yRightMin,
+    yRightMax,
+    yRightStep,
+  ]);
 
   return <canvas ref={canvasRef} style={{ position: "absolute", inset: 0 }} />;
 }
@@ -1064,17 +881,56 @@ function CaseStudySection({
                 background: isDark ? "#0d1117" : "#f1f5fb",
               }}
             >
-              <span style={{ display: "flex", alignItems: "center", gap: "0.4rem" }}>
-                <span style={{ display: "inline-block", width: 20, height: 2.5, background: "#4f9cf9", borderRadius: 2 }} />
-                <span style={{ fontSize: "0.72rem", color: palette.body }}>종가</span>
-              </span>
-              <span style={{ display: "flex", alignItems: "center", gap: "0.4rem" }}>
-                <span style={{ display: "flex", alignItems: "center", gap: 2 }}>
-                  <span style={{ width: 5, height: 5, borderRadius: "50%", background: C.teal, display: "inline-block" }} />
-                  <span style={{ width: 10, height: 2, background: C.teal, display: "inline-block" }} />
-                  <span style={{ width: 5, height: 5, borderRadius: "50%", background: C.teal, display: "inline-block" }} />
+              <span
+                style={{ display: "flex", alignItems: "center", gap: "0.4rem" }}
+              >
+                <span
+                  style={{
+                    display: "inline-block",
+                    width: 20,
+                    height: 2.5,
+                    background: "#4f9cf9",
+                    borderRadius: 2,
+                  }}
+                />
+                <span style={{ fontSize: "0.72rem", color: palette.body }}>
+                  종가
                 </span>
-                <span style={{ fontSize: "0.72rem", color: palette.body }}>예측</span>
+              </span>
+              <span
+                style={{ display: "flex", alignItems: "center", gap: "0.4rem" }}
+              >
+                <span style={{ display: "flex", alignItems: "center", gap: 2 }}>
+                  <span
+                    style={{
+                      width: 5,
+                      height: 5,
+                      borderRadius: "50%",
+                      background: C.teal,
+                      display: "inline-block",
+                    }}
+                  />
+                  <span
+                    style={{
+                      width: 10,
+                      height: 2,
+                      background: C.teal,
+                      display: "inline-block",
+                    }}
+                  />
+                  <span
+                    style={{
+                      width: 5,
+                      height: 5,
+                      borderRadius: "50%",
+                      background: C.teal,
+                      display: "inline-block",
+                    }}
+                  />
+                </span>
+                <span style={{ fontSize: "0.72rem", color: palette.body }}>
+                  예측
+                </span>
               </span>
             </div>
             <div
@@ -1338,17 +1194,56 @@ function CaseStudySection({
                 background: isDark ? "#0d1117" : "#f1f5fb",
               }}
             >
-              <span style={{ display: "flex", alignItems: "center", gap: "0.4rem" }}>
-                <span style={{ display: "inline-block", width: 20, height: 2.5, background: "#4f9cf9", borderRadius: 2 }} />
-                <span style={{ fontSize: "0.72rem", color: palette.body }}>종가</span>
-              </span>
-              <span style={{ display: "flex", alignItems: "center", gap: "0.4rem" }}>
-                <span style={{ display: "flex", alignItems: "center", gap: 2 }}>
-                  <span style={{ width: 5, height: 5, borderRadius: "50%", background: C.teal, display: "inline-block" }} />
-                  <span style={{ width: 10, height: 2, background: C.teal, display: "inline-block" }} />
-                  <span style={{ width: 5, height: 5, borderRadius: "50%", background: C.teal, display: "inline-block" }} />
+              <span
+                style={{ display: "flex", alignItems: "center", gap: "0.4rem" }}
+              >
+                <span
+                  style={{
+                    display: "inline-block",
+                    width: 20,
+                    height: 2.5,
+                    background: "#4f9cf9",
+                    borderRadius: 2,
+                  }}
+                />
+                <span style={{ fontSize: "0.72rem", color: palette.body }}>
+                  종가
                 </span>
-                <span style={{ fontSize: "0.72rem", color: palette.body }}>예측</span>
+              </span>
+              <span
+                style={{ display: "flex", alignItems: "center", gap: "0.4rem" }}
+              >
+                <span style={{ display: "flex", alignItems: "center", gap: 2 }}>
+                  <span
+                    style={{
+                      width: 5,
+                      height: 5,
+                      borderRadius: "50%",
+                      background: C.teal,
+                      display: "inline-block",
+                    }}
+                  />
+                  <span
+                    style={{
+                      width: 10,
+                      height: 2,
+                      background: C.teal,
+                      display: "inline-block",
+                    }}
+                  />
+                  <span
+                    style={{
+                      width: 5,
+                      height: 5,
+                      borderRadius: "50%",
+                      background: C.teal,
+                      display: "inline-block",
+                    }}
+                  />
+                </span>
+                <span style={{ fontSize: "0.72rem", color: palette.body }}>
+                  예측
+                </span>
               </span>
             </div>
             <div
@@ -3445,7 +3340,10 @@ function DemoSection({
                                 tension: 0.4,
                               },
                               {
-                                data: [...predHist, ...Array(future).fill(null)],
+                                data: [
+                                  ...predHist,
+                                  ...Array(future).fill(null),
+                                ],
                                 borderColor: "#00d4aa",
                                 borderWidth: 1.5,
                                 pointRadius: 0,
@@ -3620,9 +3518,7 @@ function DemoSection({
                   }}
                 >
                   <div style={chartAreaWithTitleStyle}>
-                    <div style={chartTitleStyle}>
-                      Drift Score 추이 (30일)
-                    </div>
+                    <div style={chartTitleStyle}>Drift Score 추이 (30일)</div>
                     <div style={chartCanvasWrapStyle}>
                       <DemoLineChart
                         id={`monitor-drift-${tabKey}`}
@@ -3632,9 +3528,11 @@ function DemoSection({
                           const drift = Array.from(
                             { length: n },
                             (_, i) =>
-                              +(0.04 + i * 0.005 + Math.random() * 0.018).toFixed(
-                                3,
-                              ),
+                              +(
+                                0.04 +
+                                i * 0.005 +
+                                Math.random() * 0.018
+                              ).toFixed(3),
                           );
                           const threshold = Array(n).fill(0.2);
                           return {
@@ -4969,11 +4867,11 @@ export function MakeAIOps() {
                 margin: 0,
               }}
             >
-              시계열 데이터는 일반 ML과 다릅니다
+              시계열 데이터는 일반 ML으로 처리하기 어렵습니다.
             </h2>
           </motion.div>
 
-          <div className="grid grid-cols-1 items-center gap-16 lg:grid-cols-2">
+          <div className="grid grid-cols-1 items-center gap-16">
             <div
               style={{
                 display: "flex",
@@ -4982,17 +4880,46 @@ export function MakeAIOps() {
               }}
             >
               <ComparisonTable palette={palette} />
-              {FEATURES.map((feature, i) => (
-                <FeatureItem
-                  key={feature.title}
-                  icon={feature.icon}
-                  title={feature.title}
-                  description={feature.description}
-                  palette={palette}
-                  index={i}
-                  reduceMotion={reduceMotion}
-                />
-              ))}
+              <motion.div
+                initial={reduceMotion ? false : { opacity: 0, y: 24 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ duration: reduceMotion ? 0 : 0.65 }}
+                viewport={{ once: true, margin: "-80px" }}
+                style={{ marginBottom: "4rem" }}
+              >
+                <h2
+                  className="text-balance"
+                  style={{
+                    fontSize: "clamp(28px, 4vw, 2.4rem)",
+                    fontWeight: 600,
+                    letterSpacing: "-0.03em",
+                    color: palette.heading,
+                    lineHeight: 1.1,
+                    margin: 0,
+                  }}
+                >
+                  시계열 데이터에 특화된 Make AIOps
+                </h2>
+              </motion.div>
+              <div
+                style={{
+                  display: "grid",
+                  gridTemplateColumns: "1fr 1fr",
+                  gap: "1.5rem",
+                }}
+              >
+                {FEATURES.map((feature, i) => (
+                  <FeatureItem
+                    key={feature.title}
+                    icon={feature.icon}
+                    title={feature.title}
+                    description={feature.description}
+                    palette={palette}
+                    index={i}
+                    reduceMotion={reduceMotion}
+                  />
+                ))}
+              </div>
             </div>
 
             <motion.div
@@ -5000,9 +4927,7 @@ export function MakeAIOps() {
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: reduceMotion ? 0 : 0.6, delay: 0.1 }}
               viewport={{ once: true, margin: "-60px" }}
-            >
-              <WalkForwardChart palette={palette} />
-            </motion.div>
+            ></motion.div>
           </div>
         </div>
       </section>
